@@ -1,0 +1,23 @@
+const ROUTER =require('express-promise-router')();
+const CONTROLLER =require('../controllers/three_d');
+const SCHEMA =require('../schemas/three_d');
+const VALIDATOR =require('../../helpers/validator');
+ROUTER.get('/three_d_setting',CONTROLLER.threeDSetting);
+ROUTER.post('/check_three_d_number',VALIDATOR.validateBody(SCHEMA.check_three_d),CONTROLLER.checkThreeD);
+ROUTER.post('/save_three_d_number',VALIDATOR.validateBody(SCHEMA.save_three_d),CONTROLLER.saveThreeD);
+ROUTER.post('/three_d_ticket_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.threeDTicketNumber);
+ROUTER.post('/three_d_delete_ticket_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.threeDDeleteTicketNumber);
+ROUTER.post('/delete_three_d_ticket',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.deleteThreeDTicket);
+ROUTER.post('/three_d_table_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.threeDTableNumber);
+ROUTER.post('/save_three_d_win_number',VALIDATOR.validateBody(SCHEMA.win_number),CONTROLLER.saveThreeDWinNumber);
+ROUTER.get('/three_d_win_numbers',CONTROLLER.threeDWinNumbers);
+ROUTER.post('/update_three_d_setting',VALIDATOR.validateBody(SCHEMA.three_d_setting),CONTROLLER.updateThreeDSetting);
+ROUTER.post('/cut_number',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.threeDCutNumber);
+ROUTER.post('/cut_by_name',VALIDATOR.validateBody(SCHEMA.cut_number),CONTROLLER.cutByName);
+ROUTER.post('/cash_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.cashVoucher);
+ROUTER.post('/profit_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitLedger);
+ROUTER.post('/profit_single_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitSingleLedger);
+ROUTER.post('/three_d_final_ledger',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.getThreeDFinalLedger);
+ROUTER.post('/remark',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkThreeD);
+module.exports = ROUTER;
+
