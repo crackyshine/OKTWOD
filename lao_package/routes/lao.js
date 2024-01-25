@@ -26,6 +26,7 @@ ROUTER.post('/cut_by_name_three_d',VALIDATOR.validateBody(SCHEMA.cut_number_thre
 ROUTER.post('/cut_by_name',VALIDATOR.validateBody(SCHEMA.cut_number),CONTROLLER.cutByName);
 ROUTER.post('/all_cut_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutNumber);
 ROUTER.post('/all_cut_win_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutWinNumbers);
+ROUTER.post('/all_cut_win_k_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutWinKNumbers);
 ROUTER.post('/cash_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.cashVoucher);
 ROUTER.post('/cash_k_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.cashKVoucher);
 ROUTER.post('/profit_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitLedger);

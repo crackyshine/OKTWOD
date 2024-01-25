@@ -127,6 +127,7 @@ let updateLaoPriceItem = async (req, res, next) => {
                 "lao.$.amount_k": body.amount_k,
                 "lao.$.four_d_k": body.four_d_k,
                 "lao.$.three_d_k": body.three_d_k,
+                "lao.$.front_three_d_k": body.front_three_d_k,
                 "lao.$.four_permute_k": body.four_permute_k,
                 "lao.$.three_permute_k": body.three_permute_k,
                 "lao.$.front_two_d_k": body.front_two_d_k,
@@ -1045,6 +1046,40 @@ let laoAllCutWinNumbers = async (req, res, next) => {
         next(new Error(process.env.connect_dev));
     }
 }
+
+let laoAllCutWinKNumbers =async(req,res,next)=>{
+    try{
+        let data =[];
+        let search_date =req.body.search_date;
+        search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
+        let win_number = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: search_date });
+        if (!win_number) {
+            res.send({ status: 1, data });
+            return;
+        }
+        let setting = await DB.LAO_SETTING_DB.findOne({ show_id: 0 });
+        let price_items = setting.lao;
+        price_items = _.indexBy(price_items, 'amount');
+        win_number = win_number.win_number;
+        let cut_data = await DB.LAO_KYAT_TICKET_DB.find({ "date.win": search_date });
+        cut_data.forEach((value)=>{
+            for(let item of value.items){
+                if(item.bet_num.length > 3 && item.win.amount > 0){
+                    data.push({
+                        type: `${item.bet_amount}`,
+                        bet_num: item.bet_num,
+                        win_amount: item.win.amount,
+                        win_str: item.win.str
+                    });
+                }
+            }
+        })
+
+    }catch(error){
+        console.log("Error From LaoAllCutWinKNumber =>",error);
+        next(new Error(process.env.connect_dev));
+    }
+}
 let cashVoucher = async (req, res, next) => {
     try {
         let search_id = req.body.search_id;
@@ -1540,6 +1575,7 @@ module.exports = {
     cutByName,
     laoAllCutNumber,
     laoAllCutWinNumbers,
+    laoAllCutWinKNumbers,
     cashVoucher,
     cashKVoucher,
     getProfitLedger,
