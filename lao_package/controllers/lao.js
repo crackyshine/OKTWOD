@@ -1062,18 +1062,22 @@ let laoAllCutWinKNumbers =async(req,res,next)=>{
         price_items = _.indexBy(price_items, 'amount');
         win_number = win_number.win_number;
         let cut_data = await DB.LAO_KYAT_TICKET_DB.find({ "date.win": search_date });
+        let total =0;
         cut_data.forEach((value)=>{
             for(let item of value.items){
-                if(item.bet_num.length > 3 && item.win.amount > 0){
+                if(item.num.length > 3 && item.win.amount > 0){
                     data.push({
                         type: `${item.bet_amount}`,
-                        bet_num: item.bet_num,
+                        name:"Company",
+                        bet_num: item.num,
                         win_amount: item.win.amount,
-                        win_str: item.win.str
+                        win_str: UTILS.UTZ[item.win.str]
                     });
+                    total+=item.win.amount;
                 }
             }
-        })
+        });
+        res.send({status:1,data});
 
     }catch(error){
         console.log("Error From LaoAllCutWinKNumber =>",error);
@@ -1175,7 +1179,7 @@ let getProfitLedger = async (req, res, next) => {
                                 user_data.com += 20;
                             } else if (item.bet_amount == 100) {
                                 // user_data.bet += 90;
-                                user_data.com += 30;
+                                user_data.com += 15;
                             } else if (item.bet_amount == 60) {
                                 // user_data.bet += 50;
                                 user_data.com += 10;
@@ -1289,7 +1293,7 @@ let getProfitLedger = async (req, res, next) => {
                             if (item.original_amount == 150) {
                                 d.com += 25 * count;
                             } else if (item.original_amount == 100) {
-                                d.com += 30 * count;
+                                d.com += 15 * count;
                             } else if (item.original_amount == 60) {
                                 d.com += 10 * count;
                             } else if (item.original_amount == 40) {
@@ -1375,7 +1379,7 @@ let getProfitKLedger = async (req, res, next) => {
                                 user_data.com += 20;
                             } else if (amount_items[`${item.bet_amount}`].amount == 100) {
                                 // user_data.bet += 90;
-                                user_data.com += 30;
+                                user_data.com += 15;
                             } else if (amount_items[`${item.bet_amount}`].amount == 60) {
                                 // user_data.bet += 50;
                                 user_data.com += 10;
@@ -1501,7 +1505,7 @@ let getLaoFinalLedger = async (req, res, next) => {
                         data.p_one.amount += 130;
                     } else if (item.bet_amount == 100) {
                         data.p_two.count++;
-                        data.p_two.amount += 90;
+                        data.p_two.amount += 85;
                     } else if (item.bet_amount == 60) {
                         data.p_three.count++;
                         data.p_three.amount += 50;

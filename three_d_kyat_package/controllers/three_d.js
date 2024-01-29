@@ -142,7 +142,7 @@ let saveThreeD = async (req, res, next) => {
         let nums = _.uniq(_.pluck(items, "num"));
         let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
-        let b_amount = name == "Company" ? setting.block_amount : setting.three_d_kyat_cut_amount;
+        let b_amount = name == "Company" ? setting.kyat_block_amount : setting.three_d_kyat_cut_amount;
         for (let item of data) {
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;

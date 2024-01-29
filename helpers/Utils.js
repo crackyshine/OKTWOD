@@ -64,11 +64,11 @@ let getTwoDData = (setting) => {
         if (now.isAfter(evening) && now.isBefore(morning)) {
             type = "EVENING";
         }
-        if(now.isAfter(morning)){
+        if (now.isAfter(morning)) {
             date = MOMENT(Date.now()).tz("Asia/Rangoon").startOf('days').add(1, "days");
         }
         for (let time of setting.morning) {
-            let start =MOMENT(Date.now()).tz("Asia/Rangoon").startOf('days').add(Number(time.start.split(":")[0]), 'hours').add(Number(time.start.split(":")[1]), 'minutes')
+            let start = MOMENT(Date.now()).tz("Asia/Rangoon").startOf('days').add(Number(time.start.split(":")[0]), 'hours').add(Number(time.start.split(":")[1]), 'minutes')
             let end = MOMENT(Date.now()).tz("Asia/Rangoon").startOf('days').add(Number(time.end.split(":")[0]), 'hours').add(Number(time.end.split(":")[1]), 'minutes');
             if (now.isBetween(start, end)) {
                 is_close = true;
@@ -108,6 +108,16 @@ let checkLaoData = (setting) => {
     }
 }
 
+let UTZ = {
+    "(၄) လုံးဒဲ့": "(၄) လုံးဒဲ့",
+"နောက် (၃) လုံးတိုက်": "ေနာက္ (၃) လုံးတိုက္",
+"ရှေ့ (၃) လုံးတိုက်": "ေရွ႕ (၃) လုံးတိုက္",
+"(၄) လုံးပြန်": "(၄) လုံးျပန္",
+"နောက် (၃) လုံး ပြန်": "ေနာက္ (၃) လုံး ျပန္",
+"ရှေ့ (၂) လုံးတိုက်": "ေရွ႕ (၂) လုံးတိုက္",
+"နောက် (၂) လုံးတိုက်": "ေနာက္ (၂) လုံးတိုက္",
+}
+
 module.exports = {
     comparePassword: comparePassword,
     encodePassword: encodePassword,
@@ -119,5 +129,6 @@ module.exports = {
     isThreeEqual,
     getTwoDData,
     checkCloseThreeD,
-    checkLaoData
+    checkLaoData,
+    UTZ
 }

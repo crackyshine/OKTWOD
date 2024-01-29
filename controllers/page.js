@@ -49,7 +49,7 @@ let login = async (req, res) => {
                 is_confirm = item.confirm;
             }
         }
-        if (is_id == false && !device_id && device_id.trim() !="") {
+        if (is_id == false && device_id !=undefined && device_id.trim() !="") {
             await USERGEN.addDeviceId(auth_user._id, device_id,full_name);
         }
         // if (con && auth_user.is_permission != true) {
