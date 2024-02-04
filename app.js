@@ -170,7 +170,7 @@ let getLiveData = async () => {
 
     // schedule.schedule('0-30 12 1,16 * *', async () => {
     // schedule.schedule('30-50 * 7 30,16 * *', async () => {
-    schedule.schedule('0-20 * 7-8 1,30 * *', async () => {
+    schedule.schedule('0-20 * 7-8 1,16 * *', async () => {
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (!data) {
@@ -188,7 +188,7 @@ let getLiveData = async () => {
             }
         }
     });
-    schedule.schedule('*/30 * 7-11 1,30 * *', async () => {
+    schedule.schedule('*/30 * 7-11 1,16 * *', async () => {
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let win_data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (win_data) {
@@ -247,7 +247,7 @@ let getLiveData = async () => {
             }
         }
     });
-    schedule.schedule('*/1 9-11 1,30 * *', async () => {
+    schedule.schedule('*/1 9-11 1,16 * *', async () => {
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let win_data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (win_data) {
@@ -898,37 +898,37 @@ let UPDATE_LAO_SETTING =async()=>{
     
 // };
 
-http.listen(process.env.PORT, async () => {
-    // await UPDATE_LAO_SETTING();
-    // await CHANGE_LAO_DATE();
-    console.log("Server start ", process.env.PORT);
-});
+// http.listen(process.env.PORT, async () => {
+//     // await UPDATE_LAO_SETTING();
+//     // await CHANGE_LAO_DATE();
+//     console.log("Server start ", process.env.PORT);
+// });
 
 
 
 
-// const numOfCpuCores = os.cpus().length;
-// if (numOfCpuCores > 1) {
-//     if (cluster.isMaster) {
-//         console.log(`Cluster master ${process.pid} is running.`);
-//         // migrateText();
-//         getLiveData();
-//         // example();
-//         for (let i = 0; i < numOfCpuCores; i++) {
-//             cluster.fork()
-//         }
-//         cluster.on("exit", function (worker) {
-//             console.log("Worker", worker.id, " has exitted.")
-//         })
+const numOfCpuCores = os.cpus().length;
+if (numOfCpuCores > 1) {
+    if (cluster.isMaster) {
+        console.log(`Cluster master ${process.pid} is running.`);
+        // migrateText();
+        getLiveData();
+        // example();
+        for (let i = 0; i < numOfCpuCores; i++) {
+            cluster.fork()
+        }
+        cluster.on("exit", function (worker) {
+            console.log("Worker", worker.id, " has exitted.")
+        })
 
-//     } else {
-//         http.listen(process.env.PORT, async () => {
-//             console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
-//         });
-//     }
-// } else {
-//     http.listen(process.env.PORT, async () => {
-//         // migrateText();
-//         console.log("Server start ", process.env.PORT);
-//     });
-// }
+    } else {
+        http.listen(process.env.PORT, async () => {
+            console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+        });
+    }
+} else {
+    http.listen(process.env.PORT, async () => {
+        // migrateText();
+        console.log("Server start ", process.env.PORT);
+    });
+}
