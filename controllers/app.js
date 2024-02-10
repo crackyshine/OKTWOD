@@ -1004,8 +1004,6 @@ let checkTicket = async (req, res) => {
         let exist_count = req.body.exist_count;
         let number = req.body.number;
         let scanner = req.body.scanner;
-        console.log(req.body);
-
         if (isNaN(exist_count) || !number || number.length != 6) {
             res.send({ status: 0, msg: "နံပါတ်မှားယွင်းနေပါသည်" });
             return;

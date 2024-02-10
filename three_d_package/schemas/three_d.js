@@ -4,6 +4,7 @@ let check_three_d = JOI.object({
         num: JOI.string().required().error(new Error("နံပါတ် မှားယွင်းနေပါသည်။")),
         bet_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်။")),
         original_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
+        za_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
     })).min(1).required(),
 });
 let save_three_d = JOI.object({
@@ -12,6 +13,7 @@ let save_three_d = JOI.object({
         num: JOI.string().required().error(new Error("နံပါတ် မှားယွင်းနေပါသည်။")),
         bet_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်။")),
         original_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
+        za_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
     })).min(1).required(),
 });
 let check_date =JOI.object({
@@ -42,6 +44,8 @@ let three_d_setting = JOI.object({
     block_amount: JOI.number().required().error(new Error("အကန့်အသတ်မှားယွင်းနေပါသည်။")),
     delete_minute: JOI.number().required().error(new Error("ဖျတ်ချိန်မှားယွင်းနေပါသည်။")),
     kyat_block_amount: JOI.number().required().error(new Error("ကျပ် အကန့်အသတ် မှားယွင်းနေပါသည်။")),
+    za_amount: JOI.number().required().error(new Error("ဇ ပမာဏ မှားယွင်းနေပါသည်။")),
+    kyat_za_amount: JOI.number().required().error(new Error("ကျပ် ဇ ပမာဏ မှားယွင်းနေပါသည်။")),
     three_d_cut_amount: JOI.number().required().error(new Error("ဖျတ် ပမာဏ မှားယွင်းနေပါသည်။")),
     three_d_kyat_cut_amount: JOI.number().required().error(new Error("ဖျတ်ကျပ် ပမာဏ မှားယွင်းနေပါသည်။")),
     apar: JOI.number().required().error(new Error("အပါ ပမာဏ မှားယွင်းနေပါသည်။")),

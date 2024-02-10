@@ -17,6 +17,7 @@ const threeDKyatTicketSchema = new Schema({
             num: {type: String},
             bet_amount: {type: Number},
             win_amount: {type: Number, default: 0},
+            za_amount: {type: Number, default: 0},
         }
     ],
     status: {

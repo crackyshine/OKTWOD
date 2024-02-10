@@ -55,6 +55,9 @@ let checkThreeD = async (req, res, next) => {
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
+                        if (item.za_amount == 2) {
+                            d.za_amount == 2;
+                        }
                         d.bet_amount += item.bet_amount;
                         d.original_amount += item.bet_amount;
                     }
@@ -67,13 +70,19 @@ let checkThreeD = async (req, res, next) => {
         let nums = _.uniq(_.pluck(items, "num"));
         let block_tickets = await DB.THREE_D_BLOCK_KYAT_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
-        let b_amount = name == "Company" ? setting.kyat_block_amount : setting.three_d_kyat_cut_amount;
+        let b_amount = name == "Company" ? setting.kyat_za_amount : setting.three_d_kyat_cut_amount;
         for (let item of data) {
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;
                 confirm = true;
             } else if ((item.bet_amount + item.server_amount) > b_amount) {
+                if ((item.bet_amount + item.server_amount) > setting.kyat_block_amount) {
+                    item.za_amount = 2;
+                }
                 item.bet_amount = b_amount - item.server_amount;
+                confirm = true;
+            } else if (((item.bet_amount + item.server_amount) > setting.kyat_block_amount && item.za_amount == 1)) {
+                item.za_amount = 2;
                 confirm = true;
             }
         }
@@ -129,12 +138,14 @@ let saveThreeD = async (req, res, next) => {
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
+                        if (item.za_amount == 2) {
+                            d.za_amount == 2;
+                        }
                         d.bet_amount += item.bet_amount;
                         d.original_amount += item.bet_amount;
                     }
                 }
             } else {
-                console.log(server_amount);
                 item.server_amount = server_amount;
                 data.push(item);
             }
@@ -142,13 +153,19 @@ let saveThreeD = async (req, res, next) => {
         let nums = _.uniq(_.pluck(items, "num"));
         let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
-        let b_amount = name == "Company" ? setting.kyat_block_amount : setting.three_d_kyat_cut_amount;
+        let b_amount = name == "Company" ? setting.kyat_za_amount : setting.three_d_kyat_cut_amount;
         for (let item of data) {
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;
                 confirm = true;
             } else if ((item.bet_amount + item.server_amount) > b_amount) {
+                if ((item.bet_amount + item.server_amount) > setting.kyat_block_amount) {
+                    item.za_amount = 2;
+                }
                 item.bet_amount = b_amount - item.server_amount;
+                confirm = true;
+            } else if (((item.bet_amount + item.server_amount) > setting.kyat_block_amount && item.za_amount == 1)) {
+                item.za_amount = 2;
                 confirm = true;
             }
         }

@@ -4,6 +4,7 @@ let check_three_d = JOI.object({
         num: JOI.string().required().error(new Error("နံပါတ် မှားယွင်းနေပါသည်။")),
         bet_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်။")),
         original_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
+        za_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
     })).min(1).required(),
 });
 let save_three_d = JOI.object({
@@ -12,6 +13,7 @@ let save_three_d = JOI.object({
         num: JOI.string().required().error(new Error("နံပါတ် မှားယွင်းနေပါသည်။")),
         bet_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်။")),
         original_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
+        za_amount: JOI.number().required().error(new Error("လောင်းကြေးမှားယွင်းနေပါသည်")),
     })).min(1).required(),
 });
 let check_date =JOI.object({

@@ -2,37 +2,38 @@ const MONGO = require('mongoose');
 const Schema = MONGO.Schema;
 const autoIncrement = require('mongoose-auto-increment');
 const threeDTicketSchema = new Schema({
-    voucher_id: {type: Number, required: true},
+    voucher_id: { type: Number, required: true },
     agent: {
-        id: {type: Schema.ObjectId, ref: 'user'},
-        name: {type: String, required: true},
-        sold_out_name: {type: String, default: ""},
+        id: { type: Schema.ObjectId, ref: 'user' },
+        name: { type: String, required: true },
+        sold_out_name: { type: String, default: "" },
     },
     amount: {
-        total: {type: Number, default: 0},
-        win: {type: Number, default: 0}
+        total: { type: Number, default: 0 },
+        win: { type: Number, default: 0 }
     },
     items: [
         {
-            num: {type: String},
-            bet_amount: {type: Number},
-            win_amount: {type: Number, default: 0},
+            num: { type: String },
+            bet_amount: { type: Number },
+            za_amount: { type: Number, default: 1 },
+            win_amount: { type: Number, default: 0 },
         }
     ],
     status: {
-        cash: {type: Boolean, default: false},
-        finish: {type: Boolean, default: false}
+        cash: { type: Boolean, default: false },
+        finish: { type: Boolean, default: false }
     },
     delete: {
-        is_delete: {type: Boolean, default: false},
-        name: {type: String, default: ""},
-        date: {type: Date, default: null}
+        is_delete: { type: Boolean, default: false },
+        name: { type: String, default: "" },
+        date: { type: Date, default: null }
     },
     date: {
-        win: {type: Date, default: Date.now},
-        created: {type: Date, default: Date.now},
+        win: { type: Date, default: Date.now },
+        created: { type: Date, default: Date.now },
     },
-    remark:{type:String,default:""}
+    remark: { type: String, default: "" }
 });
 autoIncrement.initialize(MONGO.connection); // 3. initialize autoIncrement
 threeDTicketSchema.plugin(autoIncrement.plugin, {

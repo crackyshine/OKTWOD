@@ -30,6 +30,86 @@ let threeDSetting = async (req, res, next) => {
         next(new Error(process.env.connect_dev));
     }
 }
+// let checkThreeD = async (req, res, next) => {
+//     try {
+//         let setting = await DB.THREE_D_SETTING_DB.findOne({ show_id: 0 });
+//         const is_close = UTILS.checkCloseThreeD(setting);
+//         if (is_close) {
+//             next(new Error(`လောင်းကြေးပိတ်သွားပါပြီ။`));
+//             return;
+//         }
+//         let items = req.body.items;
+//         let confirm = false;
+//         let data = [];
+//         let win_date = MOMENT(Date.parse(setting.win_date)).tz('Asia/Rangoon').startOf('days');
+//         for (let item of items) {
+//             if (item.num.includes(' ')) {
+//                 next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
+//                 return;
+//             }
+//         }
+//         let count = await DB.THREE_D_CUT_NUMBER_DB.findOne({ $and: [{ name: "HNH" }, { win_date: win_date }] });
+//         let name = "Company";
+//         if (count) {
+//             name = "HNH";
+//         }
+//         let tickets = await DB.THREE_D_CUT_NUMBER_DB.find({
+//             $and: [
+//                 { win_date: win_date },
+//                 { name: name },
+//             ]
+//         });
+//         tickets = _.indexBy(tickets, 'bet_num');
+//         for (let item of items) {
+//             let server_amount = 0;
+//             if (item.num in tickets) {
+//                 server_amount = tickets[item.num].amount;
+//             }
+//             if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+//                 item.server_amount = server_amount;
+//                 data.push(item);
+//                 continue;
+//             }
+//             if (data.some(e => e.num == item.num)) {
+//                 for (let d of data) {
+//                     if (d.num == item.num) {
+//                         d.bet_amount += item.bet_amount;
+//                         d.original_amount += item.bet_amount;
+//                     }
+//                 }
+//             } else {
+//                 item.server_amount = server_amount;
+//                 data.push(item);
+//             }
+//         }
+//         let nums = _.uniq(_.pluck(items, "num"));
+//         let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
+//         block_tickets = _.indexBy(block_tickets, 'bet_num');
+//         let b_amount = name == "Company" ? setting.block_amount : setting.three_d_cut_amount;
+//         for (let item of data) {
+//             if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+//                 continue;
+//             }
+//             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
+//                 item.bet_amount = 0;
+//                 confirm = true;
+//             } else if ((item.bet_amount + item.server_amount) > b_amount) {
+//                 item.bet_amount = b_amount - item.server_amount;
+//                 confirm = true;
+//             }
+//         }
+//         res.send({
+//             status: 1,
+//             data: {
+//                 confirm,
+//                 numbers: data
+//             }
+//         });
+//     } catch (error) {
+//         console.log("Error From checkThreeD => ", error);
+//         next(new Error(process.env.connect_dev));
+//     }
+// }
 let checkThreeD = async (req, res, next) => {
     try {
         let setting = await DB.THREE_D_SETTING_DB.findOne({ show_id: 0 });
@@ -73,6 +153,9 @@ let checkThreeD = async (req, res, next) => {
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
+                        if (item.za_amount == 2) {
+                            d.za_amount == 2;
+                        }
                         d.bet_amount += item.bet_amount;
                         d.original_amount += item.bet_amount;
                     }
@@ -85,7 +168,8 @@ let checkThreeD = async (req, res, next) => {
         let nums = _.uniq(_.pluck(items, "num"));
         let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
-        let b_amount = name == "Company" ? setting.block_amount : setting.three_d_cut_amount;
+        let b_amount = name == "Company" ? setting.za_amount : setting.three_d_cut_amount;
+
         for (let item of data) {
             if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
                 continue;
@@ -94,10 +178,17 @@ let checkThreeD = async (req, res, next) => {
                 item.bet_amount = 0;
                 confirm = true;
             } else if ((item.bet_amount + item.server_amount) > b_amount) {
+                if ((item.bet_amount + item.server_amount) > setting.block_amount) {
+                    item.za_amount = 2;
+                }
                 item.bet_amount = b_amount - item.server_amount;
+                confirm = true;
+            } else if (((item.bet_amount + item.server_amount) > setting.block_amount && item.za_amount == 1)) {
+                item.za_amount = 2;
                 confirm = true;
             }
         }
+
         res.send({
             status: 1,
             data: {
@@ -155,12 +246,14 @@ let saveThreeD = async (req, res, next) => {
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
+                        if (item.za_amount == 2) {
+                            d.za_amount == 2;
+                        }
                         d.bet_amount += item.bet_amount;
                         d.original_amount += item.bet_amount;
                     }
                 }
             } else {
-                console.log(server_amount);
                 item.server_amount = server_amount;
                 data.push(item);
             }
@@ -168,16 +261,23 @@ let saveThreeD = async (req, res, next) => {
         let nums = _.uniq(_.pluck(items, "num"));
         let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
-        let b_amount = name == "Company" ? setting.block_amount : setting.three_d_cut_amount;
+        let b_amount = name == "Company" ? setting.za_amount : setting.three_d_cut_amount;
         for (let item of data) {
             if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
                 continue;
             }
+
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;
                 confirm = true;
             } else if ((item.bet_amount + item.server_amount) > b_amount) {
+                if ((item.bet_amount + item.server_amount) > setting.block_amount) {
+                    item.za_amount = 2;
+                }
                 item.bet_amount = b_amount - item.server_amount;
+                confirm = true;
+            } else if (((item.bet_amount + item.server_amount) > setting.block_amount && item.za_amount == 1)) {
+                item.za_amount = 2;
                 confirm = true;
             }
         }
@@ -260,7 +360,6 @@ let threeDDeleteTicketNumber = async (req, res, next) => {
         let start_date = req.body.start_date;
         let end_date = req.body.end_date;
         let auth_user = res.locals.auth_user;
-        console.log(req.body);
         start_date = MOMENT(Date.parse(start_date)).tz("Asia/Rangoon").startOf("days");
         end_date = MOMENT(Date.parse(end_date)).tz("Asia/Rangoon").endOf("days");
         let data = await DB.THREE_D_TICKET_DB.find({
@@ -390,11 +489,11 @@ let saveThreeDWinNumber = async (req, res, next) => {
                     if (item.num == win_number) {
                         let agent = agents[ticket.agent.id];
                         if (agent.is_permission == true) {
-                            item.win_amount = Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
-                            win_amount += Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
+                            item.win_amount = Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
+                            win_amount += Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
                         } else {
-                            item.win_amount = item.bet_amount * setting.win_percent;
-                            win_amount += item.bet_amount * setting.win_percent;
+                            item.win_amount = Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
+                            win_amount += Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
                         }
 
                     } else {
@@ -418,12 +517,19 @@ let saveThreeDWinNumber = async (req, res, next) => {
                     // item.win_amount = item.bet_amount * setting.win_percent;
                     // win_amount += item.bet_amount * setting.win_percent;
                     let agent = agents[ticket.agent.id];
+                    // if (agent.is_permission == true) {
+                    //     item.win_amount = Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
+                    //     win_amount += Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
+                    // } else {
+                    //     item.win_amount = item.bet_amount * setting.win_percent;
+                    //     win_amount += item.bet_amount * setting.win_percent;
+                    // }
                     if (agent.is_permission == true) {
-                        item.win_amount = Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
-                        win_amount += Math.ceil(((item.bet_amount * setting.win_percent) / 14) * 13);
+                        item.win_amount = Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
+                        win_amount += Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
                     } else {
-                        item.win_amount = item.bet_amount * setting.win_percent;
-                        win_amount += item.bet_amount * setting.win_percent;
+                        item.win_amount = Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
+                        win_amount += Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
                     }
                 } else {
                     item.win_amount = 0;
