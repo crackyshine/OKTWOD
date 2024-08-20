@@ -4331,7 +4331,7 @@ let changeWinTicketNumber = async (req, res, next) => {
                 update_data.num = num;
             }
             win_data[key] = update_data;
-            win_dat["pdf_url"] = "custom";
+            win_data["pdf_url"] = "custom";
             await DB.WinNumberDB.updateOne({ _id: win_data._id }, { $set: win_data });
             res.send({
                 status: 1,

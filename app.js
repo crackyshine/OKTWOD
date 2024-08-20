@@ -826,18 +826,18 @@ let change_number = async () => {
     await DB.WinNumberDB.updateOne({ _id: data._id }, { $set: data });
     console.log("change numbers");
 }
-let UPDATE_LAO_SETTING =async()=>{
-    let ls =await DB.LAO_SETTING_DB.findOne();
-    for(let item of ls.lao){
-        item["amount_k"] =item.amount;
-        item["four_d_k"] =item.four_d;
-        item["three_d_k"] =item.three_d;
-        item["four_permute_k"] =item.four_permute;
-        item["three_permute_k"] =item.three_permute;
-        item["front_two_d_k"] =item.front_two_d;
-        item["back_two_d_k"] =item.back_two_d;
+let UPDATE_LAO_SETTING = async () => {
+    let ls = await DB.LAO_SETTING_DB.findOne();
+    for (let item of ls.lao) {
+        item["amount_k"] = item.amount;
+        item["four_d_k"] = item.four_d;
+        item["three_d_k"] = item.three_d;
+        item["four_permute_k"] = item.four_permute;
+        item["three_permute_k"] = item.three_permute;
+        item["front_two_d_k"] = item.front_two_d;
+        item["back_two_d_k"] = item.back_two_d;
     }
-    await DB.LAO_SETTING_DB.updateOne({show_id:0},{$set:{lao:ls.lao,"three_d.block_amount_k":50000,"three_d_cut_amount_k":100000}});
+    await DB.LAO_SETTING_DB.updateOne({ show_id: 0 }, { $set: { lao: ls.lao, "three_d.block_amount_k": 50000, "three_d_cut_amount_k": 100000 } });
     console.log("done");
 }
 // let change_ticket_agent =async()=>{
@@ -867,8 +867,8 @@ let UPDATE_LAO_SETTING =async()=>{
 
 
 // let CHANGE_LAO_DATE=async()=>{
-//     let old_date = MOMENT("2024-01-02").tz("Asia/Rangoon").startOf("days");
-//     let new_date = MOMENT("2024-01-03").tz("Asia/Rangoon").startOf("days");
+//     let old_date = MOMENT("2024-05-01").tz("Asia/Rangoon").startOf("days");
+//     let new_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");
 //     let old_data =await DB.LAO_CUT_NUMBER_DB.find({win_date:old_date});
 //     for(let item of old_data){
 //         if(item.bet_num.length ==3){
@@ -895,40 +895,160 @@ let UPDATE_LAO_SETTING =async()=>{
 //     }
 //     await DB.LAO_TICKET_DB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
 //     console.log("Change Date Success");
-    
 // };
 
-http.listen(process.env.PORT, async () => {
-    // await UPDATE_LAO_SETTING();
-    // await CHANGE_LAO_DATE();
-    console.log("Server start ", process.env.PORT);
-});
-
-
-
-
-// const numOfCpuCores = os.cpus().length;
-// if (numOfCpuCores > 1) {
-//     if (cluster.isMaster) {
-//         console.log(`Cluster master ${process.pid} is running.`);
-//         // migrateText();
-//         getLiveData();
-//         // example();
-//         for (let i = 0; i < numOfCpuCores; i++) {
-//             cluster.fork()
+// let CHANGE_LAO_DATE_WIN_DATE = async () => {
+//     let old_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");
+//     let new_date = MOMENT("2024-05-03").tz("Asia/Rangoon").startOf("days");
+//     // let old_data = await DB.LAO_CUT_NUMBER_DB.find({ win_date: old_date });
+//     let count = 0;
+//     // for (let item of old_data) {
+//     //     item.win_amount =0;
+//     // };
+//     let d = await DB.LAO_TICKET_DB.find({ "date.win": old_date });
+//     for await (let item of d) {
+//         count += item.amount.win;
+//         if (item.delete.is_delete == false) {
+//             await SAVE_CUT_LAO(item.items, 'Company', new_date);
+//             item.amount.win = 0;
+//             item.status = {
+//                 cash: false,
+//                 finish: false
+//             };
+//             item.date.win = new_date;
+//             for (let i of item.items) {
+//                 i.win = {
+//                     amount: 0,
+//                     str: ""
+//                 }
+//             }
+//             await DB.LAO_TICKET_DB.updateOne({ _id: item._id }, { $set: item });
+//             console.log("Update ", item.voucher_id);
 //         }
-//         cluster.on("exit", function (worker) {
-//             console.log("Worker", worker.id, " has exitted.")
-//         })
-
-//     } else {
-//         http.listen(process.env.PORT, async () => {
-//             console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
-//         });
+//     };
+//     console.log("Bet Amount => ", count)
+//     console.log("Change Date Success");
+// };
+// let SAVE_CUT_LAO = async (items, name, win_date) => {
+//     for await (let item of items) {
+//         let data = null;
+//         if (item.num.length == 3) {
+//             data = await DB.LAO_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }] });
+//         } else {
+//             data = await DB.LAO_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }, { original_amount: item.bet_amount }] });
+//         }
+//         if (data) {
+//             await DB.LAO_CUT_NUMBER_DB.updateOne({ _id: data._id }, { $inc: { bet_amount: item.bet_amount } });
+//         } else {
+//             await DB.LAO_CUT_NUMBER_DB({
+//                 name: name,
+//                 win_date: win_date,
+//                 bet_num: item.num,
+//                 original_amount: item.bet_amount,
+//                 bet_amount: item.bet_amount,
+//             }).save();
+//         }
 //     }
-// } else {
-//     http.listen(process.env.PORT, async () => {
-//         // migrateText();
-//         console.log("Server start ", process.env.PORT);
-//     });
 // }
+
+
+
+// let CHANGE_LAO_KYAT_DATE_WIN_DATE = async () => {
+//     let old_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");
+//     let new_date = MOMENT("2024-05-03").tz("Asia/Rangoon").startOf("days");
+//     // let old_data = await DB.LAO_CUT_NUMBER_DB.find({ win_date: old_date });
+//     let count = 0;
+//     let c = 0;
+//     // for (let item of old_data) {
+//     //     item.win_amount =0;
+//     // };
+//     let setting = await DB.LAO_SETTING_DB.findOne({ show_id: 0 });
+//     let price_items = setting.lao;
+//     price_items = _.indexBy(price_items, 'amount_k');
+//     let d = await DB.LAO_KYAT_TICKET_DB.find({ "date.win": old_date });
+//     for await (let item of d) {
+//         count += item.amount.win;
+//         if (item.delete.is_delete == false) {
+//             item.items = GEN_KYAT_TO_BAHT(item.items, price_items);
+//             await SAVE_CUT_KYAT_LAO(item.items, 'Company', new_date);
+//             item.amount.win = 0;
+//             item.status = {
+//                 cash: false,
+//                 finish: false
+//             };
+//             item.date.win = new_date;
+//             for (let i of item.items) {
+//                 i.win = {
+//                     amount: 0,
+//                     str: ""
+//                 }
+//             }
+//             await DB.LAO_KYAT_TICKET_DB.updateOne({ _id: item._id }, { $set: item });
+//             console.log("Update ", item.voucher_id);
+//             c++;
+//         }
+//     };
+//     console.log("Bet Amount => ", count, " Bet Count => ", c);
+//     console.log("Change Date Success");
+// };
+// let SAVE_CUT_KYAT_LAO = async (items, name, win_date) => {
+//     for await (let item of items) {
+//         let data = await DB.LAO_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }, { original_amount: item.original_amount }] });
+//         if (data) {
+//             await DB.LAO_CUT_NUMBER_DB.updateOne({ _id: data._id }, { $inc: { bet_amount: item.original_amount } });
+//         } else {
+//             await DB.LAO_CUT_NUMBER_DB({
+//                 name: name,
+//                 win_date: win_date,
+//                 bet_num: item.num,
+//                 original_amount: item.original_amount,
+//                 bet_amount: item.original_amount,
+//             }).save();
+//         }
+//     }
+// }
+// let GEN_KYAT_TO_BAHT = (items, price_items) => {
+//     let data = [];
+//     for (let item of items) {
+//         item.original_amount = price_items[`${item.bet_amount}`].amount;
+//         data.push(item);
+//     }
+//     return data;
+// }
+
+// http.listen(process.env.PORT, async () => {
+//     // await UPDATE_LAO_SETTING();
+//     // await CHANGE_LAO_DATE();
+//     // CHANGE_LAO_DATE_WIN_DATE();
+//     await CHANGE_LAO_KYAT_DATE_WIN_DATE();
+//     console.log("Server start ", process.env.PORT);
+// });
+
+
+
+
+const numOfCpuCores = os.cpus().length;
+if (numOfCpuCores > 1) {
+    if (cluster.isMaster) {
+        console.log(`Cluster master ${process.pid} is running.`);
+        // migrateText();
+        getLiveData();
+        // example();
+        for (let i = 0; i < numOfCpuCores; i++) {
+            cluster.fork()
+        }
+        cluster.on("exit", function (worker) {
+            console.log("Worker", worker.id, " has exitted.")
+        })
+
+    } else {
+        http.listen(process.env.PORT, async () => {
+            console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+        });
+    }
+} else {
+    http.listen(process.env.PORT, async () => {
+        // migrateText();
+        console.log("Server start ", process.env.PORT);
+    });
+}

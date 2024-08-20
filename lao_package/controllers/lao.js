@@ -1534,6 +1534,83 @@ let getLaoFinalLedger = async (req, res, next) => {
         next(new Error(process.env.CONNECT_DEV));
     }
 }
+let getLaoKFinalLedger = async (req, res, next) => {
+    try {
+        let search_date = req.body.search_date;
+        let auth_user = res.locals.auth_user;
+        if (!search_date || UTILS.is_date(search_date)) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf("days");
+        let tickets = await DB.LAO_KYAT_TICKET_DB.find({
+            $and: [{
+                "date.win": search_date
+            }, { "delete.is_delete": false }, { "agent.id": auth_user._id }]
+        });
+        let data = {
+            p_one: {
+                count: 0,
+                amount: 0,
+            },
+            p_two: {
+                count: 0,
+                amount: 0,
+            },
+            p_three: {
+                count: 0,
+                amount: 0,
+            },
+            p_four: {
+                count: 0,
+                amount: 0,
+            },
+            p_five: {
+                count: 0,
+                amount: 0,
+            },
+            total_bet: 0,
+            total_win: 0,
+            total_cash: 0
+        }
+
+        for (let bet of tickets) {
+            for (let item of bet.items) {
+                if (item.num.length == 4) {
+                    if (item.bet_amount == 15000) {
+                        data.p_one.count++;
+                        data.p_one.amount += 13000;
+                    } else if (item.bet_amount == 10000) {
+                        data.p_two.count++;
+                        data.p_two.amount += 8500;
+                    } else if (item.bet_amount == 6000) {
+                        data.p_three.count++;
+                        data.p_three.amount += 5000;
+                    } else if (item.bet_amount == 4000) {
+                        data.p_four.count++;
+                        data.p_four.amount += 3500;
+                    }
+                } else if (item.num.length == 3) {
+                    data.p_five.count++;
+                    data.p_five.amount += item.bet_amount;
+                }
+                if (item.win.amount > 0) {
+                    data.total_win += item.win.amount;
+                }
+            }
+        }
+        data.p_five.amount = parseInt(data.p_five.amount * 0.6);
+        data.total_bet = data.p_one.amount + data.p_two.amount + data.p_three.amount + data.p_four.amount + data.p_five.amount;
+        data.total_cash = data.total_bet - data.total_win;
+        res.send({
+            status: 1,
+            data,
+        });
+    } catch (error) {
+        console.log("Error From getLaoFinalLedger => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
 let remarkLao = async (req, res, next) => {
     try {
         let search_id = req.body.search_id;
@@ -1586,6 +1663,7 @@ module.exports = {
     getProfitKLedger,
     cutByNameThreeD,
     getLaoFinalLedger,
+    getLaoKFinalLedger,
     getLaoDeleteTicketLedger,
     remarkLao,
     remarkKLao

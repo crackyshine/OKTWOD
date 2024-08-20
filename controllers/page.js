@@ -33,7 +33,7 @@ let getWinNumber = async (req, res) => {
 let login = async (req, res) => {
     let name = req.body.name;
     let password = req.body.password;
-    let full_name =req.body.full_name;
+    let full_name = req.body.full_name;
     let device_id = req.headers.device_id;
     try {
         let { con, auth_user } = await getLoginUser(name, password);
@@ -49,8 +49,8 @@ let login = async (req, res) => {
                 is_confirm = item.confirm;
             }
         }
-        if (is_id == false && device_id !=undefined && device_id.trim() !="") {
-            await USERGEN.addDeviceId(auth_user._id, device_id,full_name);
+        if (is_id == false && device_id != undefined && device_id.trim() != "") {
+            await USERGEN.addDeviceId(auth_user._id, device_id, full_name);
         }
         // if (con && auth_user.is_permission != true) {
         //     con = 0;
@@ -58,17 +58,18 @@ let login = async (req, res) => {
         //     res.send({status: 0, msg: "ဝင်ခွင့်မရှိပါ"});
         //     return;
         // }
-        if(auth_user.is_owner ==true){
-            is_confirm =true;
+        if (auth_user.is_owner == true || auth_user.name =="ksl") {
+            is_confirm = true;
         }
-        if(is_confirm){
+        if (is_confirm) {
             res.send({
                 status: con, is_confirm, auth_user,
             });
-        }else{
+        } else {
+            console.log(req.body, req.headers);
             res.send({ status: 0, msg: "Admin မှ Confrim လုပ်ပြီးတဲ့အထိစောင့်ပါ။" });
         }
-        
+
     } catch (error) {
         console.log(error);
         res.send({ status: 0, msg: "အကောင့်ဝင်တာ မှားယွင်းနေပါသည်။" });

@@ -32,6 +32,7 @@ ROUTER.post('/cash_k_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER
 ROUTER.post('/profit_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitLedger);
 ROUTER.post('/profit_k_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitKLedger);
 ROUTER.post('/lao_final_ledger',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.getLaoFinalLedger);
+ROUTER.post('/lao_final_ledger_k',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.getLaoKFinalLedger);
 ROUTER.post('/remark',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkLao);
 ROUTER.post('/remark_k',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkKLao);
 module.exports = ROUTER;
