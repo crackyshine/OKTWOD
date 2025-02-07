@@ -1,0 +1,2 @@
+{"_id":{"$oid":"619855e6fad4aa567cacbe27"},"agent":{"name":"Mel Yann","open":480,"amount":-2000,"close":-1520,"id":{"$oid":"617f720466ce3d1278b68f9e"}},"status":"WITHDRAW","remark":"1520","date":{"$date":"2021-11-17T20:01:02.845Z"},"creator":"kosanlong","__v":0}
+{"_id":{"$oid":"61984deefad4aa567cacbd88"},"agent":{"name":"Mel Yann","open":-13000,"amount":13480,"close":480,"id":{"$oid":"617f720466ce3d1278b68f9e"}},"status":"PAY","remark":"1520 ကျန်","date":{"$date":"2021-11-17T20:01:02.845Z"},"creator":"kosanlong","__v":0}

@@ -35,5 +35,6 @@ ROUTER.post('/lao_final_ledger',VALIDATOR.validateBody(SCHEMA.check_date),CONTRO
 ROUTER.post('/lao_final_ledger_k',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.getLaoKFinalLedger);
 ROUTER.post('/remark',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkLao);
 ROUTER.post('/remark_k',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkKLao);
+ROUTER.post('/balance_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.balanceLedger);
 module.exports = ROUTER;
 

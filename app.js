@@ -17,7 +17,8 @@ const express = require('express'),
     appRoute = require('./routes/app'),
     THREE_D_ROUTE = require('./three_d_package/routes/three_d'),
     THREE_D_KYAT_ROUTE = require('./three_d_kyat_package/routes/three_d'),
-    LAO_ROUTE = require('./lao_package/routes/lao');
+    LAO_ROUTE = require('./lao_package/routes/lao'),
+    THAI_ROUTE = require('./thai_package/routes/thai');
 const DB = require('./models/DB');
 const HTMLParser = require('node-html-parser');
 const jsdom = require("jsdom");
@@ -46,6 +47,7 @@ app.use('/app', [validateAuthToken], appRoute);
 app.use('/three_d', [validateAuthToken], THREE_D_ROUTE);
 app.use('/three_d_kyat', [validateAuthToken], THREE_D_KYAT_ROUTE);
 app.use('/lao', [validateAuthToken], LAO_ROUTE);
+app.use('/thai', [validateAuthToken], THAI_ROUTE);
 app.use((err, req, res, next) => {
     err.status = err.status || 200;
     res.send({
@@ -867,8 +869,8 @@ let UPDATE_LAO_SETTING = async () => {
 
 
 // let CHANGE_LAO_DATE=async()=>{
-//     let old_date = MOMENT("2024-05-01").tz("Asia/Rangoon").startOf("days");
-//     let new_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");
+//     let old_date = MOMENT("2024-09-11").tz("Asia/Rangoon").startOf("days");
+//     let new_date = MOMENT("2024-09-16").tz("Asia/Rangoon").startOf("days");
 //     let old_data =await DB.LAO_CUT_NUMBER_DB.find({win_date:old_date});
 //     for(let item of old_data){
 //         if(item.bet_num.length ==3){
@@ -951,6 +953,19 @@ let UPDATE_LAO_SETTING = async () => {
 //     }
 // }
 
+let CHANGE_TWO_D_DATE = async () => {
+    // let old_date = MOMENT("2024-10-14").tz("Asia/Rangoon").startOf("days");
+    // let new_date = MOMENT("2024-10-15").tz("Asia/Rangoon").startOf("days");
+    // let old_cut_date = await DB.TwoDCutNumber.find({ win_date: old_date });
+    // for(let item of old_cut_date){
+    // let c =await DB.TwoDCutNumber.updateOne({win_date:new_date,type:item.type,bet_num:item.bet_num},{$inc:{amount:item.amount}});
+    // }
+    // let delete_data = await DB.TwoDCutNumber.deleteMany({ win_date: old_date });
+    // console.log(delete_data);
+    // let old_data =await DB.TwoDNumberDB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
+    // console.log(old_data);
+    console.log("OKK");
+}
 
 
 // let CHANGE_LAO_KYAT_DATE_WIN_DATE = async () => {
@@ -1016,39 +1031,219 @@ let UPDATE_LAO_SETTING = async () => {
 //     return data;
 // }
 
-// http.listen(process.env.PORT, async () => {
-//     // await UPDATE_LAO_SETTING();
-//     // await CHANGE_LAO_DATE();
-//     // CHANGE_LAO_DATE_WIN_DATE();
-//     await CHANGE_LAO_KYAT_DATE_WIN_DATE();
-//     console.log("Server start ", process.env.PORT);
-// });
-
-
-
-
-const numOfCpuCores = os.cpus().length;
-if (numOfCpuCores > 1) {
-    if (cluster.isMaster) {
-        console.log(`Cluster master ${process.pid} is running.`);
-        // migrateText();
-        getLiveData();
-        // example();
-        for (let i = 0; i < numOfCpuCores; i++) {
-            cluster.fork()
+let TRANSFER_TICKET = async () => {
+    await DB.UserDB.updateMany({}, {
+        $set: {
+            com: {
+                air: 270,
+                simple: 0,
+            },
+            pair: [
+                { count: 1, amount: 110 },
+                { count: 2, amount: 220 },
+                { count: 3, amount: 350 },
+                { count: 5, amount: 650 },
+            ]
         }
-        cluster.on("exit", function (worker) {
-            console.log("Worker", worker.id, " has exitted.")
-        })
+    });
+    await DB.SettingDB.updateMany({}, {
+        $set: {
+            sold_out: {
+                air: 270,
+                simple: 0,
+            },
+            pair: [
+                { count: 1, amount: 110 },
+                { count: 2, amount: 220 },
+                { count: 3, amount: 350 },
+                { count: 5, amount: 650 },
+            ]
+        }
+    });
+    let old_date = MOMENT("2025-02-01").tz("Asia/Rangoon").startOf("days");
+    let setting = await DB.SettingDB.findOne();
+    let setting_pair = _.indexBy(setting.pair, "count");
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, '_id');
+    let ticket_ledgers = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": old_date }, { "delete.is_delete": false }] });
+    let save_data = [];
+    let save_extra_data = [];
+    let count = 0;
+    for await (let ticket_ledger of ticket_ledgers) {
+        let ticket = ticket_ledger.ticket;
+        let user = users[ticket_ledger.agent.id];
+        let user_pair = _.indexBy(user.pair, "count");
+        let income_date = MOMENT(Date.parse(ticket_ledger.agent.date)).tz('Asia/Rangoon').unix();
+        let sold_out_date = MOMENT(Date.parse(ticket_ledger.sold_out.date)).tz('Asia/Rangoon').unix();
+        let amount = setting.sold_out.air;
+        let sold_out_amount = user.com.air;
+        if (ticket.is_air == false) {
+            amount = setting_pair[ticket.count].amount;
+            sold_out_amount = user_pair[ticket.count].amount;
+        }
+        let save_item = new DB.THAI_LEDGER();
+        let save_extra = new DB.THAI_EXTRA();
+        save_extra.ticket_id = save_item._id;
+        save_item.ticket = {
+            number: ticket.number,
+            scanner: ticket.scanner,
+            air_simple: ticket.is_air,
+            count: ticket.count,
+        };
+        save_item.income = {
+            user_id: user._id,
+            name: user.full_name,
+        };
+        save_item.amount.ticket = amount;
+        save_item.amount.income = setting.income * ticket.count;
+        save_item.amount.sold_out = sold_out_amount;
+        save_item.amount.com = amount - sold_out_amount;
+        save_item.win_date = old_date.unix();
+        save_item.update = income_date;
+        save_extra.date.win = old_date.unix();
+        save_extra.date.income = income_date;
+        save_extra.device.income = user.user_list[0].device_id;
+        if (ticket_ledger.sold_out.is_sold_out == true) {
+            save_item.sold_out = {
+                user_id: user._id,
+                name: user.full_name,
+            };
+            save_item.status = "SOLD_OUT";
+            save_item.sold_out_date = sold_out_date;
+            save_extra.device.sold_out = user.user_list[0].device_id;
+            save_extra.date.sold_out = sold_out_date;
+            save_item.update = sold_out_date;
+        }
+        save_item.contact = ticket_ledger.sold_out.name;
+        save_item.remark = ticket_ledger.remark;
+        save_data.push(save_item);
+        save_extra_data.push(save_extra);
+        if (save_data.length == 500) {
+            await DB.THAI_LEDGER.insertMany(save_data);
+            await DB.THAI_EXTRA.insertMany(save_extra_data);
+            count++;
+            console.log("save_data => ", count * save_data.length);
+            save_data = [];
+            save_extra_data = [];
+        }
+    }
+    if (save_data.length > 0) {
+        await DB.THAI_LEDGER.insertMany(save_data);
+        await DB.THAI_EXTRA.insertMany(save_extra_data);
+        console.log("save_data => ", (count * 500) + save_data.length);
+    }
+    console.log("all Ticket => ", ticket_ledgers.length);
+    let thai_ticket_ledgers = await DB.THAI_LEDGER.find({ "win_date": old_date.unix() });
+    let save_users = [];
+    let ticket_count = [];
+    for (let item of thai_ticket_ledgers) {
+        save_users.push(item.income.user_id.toString());
+        if (item.ticket.air_simple == false) {
+            ticket_count.push(item.ticket.count);
+        }
+    }
+    save_users = _.uniq(save_users);
+    ticket_count = _.uniq(ticket_count);
+    for await (let save_user of save_users) {
+        let item = new DB.THAI_SHOP_LEDGER();
+        let user = users[save_user];
+        item.user_id = user._id;
+        item.name = user.full_name;
+        item.win_date = old_date.unix();
 
-    } else {
-        http.listen(process.env.PORT, async () => {
-            console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+        let cash_item = new DB.THAI_CASH_LEDGER();
+        cash_item.user_id = user._id;
+        cash_item.name = user.full_name;
+        cash_item.win_date = old_date.unix();
+        await item.save();
+        await cash_item.save();
+    }
+}
+
+let CHANGE_COM = async () => {
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, '_id');
+    let setting = await DB.SettingDB.findOne();
+    let setting_pair = _.indexBy(setting.pair, "count");
+    let tickets = await DB.THAI_LEDGER.find({ status: { $ne: "DELETE" } });
+    for await (let ticket of tickets) {
+        let user = users[ticket.income.user_id];
+        let user_pair = _.indexBy(user.pair, "count");
+        let amount = setting.sold_out.air;
+        let sold_out_amount = user.com.air;
+        if (ticket.ticket.air_simple == false) {
+            amount = setting_pair[ticket.ticket.count].amount;
+            sold_out_amount = user_pair[ticket.ticket.count].amount;
+        }
+        await DB.THAI_LEDGER.updateOne({ _id: ticket._id }, {
+            $set: {
+                "amount.ticket": amount,
+                "amount.sold_out": sold_out_amount,
+                "amount.com": amount - sold_out_amount,
+            }
         });
     }
-} else {
-    http.listen(process.env.PORT, async () => {
-        // migrateText();
-        console.log("Server start ", process.env.PORT);
-    });
+    console.log("Done");
 }
+
+let CHANGE_EXTRA = async () => {
+    // let users = await DB.UserDB.find();
+    // users = _.indexBy(users, '_id');
+    // let tickets = await DB.THAI_LEDGER.find();
+    // for await (let ticket of tickets) {
+    //     let user = users[ticket.income.user_id];
+    //     let device_id = user.user_list[0].device_id;
+    //     let save_data = new DB.THAI_EXTRA();
+    //     save_data.ticket_id = ticket._id;
+    //     save_data.device.income = device_id;
+    //     save_data.device.delete = ticket.status == "DELETE" ? device_id : "";
+    //     save_data.date.win = ticket.win_date;
+    //     save_data.date.income = 0;
+    //     await save_data.save();
+
+    // }
+    // console.log("Done");
+}
+
+http.listen(process.env.PORT, async () => {
+    // await UPDATE_LAO_SETTING();
+    // await CHANGE_LAO_DATE();
+    // CHANGE_LAO_DATE_WIN_DATE();
+    // await CHANGE_LAO_KYAT_DATE_WIN_DATE();
+    // await CHANGE_TWO_D_DATE();
+    // await new DB.SIMPLE_PRICE_SETTING().save();
+    // await TRANSFER_TICKET();
+    // await CHANGE_USER_DATA();
+    // await CHANGE_COM();
+    // await CHANGE_EXTRA();
+    console.log("Server start ", process.env.PORT);
+});
+
+
+
+
+// const numOfCpuCores = os.cpus().length;
+// if (numOfCpuCores > 1) {
+//     if (cluster.isMaster) {
+//         console.log(`Cluster master ${process.pid} is running.`);
+//         // migrateText();
+//         getLiveData();
+//         // example();
+//         for (let i = 0; i < numOfCpuCores; i++) {
+//             cluster.fork()
+//         }
+//         cluster.on("exit", function (worker) {
+//             console.log("Worker", worker.id, " has exitted.")
+//         })
+
+//     } else {
+//         http.listen(process.env.PORT, async () => {
+//             console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+//         });
+//     }
+// } else {
+//     http.listen(process.env.PORT, async () => {
+//         // migrateText();
+//         console.log("Server start ", process.env.PORT);
+//     });
+// }

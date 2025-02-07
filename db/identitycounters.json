@@ -1,0 +1,5 @@
+{"_id":{"$oid":"61ee3bc886990d141de0707c"},"count":1599,"model":"two_d_kyat_numbers","field":"voucher_id","__v":0}
+{"_id":{"$oid":"61b01142836b011658db7e8d"},"count":914007,"model":"two_d_numbers","field":"voucher_id","__v":0}
+{"_id":{"$oid":"622dce8f5912394afc686c51"},"count":381586,"model":"three_d_tickets","field":"voucher_id","__v":0}
+{"_id":{"$oid":"622dce8f5912394afc686c53"},"count":1550795,"model":"lao_tickets","field":"voucher_id","__v":0}
+{"_id":{"$oid":"625a051d286dff374e7cd5ba"},"count":9942,"model":"three_d_kyat_tickets","field":"voucher_id","__v":0}

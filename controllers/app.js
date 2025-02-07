@@ -37,9 +37,10 @@ let setDefaultCutKyatNumber = async (name, type, date) => {
         }
     }
 }
-let check_simple = (win_number, prices, ticket) => {
+let check_simple = (win_number, prices, simple_price_setting, ticket) => {
     let update_data = {
         status: false,
+        show_amount: 0,
         amount: 0,
         win_title: []
     };
@@ -48,87 +49,116 @@ let check_simple = (win_number, prices, ticket) => {
     if (win_number.first_prize.num == check_num) {
         update_data.win_title.push({
             title: prices.first_price,
-            amount: win_number.first_prize.amount * count
+            show: win_number.first_prize.amount * count,
+            amount: simple_price_setting.first_prize * count,
+            air_simple: false,
         });
         update_data.status = true;
-        update_data.amount += win_number.first_prize.amount * count;
+        update_data.show_amount += win_number.first_prize.amount * count;
+        update_data.amount += simple_price_setting.first_prize * count;
     }
     win_number.first_close_prize.num.forEach((value) => {
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.first_near,
-                amount: win_number.first_close_prize.amount * count
+                show: win_number.first_close_prize.amount * count,
+                amount: simple_price_setting.first_close_prize * count,
+                air_simple: false,
             });
             update_data.status = true;
-            update_data.amount += win_number.first_close_prize.amount * count;
+            update_data.show_amount += win_number.first_close_prize.amount * count;
+            update_data.amount += simple_price_setting.first_close_prize * count;
         }
     });
     win_number.first_front_three_prize.num.forEach((value) => {
         if (value == check_num.substr(0, 3)) {
             update_data.win_title.push({
                 title: prices.upper_three_d,
-                amount: win_number.first_front_three_prize.amount * count
+                show: win_number.first_front_three_prize.amount * count,
+                amount: simple_price_setting.first_front_three_prize * count,
+                air_simple: false
             });
             update_data.status = true;
-            update_data.amount += win_number.first_front_three_prize.amount * count;
+            update_data.show_amount += win_number.first_front_three_prize.amount * count;
+            update_data.amount += simple_price_setting.first_front_three_prize * count;
         }
     });
     win_number.first_back_three_prize.num.forEach((value) => {
         if (value == check_num.substr(3)) {
             update_data.win_title.push({
                 title: prices.below_three_d,
-                amount: win_number.first_back_three_prize.amount * count
+                show: win_number.first_back_three_prize.amount * count,
+                amount: simple_price_setting.first_back_three_prize * count,
+                air_simple: false
             });
             update_data.status = true;
-            update_data.amount += win_number.first_back_three_prize.amount * count;
+            update_data.show_amount += win_number.first_back_three_prize.amount * count;
+            update_data.amount += simple_price_setting.first_back_three_prize * count;
         }
     });
     if (win_number.first_back_two_prize.num == check_num.substr(4)) {
         update_data.win_title.push({
             title: prices.below_two_d,
-            amount: win_number.first_back_two_prize.amount * count
+            show: win_number.first_back_two_prize.amount * count,
+            amount: simple_price_setting.first_back_two_prize * count,
+            air_simple: false
         });
         update_data.status = true;
-        update_data.amount += win_number.first_back_two_prize.amount * count;
+        update_data.show_amount += win_number.first_back_two_prize.amount * count;
+        update_data.amount += simple_price_setting.first_back_two_prize * count;
     }
     win_number.second_prize.num.forEach((value) => {
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.second_price,
-                amount: win_number.second_prize.amount * count
+                show: win_number.second_prize.amount * count,
+                amount: simple_price_setting.second_prize * count,
+                air_simple: false
             });
             update_data.status = true;
-            update_data.amount += win_number.second_prize.amount * count;
+            update_data.show_amount += win_number.second_prize.amount * count;
+            update_data.amount += simple_price_setting.second_prize * count;
         }
     });
     win_number.third_prize.num.forEach((value) => {
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.third_price,
-                amount: win_number.third_prize.amount * count
+                show: win_number.third_prize.amount * count,
+                amount: simple_price_setting.third_prize * count,
+                air_simple: false
             });
             update_data.status = true;
-            update_data.amount += win_number.third_prize.amount * count;
+            update_data.show_amount += win_number.third_prize.amount * count;
+            update_data.amount += simple_price_setting.third_prize * count;
         }
     });
     win_number.fourth_prize.num.forEach((value) => {
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.fourth_price,
-                amount: win_number.fourth_prize.amount * count
+                show: win_number.fourth_prize.amount * count,
+                amount: simple_price_setting.fourth_prize * count,
+                air_simple: false
             });
             update_data.status = true;
-            update_data.amount += win_number.fourth_prize.amount * count;
+            update_data.show_amount += win_number.fourth_prize.amount * count;
+            update_data.amount += simple_price_setting.fourth_prize * count;
+
         }
     });
     win_number.fifth_prize.num.forEach((value) => {
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.fifth_price,
-                amount: win_number.fifth_prize.amount * count
+                show: win_number.fifth_prize.amount * count,
+                amount: simple_price_setting.fifth_prize * count,
+                air_simple: false
+
             });
             update_data.status = true;
-            update_data.amount += win_number.fifth_prize.amount * count;
+            update_data.show_amount += win_number.fifth_prize.amount * count;
+            update_data.amount += simple_price_setting.fifth_prize * count;
         }
     });
     return update_data;
@@ -143,56 +173,72 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
     if (win_number.first_prize.num == check_num) {
         update_data.win_title.push({
             title: prices.first_price.six_d.title,
-            amount: prices.first_price.six_d.amount
+            amount: prices.first_price.six_d.amount,
+            show: prices.first_price.six_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.six_d.amount;
     } else if (win_number.first_prize.num.substr(1) == check_num.substr(1)) {
         update_data.win_title.push({
             title: prices.first_price.back_five_d.title,
-            amount: prices.first_price.back_five_d.amount
+            amount: prices.first_price.back_five_d.amount,
+            show: prices.first_price.back_five_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_five_d.amount;
     } else if (win_number.first_prize.num.substr(3) == check_num.substr(3)) {
         update_data.win_title.push({
             title: prices.first_price.back_three_d.title,
-            amount: prices.first_price.back_three_d.amount
+            amount: prices.first_price.back_three_d.amount,
+            show: prices.first_price.back_three_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_three_d.amount;
     } else if (win_number.first_prize.num.substr(0, 5) == check_num.substr(0, 5)) {
         update_data.win_title.push({
             title: prices.first_price.front_five_d.title,
-            amount: prices.first_price.front_five_d.amount
+            amount: prices.first_price.front_five_d.amount,
+            show: prices.first_price.front_five_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.front_five_d.amount;
     } else if (win_number.first_close_prize.num[0].substr(3) == check_num.substr(3) || win_number.first_close_prize.num[1].substr(3) == check_num.substr(3)) {
         update_data.win_title.push({
             title: prices.first_price.back_three_near.title,
-            amount: prices.first_price.back_three_near.amount
+            amount: prices.first_price.back_three_near.amount,
+            show: prices.first_price.back_three_near.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_three_near.amount;
     } else if (first_three_permute.includes(check_num.substr(3))) {
         update_data.win_title.push({
             title: prices.first_price.back_three_permute.title,
-            amount: prices.first_price.back_three_permute.amount
+            amount: prices.first_price.back_three_permute.amount,
+            show: prices.first_price.back_three_permute.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_three_permute.amount;
     } else if (win_number.first_prize.num.substr(4) == check_num.substr(4)) {
         update_data.win_title.push({
             title: prices.first_price.back_two_d.title,
-            amount: prices.first_price.back_two_d.amount
+            amount: prices.first_price.back_two_d.amount,
+            show: prices.first_price.back_two_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_two_d.amount;
     } else if (first_two_permute.includes(check_num.substr(4))) {
         update_data.win_title.push({
             title: prices.first_price.back_two_permute.title,
-            amount: prices.first_price.back_two_permute.amount
+            amount: prices.first_price.back_two_permute.amount,
+            show: prices.first_price.back_two_permute.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.first_price.back_two_permute.amount;
@@ -202,7 +248,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.second_price.six_d.title,
-                amount: prices.second_price.six_d.amount
+                amount: prices.second_price.six_d.amount,
+                show: prices.second_price.six_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.second_price.six_d.amount;
@@ -210,7 +258,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(0, 5) == check_num.substr(0, 5)) {
             update_data.win_title.push({
                 title: prices.second_price.front_five_d.title,
-                amount: prices.second_price.front_five_d.amount
+                amount: prices.second_price.front_five_d.amount,
+                show: prices.second_price.front_five_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.second_price.front_five_d.amount;
@@ -218,7 +268,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(1) == check_num.substr(1)) {
             update_data.win_title.push({
                 title: prices.second_price.back_five_d.title,
-                amount: prices.second_price.back_five_d.amount
+                amount: prices.second_price.back_five_d.amount,
+                show: prices.second_price.back_five_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.second_price.back_five_d.amount;
@@ -226,7 +278,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(2) == check_num.substr(2)) {
             update_data.win_title.push({
                 title: prices.second_price.back_four_d.title,
-                amount: prices.second_price.back_four_d.amount
+                amount: prices.second_price.back_four_d.amount,
+                show: prices.second_price.back_four_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.second_price.back_four_d.amount;
@@ -235,7 +289,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.second_price.back_three_equal.title,
-                    amount: prices.second_price.back_three_equal.amount
+                    amount: prices.second_price.back_three_equal.amount,
+                    show: prices.second_price.back_three_equal.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.second_price.back_three_equal.amount;
@@ -243,7 +299,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
                 if (value.substr(4) == check_num.substr(4)) {
                     update_data.win_title.push({
                         title: prices.second_price.back_two_d.title,
-                        amount: prices.second_price.back_two_d.amount
+                        amount: prices.second_price.back_two_d.amount,
+                        show: prices.second_price.back_two_d.amount,
+                        air_simple: true
                     });
                     update_data.status = true;
                     update_data.amount += prices.second_price.back_two_d.amount;
@@ -253,7 +311,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.second_price.back_three_d.title,
-                    amount: prices.second_price.back_three_d.amount
+                    amount: prices.second_price.back_three_d.amount,
+                    show: prices.second_price.back_three_d.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.second_price.back_three_d.amount;
@@ -261,7 +321,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(4) == check_num.substr(4)) {
                 update_data.win_title.push({
                     title: prices.second_price.back_two_d.title,
-                    amount: prices.second_price.back_two_d.amount
+                    amount: prices.second_price.back_two_d.amount,
+                    show: prices.second_price.back_two_d.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.second_price.back_two_d.amount;
@@ -274,7 +336,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value == check_num) {
             update_data.win_title.push({
                 title: prices.third_price.six_d.title,
-                amount: prices.third_price.six_d.amount
+                amount: prices.third_price.six_d.amount,
+                show: prices.third_price.six_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.third_price.six_d.amount;
@@ -282,7 +346,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(1) == check_num.substr(1)) {
             update_data.win_title.push({
                 title: prices.third_price.back_five_d.title,
-                amount: prices.third_price.back_five_d.amount
+                amount: prices.third_price.back_five_d.amount,
+                show: prices.third_price.back_five_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.third_price.back_five_d.amount;
@@ -290,7 +356,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(2) == check_num.substr(2)) {
             update_data.win_title.push({
                 title: prices.third_price.back_four_d.title,
-                amount: prices.third_price.back_four_d.amount
+                amount: prices.third_price.back_four_d.amount,
+                show: prices.third_price.back_four_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.third_price.back_four_d.amount;
@@ -299,7 +367,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.third_price.back_three_equal.title,
-                    amount: prices.third_price.back_three_equal.amount
+                    amount: prices.third_price.back_three_equal.amount,
+                    show: prices.third_price.back_three_equal.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.third_price.back_three_equal.amount;
@@ -308,7 +378,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.third_price.back_three_d.title,
-                    amount: prices.third_price.back_three_d.amount
+                    amount: prices.third_price.back_three_d.amount,
+                    show: prices.third_price.back_three_d.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.third_price.back_three_d.amount;
@@ -319,7 +391,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(1) == check_num.substr(1)) {
             update_data.win_title.push({
                 title: prices.fourth_price.back_five_d.title,
-                amount: prices.fourth_price.back_five_d.amount
+                amount: prices.fourth_price.back_five_d.amount,
+                show: prices.fourth_price.back_five_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.fourth_price.back_five_d.amount;
@@ -327,7 +401,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(2) == check_num.substr(2)) {
             update_data.win_title.push({
                 title: prices.fourth_price.back_four_d.title,
-                amount: prices.fourth_price.back_four_d.amount
+                amount: prices.fourth_price.back_four_d.amount,
+                show: prices.fourth_price.back_four_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.fourth_price.back_four_d.amount;
@@ -336,7 +412,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.fourth_price.back_three_equal.title,
-                    amount: prices.fourth_price.back_three_equal.amount
+                    amount: prices.fourth_price.back_three_equal.amount,
+                    show: prices.fourth_price.back_three_equal.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.fourth_price.back_three_equal.amount;
@@ -345,7 +423,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.fourth_price.back_three_d.title,
-                    amount: prices.fourth_price.back_three_d.amount
+                    amount: prices.fourth_price.back_three_d.amount,
+                    show: prices.fourth_price.back_three_d.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.fourth_price.back_three_d.amount;
@@ -357,7 +437,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(1) == check_num.substr(1)) {
             update_data.win_title.push({
                 title: prices.fifth_price.back_five_d.title,
-                amount: prices.fifth_price.back_five_d.amount
+                amount: prices.fifth_price.back_five_d.amount,
+                show: prices.fifth_price.back_five_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.fifth_price.back_five_d.amount;
@@ -365,7 +447,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
         if (value.substr(2) == check_num.substr(2)) {
             update_data.win_title.push({
                 title: prices.fifth_price.back_four_d.title,
-                amount: prices.fifth_price.back_four_d.amount
+                amount: prices.fifth_price.back_four_d.amount,
+                show: prices.fifth_price.back_four_d.amount,
+                air_simple: true
             });
             update_data.status = true;
             update_data.amount += prices.fifth_price.back_four_d.amount;
@@ -374,7 +458,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value.substr(3) == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.fifth_price.back_three_equal.title,
-                    amount: prices.fifth_price.back_three_equal.amount
+                    amount: prices.fifth_price.back_three_equal.amount,
+                    show: prices.fifth_price.back_three_equal.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.fifth_price.back_three_equal.amount;
@@ -388,7 +474,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.below_price.below_three_equal.title,
-                    amount: prices.below_price.below_three_equal.amount
+                    amount: prices.below_price.below_three_equal.amount,
+                    show: prices.below_price.below_three_equal.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.below_price.below_three_equal.amount;
@@ -397,7 +485,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value == check_num.substr(3)) {
                 update_data.win_title.push({
                     title: prices.below_price.below_three_d.title,
-                    amount: prices.below_price.below_three_d.amount
+                    amount: prices.below_price.below_three_d.amount,
+                    show: prices.below_price.below_three_d.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.below_price.below_three_d.amount;
@@ -405,7 +495,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
             if (value_three_permute.includes(check_num.substr(3))) {
                 update_data.win_title.push({
                     title: prices.below_price.below_three_permute.title,
-                    amount: prices.below_price.below_three_permute.amount
+                    amount: prices.below_price.below_three_permute.amount,
+                    show: prices.below_price.below_three_permute.amount,
+                    air_simple: true
                 });
                 update_data.status = true;
                 update_data.amount += prices.below_price.below_three_permute.amount;
@@ -415,7 +507,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
     if (win_number.first_back_two_prize.num == check_num.substr(4)) {
         update_data.win_title.push({
             title: prices.below_price.below_two_d.title,
-            amount: prices.below_price.below_two_d.amount
+            amount: prices.below_price.below_two_d.amount,
+            show: prices.below_price.below_two_d.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.below_price.below_two_d.amount;
@@ -424,7 +518,9 @@ let check_air = (win_number, first_three_permute, first_two_permute, prices, tic
     if (back_two_permute.includes(check_num.substr(4))) {
         update_data.win_title.push({
             title: prices.below_price.below_two_permute.title,
-            amount: prices.below_price.below_two_permute.amount
+            amount: prices.below_price.below_two_permute.amount,
+            show: prices.below_price.below_two_permute.amount,
+            air_simple: true
         });
         update_data.status = true;
         update_data.amount += prices.below_price.below_two_permute.amount;
@@ -522,6 +618,7 @@ let update_user = async (req, res) => {
         let thai_apo = req.body.thai_apo;
         let is_agent = req.body.is_agent;
         let special_seller = req.body.special_seller;
+        let pairs = req.body.pairs;
         if (!user_id || !UTILS.is_mongo(user_id) || !name || !full_name || isNaN(simple_com) || isNaN(air_com) || isNaN(baht) || isNaN(kyat) || isNaN(lao_apo) || isNaN(thai_apo) || typeof is_agent != "boolean" || typeof special_seller != "boolean") {
             res.send({ status: 0, msg: "အကောင့်ချိန်းတာမှားယွင်းနေပါသည်။" });
             return;
@@ -553,6 +650,7 @@ let update_user = async (req, res) => {
                 thai_apo: thai_apo,
                 is_agent: is_agent,
                 special_seller: special_seller,
+                pair: pairs,
             };
             await DB.UserDB.updateOne({ _id: update_user._id }, { $set: update_data });
             res.send({ status: 1, msg: full_name + " အကောင့်ချိန်းတာအောင်မြင်ပါသည်။" });
@@ -648,19 +746,30 @@ let getTicketByAgent = async (req, res) => {
             res.send({ status: 0 });
             return;
         }
-        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.id": id }, { "ticket.date": search_date }, { "delete.is_delete": false }] }).sort({ 'agent.date': -1 });
+        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day').unix();
+        // let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.id": id }, { "ticket.date": search_date }, { "delete.is_delete": false }] }).sort({ 'agent.date': -1 });
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ "income.user_id": id }, { "win_date": search_date }, { status: { $ne: "DELETE" } }] }).sort({ created: -1 });
         let data = [];
         for (let tc of tickets) {
+            // let item = {
+            //     id: tc._id,
+            //     name: tc.agent.name,
+            //     number: tc.ticket.number,
+            //     is_air: tc.ticket.is_air,
+            //     count: tc.ticket.count,
+            //     amount: tc.sold_out.amount,
+            //     date: tc.sold_out.date == null ? "" : MOMENT(tc.sold_out.date).tz("Asia/Rangoon").format("yyyy-MM-DD"),
+            //     is_sold_out: tc.sold_out.is_sold_out,
+            // }
             let item = {
                 id: tc._id,
-                name: tc.agent.name,
+                name: tc.income.name,
                 number: tc.ticket.number,
-                is_air: tc.ticket.is_air,
+                is_air: tc.ticket.air_simple,
                 count: tc.ticket.count,
-                amount: tc.sold_out.amount,
-                date: tc.sold_out.date == null ? "" : MOMENT(tc.sold_out.date).tz("Asia/Rangoon").format("yyyy-MM-DD"),
-                is_sold_out: tc.sold_out.is_sold_out,
+                amount: Math.floor(tc.amount.ticket / tc.ticket.count),
+                date: tc.sold_out == null ? MOMENT.unix(parseInt(tc.created)).tz("Asia/Rangoon").format("yyyy-MM-DD") : MOMENT.unix(parseInt(tc.sold_out_date)).tz("Asia/Rangoon").format("yyyy-MM-DD"),
+                is_sold_out: tc.sold_out != null,
             }
             data.push(item);
         }
@@ -674,6 +783,7 @@ let saveTickets = async (req, res) => {
     try {
         let id = req.body.id;
         let items = req.body.items;
+        let device_id = req.headers.device_id;
         if (!id || !UTILS.is_mongo(id)) {
             res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
             return;
@@ -688,22 +798,88 @@ let saveTickets = async (req, res) => {
             res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
             return;
         }
+        let search_date = MOMENT(Date.parse(setting.date)).tz('Asia/Rangoon').unix();
         let save_data = [];
-
         let can_save = true;
         let msg = "";
-        let air_count = 0;
-        let simple_count = 0;
-        let air_amount = 0;
-        let simple_amount = 0;
+        // let income = {
+        //     air: {
+        //         count: 0,
+        //         amount: 0,
+        //     },
+        //     simple: {
+        //         count: 0,
+        //         amount: 0,
+        //         pair: []
+        //     }
+        // };
+        // let stock = {
+        //     air: {
+        //         count: 0,
+        //         amount: 0,
+        //     },
+        //     simple: {
+        //         count: 0,
+        //         amount: 0,
+        //         pair: []
+        //     }
+        // };
+        // let com = {
+        //     air: {
+        //         count: 0,
+        //         amount: 0,
+        //     },
+        //     simple: {
+        //         count: 0,
+        //         amount: 0,
+        //         pair: []
+        //     }
+        // };
+        // for (let item of setting.pair) {
+        //     income.simple.pair.push({
+        //         type: item.count,
+        //         count: 0,
+        //         amount: 0,
+        //     });
+        //     stock.simple.pair.push({
+        //         type: item.count,
+        //         count: 0,
+        //         amount: 0,
+        //     });
+        //     com.simple.pair.push({
+        //         type: item.count,
+        //         count: 0,
+        //         amount: 0,
+        //     });
+        // }
         for (let item of items) {
+            let check_ledger = await DB.THAI_LEDGER.findOne({ $and: [{ "date.win": search_date }, { "ticket.scanner": item["scanner"] }] });
+            if (check_ledger) {
+                can_save = false;
+                msg = `${item["scanner"]} ဖြင့် စာရင်းရှိနေပါသဖြင့် ထက်စရင်းသွင်း၍ မရနိုင်ပါ။`;
+                break;
+            }
+
             let data = {};
+            // let amount = item["is_air"] ? setting.sold_out.air : setting.sold_out.simple;
+            // if (item["count"] > 1) {
+            //     let pair = _.indexBy(setting.pair, (e) => e.count);
+            //     amount = pair[`${item["count"]}`].amount;
+            // }
+            let amount = setting.sold_out.air;
+            let auth_amount = agent.com.air;
+            let created = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+            console.log(created);
+            if (item["is_air"] == false) {
+                let pair = _.indexBy(setting.pair, (e) => e.count);
+                let auth_pair = _.indexBy(agent.pair, (e) => e.count);
+                amount = pair[`${item["count"]}`].amount;
+                auth_amount = auth_pair[`${item["count"]}`].amount;
+            }
             if (item["is_air"] == true) {
-                air_count++;
-                air_amount += agent.com.air;
                 let exist_count = items.filter(element => element["number"].substr(3) == item["number"].substr(3)).length;
                 let pattern = new RegExp(`${item["number"].substr(3)}$`);
-                let count = await DB.TicketLedgerDB.find({ $and: [{ "delete.is_delete": false }, { "ticket.date": setting.date }, { "ticket.is_air": true }, { "ticket.number": pattern }] }).countDocuments();
+                let count = await DB.THAI_LEDGER.find({ $and: [{ "date.win": search_date }, { "delete": null }, { "ticket.air_simple": true }, { "ticket.number": pattern }] }).countDocuments();
                 if ((exist_count + count) > setting.air_count) {
                     let exist_msg = "";
                     let total_msg = "";
@@ -723,47 +899,124 @@ let saveTickets = async (req, res) => {
                     msg = `${item["number"]} ဖြင့် ${exist_msg}${and_msg} ${server_msg} ${total_msg} ရှိနေပါသဖြင့် ထက်စရင်းသွင်း၍ မရနိုင်ပါ။`;
                     break;
                 }
+                // income.air.amount += setting.income
+                // income.air.count++;
+                // stock.air.amount += amount;
+                // stock.air.count++
             } else {
-                simple_count += item["count"];
-                simple_amount += item["count"] * agent.com.simple;
+                // income_simple += setting.income;
+                // simple_amount += amount;
+                // simple_count += item["count"];
+
+                // income.simple.amount += setting.income
+                // income.simple.count += item["count"];
+                // stock.simple.amount += amount;
+                // stock.simple.count += item["count"];
+                // for (let pair of income.simple.pair) {
+                //     if (item["count"] == pair.type) {
+                //         pair.count += item["count"];
+                //         pair.amount += setting.income;
+                //     }
+                // }
+                // for (let pair of stock.simple.pair) {
+                //     if (item["count"] == pair.type) {
+                //         pair.count += item["count"];
+                //         pair.amount += amount;
+                //     }
+                // }
             }
             data.ticket = {
                 number: item["number"],
                 scanner: item["scanner"],
-                is_air: item["is_air"],
+                air_simple: item["is_air"],
                 count: item["count"],
-                amount: setting["income"],
-                date: MOMENT(setting.date).tz("Asia/Rangoon").startOf('day')
             };
-            data.agent = {
-                id: agent._id,
+            data.income = {
+                user_id: agent._id,
                 name: agent.full_name,
-                amount: item["is_air"] ? agent.com.air : agent.com.simple,
-                date: MOMENT(Date.now()).tz("Asia/Rangoon").startOf('day'),
             };
-
-            data.sold_out = {
-                is_sold_out: agent.is_permission ? false : true,
-                name: agent.full_name,
-                amount: item["is_air"] ? agent.com.air : agent.com.simple,
-                date: MOMENT(Date.now()).tz("Asia/Rangoon")
-            };
+            // data.amount.ticket = amount;
+            // data.amount.income = setting.income;
+            // data.amount.sold_out = auth_amount;
+            // data.amount.com = amount - auth_amount;
+            data.amount = {
+                ticket: amount,
+                income: setting.income,
+                sold_out: auth_amount,
+                com: 0,
+                promotion: 0,
+                cash: 0
+            }
+            data.win_date = search_date;
+            data.created = created;
             save_data.push(data);
         }
         if (can_save) {
-            let money_change_id = await getMoneyChangeID(agent);
-            await DB.MoneyChangeDB.updateOne({ _id: money_change_id }, {
-                $inc: {
-                    "status.air_sold_out.count": air_count,
-                    "status.air_sold_out.amount": -air_amount,
-                    "status.simple_sold_out.count": simple_count,
-                    "status.simple_sold_out.amount": -simple_amount,
-                    "agent.close": -(air_amount + simple_amount),
-                }
-            });
-            let user_unit = air_amount + simple_amount;
-            await DB.UserDB.updateOne({ _id: agent._id }, { $inc: { "unit": -user_unit } });
-            await DB.TicketLedgerDB.insertMany(save_data);
+            // await DB.THAI_LEDGER.insertMany(save_data);
+            for await (let item of save_data) {
+                let save_data = new DB.THAI_LEDGER();
+                save_data.ticket = item.ticket;
+                save_data.income = item.income;
+                save_data.amount = item.amount;
+                save_data.win_date = item.win_date;
+                save_data.created = item.created;
+                let save_extra = new DB.THAI_EXTRA();
+                save_extra.ticket_id = save_data._id;
+                save_extra.date.win = search_date;
+                save_extra.date.income = item.created;
+                save_extra.device.income = device_id;
+                await save_data.save();
+                await save_extra.save();
+            }
+            let data = await DB.THAI_SHOP_LEDGER.findOne({ $and: [{ win_date: search_date }, { user_id: agent._id }] });
+            // income_pair = data.income.simple.pair;
+            // stock_pair = data.income.stock_pair;
+            if (data) {
+                // for (let pair of income_pair) {
+                //     for (let u_pair of income.simple.pair) {
+                //         if (u_pair.type == pair.name) {
+                //             pair.count += u_pair.count;
+                //             pair.amount += u_pair.amount;
+                //         }
+                //     }
+                // }
+                // for (let pair of stock_pair) {
+                //     for (let u_pair of stock.simple.pair) {
+                //         if (u_pair.type == pair.name) {
+                //             pair.count += u_pair.count;
+                //             pair.amount += u_pair.amount;
+                //         }
+                //     }
+                // }
+                // await DB.THAI_SHOP_LEDGER.updateOne({ _id: data._id }, {
+                //     $inc: {
+                //         "income.air.count": air_count,
+                //         "income.air.amount": income_air,
+                //         "income.simple.count": simple_count,
+                //         "income.simple.amount": income_simple,
+                //         "stock.air.count": air_count,
+                //         "stock.air.amount": air_amount,
+                //         "stock.simple.count": simple_count,
+                //         "stock.simple.amount": simple_amount,
+                //     },
+                //     $set: {
+                //         "income.simple.pair": income_pair,
+                //         "stock.simple.pair": stock_pair,
+                //     }
+                // });
+            } else {
+                let save_shop = new DB.THAI_SHOP_LEDGER();
+                let cash_ledger = new DB.THAI_CASH_LEDGER();
+                save_shop.user_id = agent._id;
+                save_shop.name = agent.full_name;
+                save_shop.win_date = search_date;
+                cash_ledger.user_id = agent._id;
+                cash_ledger.name = agent.full_name;
+                cash_ledger.win_date = search_date;
+                await save_shop.save();
+                await cash_ledger.save();
+            }
+
             res.send({ status: 1, msg: "လက်မှတ်များစရင်းသွင်းပြီးပါပြီ။" });
         } else {
             res.send({ status: 0, msg });
@@ -775,45 +1028,31 @@ let saveTickets = async (req, res) => {
 }
 let deleteTicket = async (req, res) => {
     try {
+        let search_id = req.body.id;
+        let device_id = req.headers.device_id;
         let auth_user = res.locals.auth_user;
-        let id = req.body.id;
-        if (!id || !UTILS.is_mongo(id)) {
-            res.send({ status: 0, msg: "မှားယွင်းနေပါသည်။" })
+        let ticket_ledger = await DB.THAI_LEDGER.findOne({ $and: [{ _id: search_id }, { status: "ACTIVE" }] });
+        if (!ticket_ledger) {
+            res.send({ status: 0, msg: "လက်မှတ်မှားယွင်းနေပါသည်။" })
             return;
         }
-
-        let ticket = await DB.TicketLedgerDB.findById(id);
-        if (!ticket) {
-            res.send({ status: 0, msg: "လက်မှတ် မှားယွင်းနေပါသည်။" })
-            return;
-        }
-        let agent = await DB.UserDB.findById((ticket.agent.id));
-        if (agent.is_permission == false || (agent.is_permission == true && ticket.sold_out.is_sold_out == false)) {
-            await DB.TicketLedgerDB.updateOne({ _id: ticket._id }, {
-                $set: {
-                    "delete.is_delete": true,
-                    "delete.date": MOMENT(Date.now()).tz("Asia/Rangoon"),
-                    "delete.name": auth_user.full_name,
-                }
-            });
-            let agent_money_change_id = await getMoneyChangeID(agent);
-            await DB.MoneyChangeDB.updateOne({ _id: agent_money_change_id }, {
-                $inc: {
-                    "status.air_sold_out.count": ticket.ticket.is_air ? -1 : 0,
-                    "status.air_sold_out.amount": ticket.ticket.is_air ? ticket.agent.amount : 0,
-                    "status.simple_sold_out.count": ticket.ticket.is_air ? 0 : -1,
-                    "status.simple_sold_out.amount": ticket.ticket.is_air ? 0 : ticket.agent.amount,
-                    "agent.close": ticket.agent.amount,
-                }
-            });
-            await DB.UserDB.updateOne({ _id: agent._id }, { $inc: { "unit": ticket.agent.amount } });
-            res.send({ status: 1, msg: ticket.ticket.number + " ကို အောင်မြင်စွာ ဖျတ်ပြီးပါပြီ။" });
-        } else {
-            res.send({ status: 0, msg: "ရောင်းပြီးသားလက်မှတ်ကို ဖျတ်လို့မရပါ။" });
-        }
-    } catch (err) {
-        console.log("Error From deleteTicket => ", err);
-        res.send({ status: 0, msg: process.env.connect_dev });
+        let delete_date = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        await DB.THAI_LEDGER.updateOne({ _id: ticket_ledger._id }, {
+            $set: {
+                status: "DELETE",
+                created: delete_date
+            }
+        });
+        await DB.THAI_EXTRA.updateOne({ ticket_id: ticket_ledger._id }, {
+            $set: {
+                "device.delete": device_id,
+                "date.delete": delete_date,
+            }
+        });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (erro) {
+        console.log("Error From deleteTicketLedger => ", error);
+        next(new Error(process.env.CONNECT_DEV));
     }
 }
 let ticketLedgers = async (req, res) => {
@@ -1014,13 +1253,14 @@ let checkTicket = async (req, res) => {
         }
 
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        let scanCount = await DB.TicketLedgerDB.find({ $and: [{ "delete.is_delete": false }, { "ticket.date": setting.date }, { "ticket.is_air": true }, { "ticket.scanner": scanner }] }).countDocuments();
+        let search_date = MOMENT(Date.parse(setting.date)).tz('Asia/Rangoon').unix();
+        let scanCount = await DB.THAI_LEDGER.find({ $and: [{ "delete": null }, { "date.win": search_date }, { "ticket.air_simple": true }, { "ticket.scanner": scanner }] }).countDocuments();
         if (scanCount > 0) {
             res.send({ status: 0, msg: `${scanner} ဖြင့် စရင်းသွင်းပြီးသွားပါပြီ။` });
             return;
         }
         let pattern = new RegExp(`${number.substr(3)}$`);
-        let count = await DB.TicketLedgerDB.find({ $and: [{ "delete.is_delete": false }, { "ticket.date": setting.date }, { "ticket.is_air": true }, { "ticket.number": pattern }] }).countDocuments();
+        let count = await DB.THAI_LEDGER.find({ $and: [{ "delete": null }, { "date.win": search_date }, { "ticket.air_simple": true }, { "ticket.number": pattern }] }).countDocuments();
         if ((exist_count + count + 1) > setting.air_count) {
             let exist_msg = "";
             let total_msg = "";
@@ -1070,11 +1310,10 @@ let sellSingleTicket = async (req, res) => {
             res.send({ status: 0, msg: "Promotion တန်ဖိုးမှားယွင်းနေပါသည်။" });
             return;
         }
-        let auth_user = res.locals.auth_user;
         let tickets = await DB.TicketLedgerDB.find({
             $and: [
                 { _id: { $in: Array.from(new Set(items)) } },
-                { "agent.id": auth_user._id },
+                // { "agent.id": auth_user._id },
                 { "sold_out.is_sold_out": false },
                 { "delete.is_delete": false },
             ]
@@ -1086,13 +1325,25 @@ let sellSingleTicket = async (req, res) => {
         let strAry = [];
         let count = 0;
         let sold_out_date = MOMENT(Date.now()).tz("Asia/Rangoon");
+        let device_id = req.headers.device_id;
+        let auth_user = res.locals.auth_user;
+        let seller = await DB.UserDB.findById(auth_user._id);
+        let device_name = "";
+        for (let item of seller.user_list) {
+            if (item.device_id == device_id) {
+                device_name = item.name;
+            }
+        }
         for await (let ticket of tickets) {
             await DB.TicketLedgerDB.updateOne({ _id: ticket._id }, {
                 $set: {
                     "sold_out.is_sold_out": true,
                     "sold_out.name": contact,
                     "sold_out.date": sold_out_date,
-                    "status.promotion": promotion
+                    "status.promotion": promotion,
+                    "seller.id": auth_user._id,
+                    "seller.device": device_name,
+                    "seller.name": auth_user._id,
                 }
             });
             strAry.push(ticket.ticket.number);
@@ -1117,6 +1368,29 @@ let sellSingleTicket = async (req, res) => {
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
+let createThaiLedger = async (search_date) => {
+    let ledgers = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "status.status": "WIN" }] });
+    await DB.THAI_BALANCE_DB.deleteMany({ win_date: search_date });
+    if (ledgers) {
+        let group_ledgers = _.groupBy(ledgers, (e) => e.agent.id);
+        for (const [key, value] of Object.entries(group_ledgers)) {
+            let first_item = value[0];
+            let save_data = await DB.THAI_BALANCE_DB();
+            save_data.user_id = first_item.agent.id;
+            save_data.name = first_item.agent.name;
+            save_data.voucher_total = value.length;
+            save_data.voucher_cash = 0;
+            save_data.voucher_to_cash = 0;
+            save_data.voucher_balance = value.length;
+            save_data.total = _.reduce(value, (total, item) => { return total + (item.air.amount + item.simple.amount); }, 0);
+            save_data.cash = 0;
+            save_data.to_cash = 0;
+            save_data.balance = 0;
+            save_data.win_date = search_date;
+            await save_data.save();
+        }
+    }
+}
 let startCalculate = async (req, res) => {
     try {
         let search_date = req.body.search_date;
@@ -1131,92 +1405,121 @@ let startCalculate = async (req, res) => {
         }
 
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
-        let setting_date = MOMENT(setting.date).tz("Asia/Rangoon").startOf('day');
-        if (!setting_date.isSame(search_date)) {
+        let win_search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
+        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day').unix();
+        let setting_date = MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').unix();
+        if (setting_date != search_date) {
             res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
             return;
         }
-        await DB.TicketLedgerDB.updateMany({ "ticket.date": search_date }, {
+
+        //တွက်ပြီးသားဖြစ်မှာစိုးလို့ ticket တွေကို မတွက်ရသေးတဲ့ အခြေအနေပြန်သွားမယ်။
+        await DB.THAI_LEDGER.updateMany({ "win_date": search_date }, {
             $set: {
-                air: {
-                    status: false,
-                    amount: 0,
-                    cash: false,
-                    date: null,
-                    win_title: []
-                },
-                simple: {
-                    status: false,
-                    amount: 0,
-                    cash: false,
-                    date: null,
-                    win_title: []
-                },
-                "status.status": 'PENDING',
-                "status.finish": false,
+                cash: null, prizes: [], status: "ACTIVE", win_amount: {
+                    air: 0,
+                    simple: 0,
+                    simple_show: 0,
+                    total: 0,
+                }
             }
         });
-        let win_number = await DB.WinNumberDB.findOne({ "date": search_date });
+        await DB.THAI_EXTRA.updateMany({ "date.win": search_date }, {
+            $set: {
+                "date.cash": 0,
+                "device.cash": "",
+            }
+        });
+        await DB.THAI_CASH_LEDGER.updateMany({ win_date: search_date }, { $set: { win_amount: 0 } });
+        // win_number ယူမယ် ရှိမရှိစစ်မယ်
+        let win_number = await DB.WinNumberDB.findOne({ "date": win_search_date });
         if (!win_number) {
             res.send({ status: 0, msg: `${search_date.format("yyyy-MM-dd")} ဖြင့် မထွက်သေးပါ` });
             return;
         }
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "delete.is_delete": false }] });
-        let updateData = [];
+        let user = await DB.UserDB.findOne({ name: "ok" });
+        let ticket_ledgers = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { status: { $ne: "DELETE" } }] });
         let first_three_permute = UTILS.permute(win_number.first_prize.num.substr(3));
         let first_two_permute = UTILS.permute(win_number.first_prize.num.substr(4));
         let prices = await DB.PriceSettingDB.findOne({ show_id: 0 });
-        for (let ticket of tickets) {
+        let simple_price_setting = await DB.SIMPLE_PRICE_SETTING.findOne();
+        let cash_date = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        let cash_user = {
+            user_id: user._id,
+            name: user.full_name,
+            device_id: user.user_list[0].device_id,
+            amount: 0
+        };
+        let bulk_update = [];
+        let bulk_extra_update = [];
+        for await (let ticket_ledger of ticket_ledgers) {
             let update_data = {
-                id: ticket._id,
-                "status.status": "LOSE",
-                "status.finish": true,
-                "air.status": false,
-                "air.amount": 0,
-                "air.win_title": [],
-                "simple.status": false,
-                "simple.amount": 0,
-                "simple.win_title": [],
-            };
-            let simple_update_data = check_simple(win_number, prices.simple, ticket.ticket);
-            if (update_data["status.status"] == "LOSE" && simple_update_data.status == true) {
-                update_data["status.status"] = "WIN";
-            }
-            update_data["simple.status"] = simple_update_data.status;
-            update_data["simple.amount"] = simple_update_data.amount;
-            update_data["simple.win_title"] = simple_update_data.win_title;
-            if (ticket.ticket.is_air == true) {
-                let air_update_data = check_air(win_number, first_three_permute, first_two_permute, prices.air, ticket.ticket);
-                if (update_data["status.status"] == "LOSE" && air_update_data.status == true) {
-                    update_data["status.status"] = "WIN";
+                cash: null,
+                prizes: [],
+                status: "LOSE",
+                created: ticket_ledger.created,
+                cash_user: null,
+                win_amount: {
+                    air: 0,
+                    simple: 0,
+                    simple_show: 0,
+                    total: 0,
                 }
-                update_data["air.status"] = air_update_data.status;
-                update_data["air.amount"] = air_update_data.amount;
-                update_data["air.win_title"] = air_update_data.win_title;
+            };
+            let ticket = ticket_ledger.ticket;
+            let simple_update_data = check_simple(win_number, prices.simple, simple_price_setting, ticket);
+            if (simple_update_data.status == true) {
+                update_data.status = "WIN";
             }
-            updateData.push(update_data);
+            update_data.win_amount.simple = simple_update_data.amount;
+            update_data.win_amount.simple_show = simple_update_data.show_amount;
+            update_data.win_amount.total += simple_update_data.amount;
+            update_data.prizes = update_data.prizes.concat(simple_update_data.win_title);
+            if (ticket.air_simple) {
+                let air_update_data = check_air(win_number, first_three_permute, first_two_permute, prices.air, ticket);
+                if (air_update_data.status == true) {
+                    update_data.status = "WIN"
+                }
+                update_data.win_amount.air = air_update_data.amount;
+                update_data.win_amount.total += air_update_data.amount;
+                update_data.prizes = update_data.prizes.concat(air_update_data.win_title);
+            }
+            if (update_data.win_amount.total == 0) {
+                update_data.created = cash_date;
+                update_data.status = "COMPANY";
+                update_data.cash_user = {
+                    name: cash_user.name,
+                    user_id: cash_user.user_id
+                };
+                // bulk_extra_update.push({ updateOne: { filter: { ticket_id: ticket_ledger._id }, update: { $set: { "date.cash": cash_date, "device.cash": cash_user.user_id } } } });
+            }
+            bulk_update.push({ updateOne: { filter: { _id: ticket_ledger._id }, update: { $set: update_data } } });
+            if (bulk_update.length == 500) {
+                await DB.THAI_LEDGER.bulkWrite(bulk_update);
+                // await DB.THAI_EXTRA.bulkWrite(bulk_extra_update);
+                bulk_update = [];
+                // bulk_extra_update = [];
+            }
         }
-
-        for (let data of updateData) {
-            let update_id = data.id;
-            delete (data.id);
-            await DB.TicketLedgerDB.updateOne({ _id: update_id }, { $set: data });
+        if (bulk_update.length > 0) {
+            await DB.THAI_LEDGER.bulkWrite(bulk_update);
         }
+        DB.THAI_EXTRA.bulkWrite(bulk_extra_update);
+        let win_ledgers = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { status: "WIN" }] });
+        win_ledgers = _.groupBy(win_ledgers, (e) => e.income.user_id);
+        for await (let [key, value] of Object.entries(win_ledgers)) {
+            let win_amount = 0;
+            let user = value[0].income;
+            for (let item of value) {
+                if (item.win_amount.total > 0) {
+                    win_amount += item.win_amount.total;
+                }
+            }
 
-        await DB.TicketLedgerDB.updateMany({ $and: [{ "ticket.date": search_date }, { "delete.is_delete": false }, { "simple.status": false }] }, {
-            $set: {
-                "simple.cash": true,
-                "simple.date": MOMENT(Date.now()).tz("Asia/Rangoon").startOf('day'),
-            }
-        });
-        await DB.TicketLedgerDB.updateMany({ $and: [{ "ticket.date": search_date }, { "delete.is_delete": false }, { "air.status": false }] }, {
-            $set: {
-                "air.cash": true,
-                "air.date": MOMENT(Date.now()).tz("Asia/Rangoon").startOf('day'),
-            }
-        });
+            await DB.THAI_CASH_LEDGER.updateOne({ $and: [{ win_date: search_date }, { user_id: user.user_id }] }, { $set: { win_amount: win_amount } });
+        }
         res.send({ status: 1, msg: "ပေါက်မဲများ တွက်ပြီးပါပြီ" });
+
     } catch (err) {
         console.log("Error From startCalculate => ", err);
         res.send({ status: 0, msg: process.env.connect_dev });
@@ -1239,15 +1542,28 @@ let cashAir = async (req, res) => {
             res.send({ status: 0, msg: `${ticket.ticket.number} တွင် အဲ နိုင်ကြေးမရှိပါ။` });
             return;
         }
-        if (!ticket.agent.id.equals(auth_user._id)) {
-            res.send({ status: 0, msg: "ဆိုင်မတူရင် ငွေရှင်းလို့မရပါ" })
-            return;
+        // if (!ticket.agent.id.equals(auth_user._id)) {
+        //     res.send({ status: 0, msg: "ဆိုင်မတူရင် ငွေရှင်းလို့မရပါ" })
+        //     return;
+        // }
+        let device_id = req.headers.device_id;
+        let seller = await DB.UserDB.findById(auth_user._id);
+        let device_name = "";
+        for (let item of seller.user_list) {
+            if (item.device_id == device_id) {
+                device_name = item.name;
+            }
         }
-
+        if (ticket.air.cash == false) {
+            await DB.THAI_BALANCE_DB.updateOne({ $and: [{ win_date: ticket.ticket.date }, { "user_id": ticket.agent.id }] }, { $inc: { voucher_to_cash: 1, to_cash: (ticket.air.amount + ticket.simple.amount) } });
+        }
         await DB.TicketLedgerDB.updateOne({ _id: ticket._id }, {
             $set: {
                 "air.cash": true,
-                "air.date": MOMENT(Date.now()).tz("Asia/Rangoon").startOf('day')
+                "air.date": MOMENT(Date.now()).tz("Asia/Rangoon").startOf('day'),
+                "cashier.id": auth_user._id,
+                "cashier.device": device_name,
+                "cashier.name": auth_user._id,
             }
         });
         res.send({ status: 1, msg: `${ticket.ticket.number} အဲနိုင်ကြေး ${ticket.air.amount} ကို ငွေရှင်းပြီးပါပြီ` });
@@ -1277,7 +1593,9 @@ let cashSimple = async (req, res) => {
             res.send({ status: 0, msg: "ဆိုင်မတူရင် ငွေရှင်းလို့မရပါ" })
             return;
         }
-
+        if (ticket.simple.cash == false && ticket.air.amount == 0) {
+            await DB.THAI_BALANCE_DB.updateOne({ $and: [{ win_date: ticket.ticket.date }, { "user_id": ticket.agent.id }] }, { $inc: { voucher_to_cash: 1, to_cash: (ticket.air.amount + ticket.simple.amount) } });
+        }
         await DB.TicketLedgerDB.updateOne({ _id: ticket._id }, {
             $set: {
                 "simple.cash": true,
@@ -1831,7 +2149,10 @@ let updateSetting = async (req, res) => {
         let title_one = req.body.title_one;
         let title_two = req.body.title_two;
         let title_three = req.body.title_three;
+        let sold_out = req.body.sold_out;
+        let pair = req.body.pair;
         let win_date = req.body.win_date;
+        let open = req.body.open;
 
         if (isNaN(income)) {
             res.send({ status: 0, msg: "မူရင်းစျေးထည့်ရန် လိုအပ်ပါသည်။" });
@@ -1859,6 +2180,9 @@ let updateSetting = async (req, res) => {
                 "title_one": title_one,
                 "title_two": title_two,
                 "title_three": title_three,
+                "sold_out": sold_out,
+                "pair": pair,
+                "open": open,
                 "date": MOMENT(win_date).tz("Asia/Rangoon").startOf('day'),
             }
         });
@@ -2117,25 +2441,41 @@ let getPrintTicket = async (req, res) => {
             res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" })
             return;
         }
-        start_date = MOMENT(start_date).tz("Asia/Rangoon").startOf('day');
-        end_date = MOMENT(end_date).tz("Asia/Rangoon").endOf('day');
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.date": { $gte: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+        let s_date = MOMENT(start_date).tz("Asia/Rangoon").startOf('day').unix();
+        let e_date = MOMENT(end_date).tz("Asia/Rangoon").endOf('day').unix();
+        // let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.date": { $gte: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+        let extra_tickets = await DB.THAI_EXTRA.find({ "date.income": { $gte: s_date, $lte: e_date } }).select('ticket_id');
+        let ticket_ids = _.pluck(extra_tickets, 'ticket_id');
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ _id: { $in: Array.from(new Set(ticket_ids)) } }, { status: { $ne: "DELETE" } }] });
         let data = [];
         for (let ticket of tickets) {
             for (let i = 0; i < ticket.ticket.count; i++) {
                 data.push({
-                    agent_id: ticket.agent.id,
+                    agent_id: ticket.income.user_id,
                     number: ticket.ticket.number,
-                    is_air: ticket.ticket.is_air,
+                    is_air: ticket.ticket.air_simple,
                     count: ticket.ticket.count,
-                    income: ticket.agent.amount,
-                    air_win: ticket.air.amount,
-                    simple_win: ticket.simple.amount / ticket.ticket.count,
-                    total_win: ticket.air.amount + (ticket.simple.amount / ticket.ticket.count),
-                    is_win: (ticket.air.status || ticket.simple.status),
-                    is_air_win: ticket.air.status,
-                    is_simple_win: ticket.simple.status,
+                    income: ticket.amount.income,
+                    air_win: ticket.win_amount.air,
+                    simple_win: ticket.win_amount.simple / ticket.ticket.count,
+                    total_win: ticket.win_amount.air + (ticket.win_amount.simple / ticket.ticket.count),
+                    is_win: ticket.win_amount.total > 0,
+                    is_air_win: ticket.win_amount.air > 0,
+                    is_simple_win: ticket.win_amount.simple > 0,
                 });
+                // data.push({
+                //     agent_id: ticket.agent.id,
+                //     number: ticket.ticket.number,
+                //     is_air: ticket.ticket.is_air,
+                //     count: ticket.ticket.count,
+                //     income: ticket.agent.amount,
+                //     air_win: ticket.air.amount,
+                //     simple_win: ticket.simple.amount / ticket.ticket.count,
+                //     total_win: ticket.air.amount + (ticket.simple.amount / ticket.ticket.count),
+                //     is_win: (ticket.air.status || ticket.simple.status),
+                //     is_air_win: ticket.air.status,
+                //     is_simple_win: ticket.simple.status,
+                // });
             }
         }
         res.send({ status: 1, data });
@@ -2147,18 +2487,21 @@ let getPrintTicket = async (req, res) => {
 let getImageData = async (req, res) => {
     try {
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        let search_date = MOMENT(setting.date).tz("Asia/Rangoon").startOf('day');
+        let search_date = MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').unix();
         let users = await DB.UserDB.find({ is_permission: true }).select("_id");
-        let ids = _.pluck(users, '_id');
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.id": { $in: Array.from(new Set(ids)) } }, { "ticket.date": search_date }, { "delete.is_delete": false }] }).select("ticket sold_out");
+        users = _.indexBy(users, '_id');
+        // let tickets = await DB.TicketLedgerDB.find({ $and: [{ "agent.id": { $in: Array.from(new Set(ids)) } }, { "ticket.date": search_date }, { "delete.is_delete": false }] }).select("ticket sold_out");
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { status: { $ne: "DELETE" } }] }).select("ticket income sold_out");
         let data = [];
         for (let ticket of tickets) {
-            data.push({
-                number: ticket.ticket.number,
-                count: ticket.ticket.count,
-                is_air: ticket.ticket.is_air,
-                is_sold_out: ticket.sold_out.is_sold_out
-            });
+            if (ticket.income.user_id.toString() in users) {
+                data.push({
+                    number: ticket.ticket.number,
+                    count: ticket.ticket.count,
+                    is_air: ticket.ticket.air_simple,
+                    is_sold_out: ticket.sold_out != null
+                });
+            }
         }
         res.send({ status: 1, data });
     } catch (err) {
@@ -2419,77 +2762,111 @@ let getTransferIDS = async (req, res) => {
     }
 }
 let DeleteTicketByAgent = async (req, res) => {
+    // try {
+    //     let agent_id = req.body.agent_id;
+    //     let setting = await DB.SettingDB.findOne({ show_id: 0 });
+    //     let auth_user = res.locals.auth_user;
+    //     if (!agent_id || !UTILS.is_mongo(agent_id)) {
+    //         res.send({ status: 0, msg: "ကိုယ်စလှယ်မှားယွင်းနေပါသည်။" });
+    //         return;
+    //     }
+    //     let agent = await DB.UserDB.findOne({ _id: agent_id });
+    //     if (!agent) {
+    //         res.send({ status: 0, msg: "ကိုယ်စလှယ်မှားယွင်းနေပါသည်။" });
+    //         return;
+    //     }
+
+    //     let tickets = await DB.TicketLedgerDB.find({
+    //         $and: [
+    //             { "delete.is_delete": false },
+    //             { "agent.id": agent._id },
+    //             { "ticket.date": MOMENT(setting.date).tz("Asia/Rangoon") }
+    //         ]
+    //     });
+    //     let simple_count = 0;
+    //     let simple_amount = 0;
+    //     let air_count = 0;
+    //     let air_amount = 0;
+    //     let amount = 0;
+    //     tickets.forEach((ticket) => {
+    //         if (ticket.ticket.is_air) {
+    //             air_count += ticket.ticket.count;
+    //             air_amount += (ticket.agent.amount * ticket.ticket.count);
+    //         } else {
+    //             simple_count += ticket.ticket.count;
+    //             simple_amount += (ticket.agent.amount * ticket.ticket.count);
+    //         }
+    //         amount += (ticket.agent.amount * ticket.ticket.count);
+    //     });
+
+    //     await DB.TicketLedgerDB.updateMany(
+    //         {
+    //             $and: [
+    //                 { "delete.is_delete": false },
+    //                 { "agent.id": agent._id },
+    //                 { "ticket.date": MOMENT(setting.date).tz("Asia/Rangoon") }
+    //             ]
+    //         }, {
+    //         $set: {
+    //             "delete.is_delete": true,
+    //             "delete.date": MOMENT(Date.now()).tz("Asia/Rangoon"),
+    //             "delete.name": auth_user.full_name,
+    //         }
+    //     });
+
+    //     let agent_money_change_id = await getMoneyChangeID(agent);
+    //     await DB.MoneyChangeDB.updateOne({ _id: agent_money_change_id }, {
+    //         $inc: {
+    //             "status.air_sold_out.count": -air_count,
+    //             "status.air_sold_out.amount": air_amount,
+    //             "status.simple_sold_out.count": -simple_count,
+    //             "status.simple_sold_out.amount": simple_amount,
+    //             "agent.close": amount,
+    //         }
+    //     });
+    //     await DB.UserDB.updateOne({ _id: agent._id }, { $inc: { "unit": amount } });
+    //     res.send({
+    //         status: 1,
+    //         msg: `${agent.full_name} ${MOMENT(setting.date).tz("Asia/Rangoon").format("yyyy-MM-DD")} ဖျတ်ပြီးပါပြီ။`
+    //     });
+
+    // } catch (err) {
+    //     console.log("Error From DeleteTicketByAgent => ", err);
+    //     res.send({ status: 0, msg: process.env.connect_dev });
+    // }
     try {
         let agent_id = req.body.agent_id;
-        let setting = await DB.SettingDB.findOne({ show_id: 0 });
+        let device_id = req.headers.device_id;
         let auth_user = res.locals.auth_user;
-        if (!agent_id || !UTILS.is_mongo(agent_id)) {
-            res.send({ status: 0, msg: "ကိုယ်စလှယ်မှားယွင်းနေပါသည်။" });
-            return;
+        // let ticket_ledger = await DB.THAI_LEDGER.findOne({ $and: [{ _id: search_id }, { status: "ACTIVE" }] });
+        // if (!ticket_ledger) {
+        //     res.send({ status: 0, msg: "လက်မှတ်မှားယွင်းနေပါသည်။" })
+        //     return;
+        // }
+        let settings = await DB.SettingDB.findOne();
+        let search_date = MOMENT(Date.parse(settings.date)).tz('Asia/Rangoon').unix();
+        let delete_date = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { "income.user_id": agent_id }, { status: "ACTIVE" }] });
+        if (tickets) {
+            await DB.THAI_LEDGER.updateMany({ $and: [{ win_date: search_date }, { "income.user_id": agent_id }, { status: "ACTIVE" }] }, {
+                $set: {
+                    status: "DELETE",
+                    created: delete_date
+                }
+            });
+            for (let ticket_ledger of tickets) {
+                await DB.THAI_EXTRA.updateOne({ ticket_id: ticket_ledger._id }, {
+                    $set: {
+                        "device.delete": device_id,
+                        "date.delete": delete_date,
+                    }
+                });
+            }
         }
-        let agent = await DB.UserDB.findOne({ _id: agent_id });
-        if (!agent) {
-            res.send({ status: 0, msg: "ကိုယ်စလှယ်မှားယွင်းနေပါသည်။" });
-            return;
-        }
-
-        let tickets = await DB.TicketLedgerDB.find({
-            $and: [
-                { "delete.is_delete": false },
-                { "agent.id": agent._id },
-                { "ticket.date": MOMENT(setting.date).tz("Asia/Rangoon") }
-            ]
-        });
-        let simple_count = 0;
-        let simple_amount = 0;
-        let air_count = 0;
-        let air_amount = 0;
-        let amount = 0;
-        tickets.forEach((ticket) => {
-            if (ticket.ticket.is_air) {
-                air_count += ticket.ticket.count;
-                air_amount += (ticket.agent.amount * ticket.ticket.count);
-            } else {
-                simple_count += ticket.ticket.count;
-                simple_amount += (ticket.agent.amount * ticket.ticket.count);
-            }
-            amount += (ticket.agent.amount * ticket.ticket.count);
-        });
-
-        await DB.TicketLedgerDB.updateMany(
-            {
-                $and: [
-                    { "delete.is_delete": false },
-                    { "agent.id": agent._id },
-                    { "ticket.date": MOMENT(setting.date).tz("Asia/Rangoon") }
-                ]
-            }, {
-            $set: {
-                "delete.is_delete": true,
-                "delete.date": MOMENT(Date.now()).tz("Asia/Rangoon"),
-                "delete.name": auth_user.full_name,
-            }
-        });
-
-        let agent_money_change_id = await getMoneyChangeID(agent);
-        await DB.MoneyChangeDB.updateOne({ _id: agent_money_change_id }, {
-            $inc: {
-                "status.air_sold_out.count": -air_count,
-                "status.air_sold_out.amount": air_amount,
-                "status.simple_sold_out.count": -simple_count,
-                "status.simple_sold_out.amount": simple_amount,
-                "agent.close": amount,
-            }
-        });
-        await DB.UserDB.updateOne({ _id: agent._id }, { $inc: { "unit": amount } });
-        res.send({
-            status: 1,
-            msg: `${agent.full_name} ${MOMENT(setting.date).tz("Asia/Rangoon").format("yyyy-MM-DD")} ဖျတ်ပြီးပါပြီ။`
-        });
-
-    } catch (err) {
-        console.log("Error From DeleteTicketByAgent => ", err);
-        res.send({ status: 0, msg: process.env.connect_dev });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (erro) {
+        console.log("Error From deleteTicketLedger => ", error);
+        next(new Error(process.env.CONNECT_DEV));
     }
 }
 let UnSellTicket = async (req, res) => {
@@ -2523,6 +2900,7 @@ let UnSellTicket = async (req, res) => {
                     "sold_out.is_sold_out": false,
                     "sold_out.name": auth_user.full_name,
                     "status.promotion": 0,
+                    "seller": null
                 }
             }
         );
@@ -2791,8 +3169,8 @@ let checkTwoDNumbers = async (req, res) => {
         let auth_user = res.locals.auth_user;
         let confirm = false;
         const { is_close, type, date } = UTILS.getTwoDData(setting);
-        // if (is_close && auth_user.is_agent == false) {
-        if (is_close) {
+        if (is_close && auth_user.is_agent == false) {
+            // if (is_close) {
             res.send({ status: 0, msg: "လောင်းကြေးပိတ်သွားပါပြီ။" });
             return;
         }
@@ -2966,6 +3344,8 @@ let saveTwoDNumber = async (req, res) => {
                 return;
             }
         }
+        // let cover_amount = 22000;
+        // let cover_numbers = [];
         for await (let item of items) {
             let response = await DB.TwoDNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": item.num }, { "delete.is_delete": false }] });
             let server_amount = 0;
@@ -2993,9 +3373,20 @@ let saveTwoDNumber = async (req, res) => {
                 item.bet_amount = setting.block_amount - server_amount;
                 confirm = true;
             }
+            // if (server_amount >= cover_amount) {
+            //     cover_numbers.push({
+            //         num: item.num,
+            //         amount: item.bet_amount
+            //     });
+            // } else if ((item.bet_amount + server_amount) > cover_amount) {
+            //     cover_numbers.push({
+            //         num: item.num,
+            //         amount: (item.bet_amount + server_amount) - cover_amount
+            //     });
+            // }
         }
-
         if (confirm) {
+            // res.send({ status: 1, data: { confirm, numbers: items, cover_numbers } });
             res.send({ status: 1, data: { confirm, numbers: items } });
             return;
         }
@@ -4068,44 +4459,47 @@ let getAllWinNumber = async (req, res, next) => {
             res.send({ status: 0 });
             return;
         }
-        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "status.status": "WIN" }] });
+        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day').unix();
+        // let tickets = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "status.status": "WIN" }] });
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { "win_amount.total": { $gt: 0 } }] });
         let data = [];
         let total = 0;
         for (let ticket of tickets) {
             let d = {
                 number: ticket.ticket.number,
-                agent: ticket.agent.name,
-                user: ticket.sold_out.name,
+                agent: ticket.income.name,
+                user: ticket.contact,
                 air: [],
                 simple: [],
-                total: 0,
+                total: ticket.win_amount.air + ticket.win_amount.simple_show,
             }
-            if (ticket.air.status == true) {
-                for (let win_title of ticket.air.win_title) {
-                    d.air.push(
-                        {
-                            title: win_title.title,
-                            amount: win_title.amount
-                        }
-                    );
-                    d.total = d.total + win_title.amount;
-                    total += win_title.amount;
+            total += ticket.win_amount.air + ticket.win_amount.simple_show;
+            if (ticket.win_amount.air > 0) {
+                for (let item of ticket.prizes) {
+                    if (item.air_simple == true) {
+                        d.air.push(
+                            {
+                                title: item.title,
+                                amount: item.show
+                            }
+                        );
+                    }
                 }
             }
-            if (ticket.simple.status == true) {
-                for (let win_title of ticket.simple.win_title) {
-                    d.simple.push(
-                        {
-                            title: win_title.title,
-                            amount: win_title.amount
-                        }
-                    );
-                    total += win_title.amount;
-                    d.total = d.total + win_title.amount;
+            if (ticket.win_amount.simple > 0) {
+                for (let item of ticket.prizes) {
+                    if (item.air_simple == false) {
+                        d.simple.push(
+                            {
+                                title: item.title,
+                                amount: item.show
+                            }
+                        );
+                    }
                 }
             }
             data.push(d);
+
         }
         data = _.sortBy(data, "number");
         data = _.sortBy(data, (item) => item.number.substring(3, 6)).reverse();
@@ -4126,41 +4520,43 @@ let getAllWinNumberByAgent = async (req, res, next) => {
             res.send({ status: 0 });
             return;
         }
-        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
-        let tickets = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "status.status": "WIN" }] });
+        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day').unix();
+        // let tickets = await DB.TicketLedgerDB.find({ $and: [{ "ticket.date": search_date }, { "status.status": "WIN" }] });
+        let tickets = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { "win_amount.total": { $gt: 0 } }] });
         let data = [];
         let total = 0;
         for (let ticket of tickets) {
             let d = {
                 number: ticket.ticket.number,
-                agent: ticket.agent.name,
-                user: ticket.sold_out.name,
+                agent: ticket.income.name,
+                user: ticket.contact,
                 air: [],
                 simple: [],
-                total: 0,
+                total: ticket.win_amount.air + ticket.win_amount.simple_show,
             }
-            if (ticket.air.status == true) {
-                for (let win_title of ticket.air.win_title) {
-                    d.air.push(
-                        {
-                            title: win_title.title,
-                            amount: win_title.amount
-                        }
-                    );
-                    d.total = d.total + win_title.amount;
-                    total += win_title.amount;
+            total += ticket.win_amount.air + ticket.win_amount.simple_show;
+            if (ticket.win_amount.air > 0) {
+                for (let item of ticket.prizes) {
+                    if (item.air_simple == true) {
+                        d.air.push(
+                            {
+                                title: item.title,
+                                amount: item.show
+                            }
+                        );
+                    }
                 }
             }
-            if (ticket.simple.status == true) {
-                for (let win_title of ticket.simple.win_title) {
-                    d.simple.push(
-                        {
-                            title: win_title.title,
-                            amount: win_title.amount
-                        }
-                    );
-                    total += win_title.amount;
-                    d.total = d.total + win_title.amount;
+            if (ticket.win_amount.simple > 0) {
+                for (let item of ticket.prizes) {
+                    if (item.air_simple == false) {
+                        d.simple.push(
+                            {
+                                title: item.title,
+                                amount: item.show
+                            }
+                        );
+                    }
                 }
             }
             data.push(d);
@@ -4367,6 +4763,102 @@ let changeSingleTicketPhone = async (req, res, next) => {
         next(new Error(process.env.CONNECT_DEV));
     }
 }
+
+let getThaiBalanceLedger = async (req, res, next) => {
+    try {
+        let search_date = req.body.search_date;
+        let auth_user = res.locals.auth_user;
+        if (!search_date || UTILS.is_date(search_date)) {
+            res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
+            return;
+        }
+        if (auth_user.is_agent == false) {
+            res.send({ status: 0, msg: "စာရင်းတိုက်ခွင့်မရှိပါ။" });
+            return;
+        }
+        search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
+        let data = await DB.THAI_BALANCE_DB.find({ win_date: search_date });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From changeWinTicketNumber => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
+let calculateThaiBalance = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let auth_user = res.locals.auth_user;
+        if (auth_user.is_agent == false) {
+            res.send({ status: 0, msg: "စာရင်းတိုက်ခွင့်မရှိပါ။" });
+            return;
+        }
+        let response = await DB.THAI_BALANCE_DB.findById(search_id);
+        if (!response) {
+            res.send({ status: 0, msg: "စာရင်းမှားနေပါသည်။" });
+            return;
+        }
+        await DB.THAI_BALANCE_DB.updateOne({ _id: response._id }, {
+            $set: {
+                "voucher_to_cash": 0,
+                "to_cash": 0,
+                "voucher_cash": response.voucher_cash + response.voucher_to_cash,
+                "cash": response.cash + response.to_cash,
+                "voucher_balance": response.voucher_balance - response.voucher_to_cash,
+                "balance": response.balance - response.to_cash
+            }
+        });
+        res.send({ status: 1, msg: "အောင်မြင်ပါသည်။" });
+    } catch (error) {
+        console.log("Error From changeWinTicketNumber => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
+let cashThaiBalance = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let balance = req.body.balance;
+        let auth_user = res.locals.auth_user;
+        if (auth_user.is_agent == false) {
+            res.send({ status: 0, msg: "စာရင်းတိုက်ခွင့်မရှိပါ။" });
+            return;
+        }
+        let response = await DB.THAI_BALANCE_DB.findById(search_id);
+        if (!response) {
+            res.send({ status: 0, msg: "စာရင်းမှားနေပါသည်။" });
+            return;
+        }
+        await DB.THAI_BALANCE_DB.updateOne({ _id: response._id }, {
+            $inc: {
+                balance: balance
+            }
+        });
+        res.send({ status: 1, msg: "အောင်မြင်ပါသည်။" });
+    } catch (error) {
+        console.log("Error From changeWinTicketNumber => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
+let checkWinTicket = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let agent_id = req.body.agent_id;
+        let number = req.body.number;
+        let auth_user = res.locals.auth_user;
+        if (auth_user.is_agent == false) {
+            res.send({ status: 0, msg: "စာရင်းတိုက်ခွင့်မရှိပါ။" });
+            return;
+        }
+        let response = await DB.THAI_BALANCE_DB.fineOne({ $and: [{ "agent.id": agent_id }, { "ticket.number": number }, { "status.status": "WIN" }] });
+        if (!response) {
+            res.send({ status: 0, msg: "စာရင်းထဲတွင် ယခု နံပါတ်မရှိပါ။" });
+            return;
+        }
+        res.send({ status: 1, msg: "အောင်မြင်ပါသည်။" });
+    } catch (error) {
+        console.log("Error From changeWinTicketNumber => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
 module.exports = {
     all_agent,
     getEditUser,
@@ -4470,5 +4962,9 @@ module.exports = {
     remarkTwoDKyat,
     remarkThai,
     changeWinTicketNumber,
-    changeSingleTicketPhone
+    changeSingleTicketPhone,
+    getThaiBalanceLedger,
+    calculateThaiBalance,
+    cashThaiBalance,
+    checkWinTicket
 }

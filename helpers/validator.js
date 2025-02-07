@@ -23,7 +23,7 @@ let validateAuthToken = async (req, res, next) => {
                 res.send({ status: 0, msg: "ဝင်ခွင့်မရှိပါ။" });
                 return;
             }
-            auth_user.user_list = undefined;
+            // auth_user.user_list = undefined;
             // if(auth_user && auth_user.is_permission ==true){
             res.locals.auth_user = auth_user;
             next();

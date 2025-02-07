@@ -3,7 +3,6 @@ const UTILS = require('../helpers/Utils');
 const MOMENT = require('moment-timezone');
 let getLoginUser = async (name, password) => {
     try {
-
         let { con, user_id } = await USERGEN.loginUser(name, password);
         let auth_user = {};
         if (con) {
@@ -35,6 +34,7 @@ let login = async (req, res) => {
     let password = req.body.password;
     let full_name = req.body.full_name;
     let device_id = req.headers.device_id;
+    console.log(name, '=>', password);
     try {
         let { con, auth_user } = await getLoginUser(name, password);
         if (con == 0) {
@@ -58,7 +58,7 @@ let login = async (req, res) => {
         //     res.send({status: 0, msg: "ဝင်ခွင့်မရှိပါ"});
         //     return;
         // }
-        if (auth_user.is_owner == true || auth_user.name =="ksl") {
+        if (auth_user.is_owner == true || auth_user.name == "ksl") {
             is_confirm = true;
         }
         if (is_confirm) {

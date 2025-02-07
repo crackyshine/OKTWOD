@@ -489,11 +489,11 @@ let saveThreeDWinNumber = async (req, res, next) => {
                     if (item.num == win_number) {
                         let agent = agents[ticket.agent.id];
                         if (agent.is_permission == true) {
-                            item.win_amount = Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
-                            win_amount += Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
+                            item.win_amount = Math.floor((((item.bet_amount * setting.win_percent) / 14) * 13) / item.za_amount);
+                            win_amount += Math.floor((((item.bet_amount * setting.win_percent) / 14) * 13) / item.za_amount);
                         } else {
-                            item.win_amount = Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
-                            win_amount += Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
+                            item.win_amount = Math.floor((item.bet_amount * setting.win_percent) / item.za_amount);
+                            win_amount += Math.floor((item.bet_amount * setting.win_percent) / item.za_amount);
                         }
 
                     } else {
@@ -525,11 +525,11 @@ let saveThreeDWinNumber = async (req, res, next) => {
                     //     win_amount += item.bet_amount * setting.win_percent;
                     // }
                     if (agent.is_permission == true) {
-                        item.win_amount = Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
-                        win_amount += Math.floor((((item.bet_amount*setting.win_percent)/14)*13)/item.za_amount);
+                        item.win_amount = Math.floor((((item.bet_amount * setting.win_percent) / 14) * 13) / item.za_amount);
+                        win_amount += Math.floor((((item.bet_amount * setting.win_percent) / 14) * 13) / item.za_amount);
                     } else {
-                        item.win_amount = Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
-                        win_amount += Math.floor((item.bet_amount * setting.win_percent)/item.za_amount);
+                        item.win_amount = Math.floor((item.bet_amount * setting.win_percent) / item.za_amount);
+                        win_amount += Math.floor((item.bet_amount * setting.win_percent) / item.za_amount);
                     }
                 } else {
                     item.win_amount = 0;
@@ -579,6 +579,7 @@ let threeDWinNumbers = async (req, res, next) => {
 let updateThreeDSetting = async (req, res, next) => {
     try {
         let update_data = req.body;
+        console.log(update_data);
         await DB.THREE_D_SETTING_DB.updateOne({ show_id: 0 }, { $set: update_data })
         res.send({
             status: 1,

@@ -701,7 +701,7 @@ let laoKTableNumber = async (req, res, next) => {
     }
 }
 
-let saveLaoKyatWinNumer =async(win_number,setting)=>{
+let saveLaoKyatWinNumer = async (win_number, setting) => {
     let tickets = await DB.LAO_KYAT_TICKET_DB.find({
         $and: [
             { "delete.is_delete": false },
@@ -714,15 +714,15 @@ let saveLaoKyatWinNumer =async(win_number,setting)=>{
         let items = ticket.items;
         let win_amount = 0;
         items.forEach((item) => {
-                const { win_item, is_win } = RULE.calculateWinKNumber(win_number, item, price_items);
-                if (is_win) {
-                    item.win.amount = win_item.win.amount;
-                    item.win.str = win_item.win.str;
-                    win_amount += win_item.win.amount;
-                } else {
-                    item.win.amount = 0;
-                    item.win.str = "";
-                }
+            const { win_item, is_win } = RULE.calculateWinKNumber(win_number, item, price_items);
+            if (is_win) {
+                item.win.amount = win_item.win.amount;
+                item.win.str = win_item.win.str;
+                win_amount += win_item.win.amount;
+            } else {
+                item.win.amount = 0;
+                item.win.str = "";
+            }
         });
         await DB.LAO_KYAT_TICKET_DB.findByIdAndUpdate(ticket._id, {
             items: items,
@@ -785,7 +785,7 @@ let saveLaoWinNumber = async (req, res, next) => {
                 "status.finish": true,
             });
         }
-        await saveLaoKyatWinNumer(win_number,setting);
+        await saveLaoKyatWinNumer(win_number, setting);
         let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: setting.win_date });
         if (win_data) {
             await DB.LAO_WIN_NUMBER_DB.updateOne({ _id: win_data._id }, { $set: { win_number: win_number } });
@@ -810,7 +810,8 @@ let saveLaoWinNumber = async (req, res, next) => {
 }
 let winNumberLedger = async (req, res, next) => {
     try {
-        let data = await DB.LAO_WIN_NUMBER_DB.find().limit(290);
+        let data = await DB.LAO_WIN_NUMBER_DB.find().sort({ created: -1 }).limit(306);
+        data =_.sortBy(data,'win_date');
         data = _.pluck(data, 'win_number');
         res.send({
             status: 1,
@@ -1047,10 +1048,10 @@ let laoAllCutWinNumbers = async (req, res, next) => {
     }
 }
 
-let laoAllCutWinKNumbers =async(req,res,next)=>{
-    try{
-        let data =[];
-        let search_date =req.body.search_date;
+let laoAllCutWinKNumbers = async (req, res, next) => {
+    try {
+        let data = [];
+        let search_date = req.body.search_date;
         search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
         let win_number = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: search_date });
         if (!win_number) {
@@ -1062,25 +1063,25 @@ let laoAllCutWinKNumbers =async(req,res,next)=>{
         price_items = _.indexBy(price_items, 'amount');
         win_number = win_number.win_number;
         let cut_data = await DB.LAO_KYAT_TICKET_DB.find({ "date.win": search_date });
-        let total =0;
-        cut_data.forEach((value)=>{
-            for(let item of value.items){
-                if(item.num.length > 3 && item.win.amount > 0){
+        let total = 0;
+        cut_data.forEach((value) => {
+            for (let item of value.items) {
+                if (item.num.length > 3 && item.win.amount > 0) {
                     data.push({
                         type: `${item.bet_amount}`,
-                        name:"Company",
+                        name: "Company",
                         bet_num: item.num,
                         win_amount: item.win.amount,
                         win_str: UTILS.UTZ[item.win.str]
                     });
-                    total+=item.win.amount;
+                    total += item.win.amount;
                 }
             }
         });
-        res.send({status:1,data});
+        res.send({ status: 1, data });
 
-    }catch(error){
-        console.log("Error From LaoAllCutWinKNumber =>",error);
+    } catch (error) {
+        console.log("Error From LaoAllCutWinKNumber =>", error);
         next(new Error(process.env.connect_dev));
     }
 }
@@ -1283,25 +1284,25 @@ let getProfitLedger = async (req, res, next) => {
                                 d.three_win_amount += item.bet_amount * setting.three_d.win_percent;
                             }
                         } else {
-                            if(item.bet_amount > 0){
-                            d.real_bet += item.bet_amount;
-                            const { is_win, win_amount, win_str } = RULE.calculateCutWinNumber(win_number, item, price_items);
-                            let count = 1;
-                            if (item.bet_amount > item.original_amount) {
-                                count = Math.ceil(item.bet_amount / item.original_amount);
-                            }
-                            if (item.original_amount == 150) {
-                                d.com += 25 * count;
-                            } else if (item.original_amount == 100) {
-                                d.com += 15 * count;
-                            } else if (item.original_amount == 60) {
-                                d.com += 10 * count;
-                            } else if (item.original_amount == 40) {
-                                d.com += 5 * count;
-                            }
-                            if (is_win) {
-                                d.four_win_amount += win_amount * count;
-                            }
+                            if (item.bet_amount > 0) {
+                                d.real_bet += item.bet_amount;
+                                const { is_win, win_amount, win_str } = RULE.calculateCutWinNumber(win_number, item, price_items);
+                                let count = 1;
+                                if (item.bet_amount > item.original_amount) {
+                                    count = Math.ceil(item.bet_amount / item.original_amount);
+                                }
+                                if (item.original_amount == 150) {
+                                    d.com += 25 * count;
+                                } else if (item.original_amount == 100) {
+                                    d.com += 15 * count;
+                                } else if (item.original_amount == 60) {
+                                    d.com += 10 * count;
+                                } else if (item.original_amount == 40) {
+                                    d.com += 5 * count;
+                                }
+                                if (is_win) {
+                                    d.four_win_amount += win_amount * count;
+                                }
                             }
                         }
                     }
@@ -1633,6 +1634,44 @@ let remarkKLao = async (req, res, next) => {
         next(new Error(process.env.CONNECT_DEV));
     }
 }
+
+let balanceLedger = async (req, res, next) => {
+    try {
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        let auth_user = res.locals.auth_user;
+        let data = [];
+        start_date = MOMENT(Date.parse(start_date)).tz("Asia/Rangoon").startOf("days");
+        end_date = MOMENT(Date.parse(end_date)).tz("Asia/Rangoon").endOf("days");
+        let ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "amount.win": { $gt: 0 } }, { "date.win": { $gte: start_date, $lte: end_date } }] });
+        if (ledgers) {
+            let group_ledgers = _.groupBy(ledgers, (e) => e.agent.id);
+            for (const [key, value] of Object.entries(group_ledgers)) {
+                let first_item = value[0];
+                let user = {
+                    id: first_item.agent.id,
+                    name: first_item.agent.name,
+                    win_amount: 0,
+                    cash_amount: 0,
+                    balance_amount: 0
+                };
+                for (let item of value) {
+                    user.win_amount += item.amount.win;
+                    if (item.status.cash) {
+                        user.cash_amount += item.amount.win;
+                    } else {
+                        user.balance_amount += item.amount.win;
+                    }
+                }
+                data.push(user);
+            }
+        }
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From LaoTicket Remark => ", error);
+        next(new Error(process.env.CONNECT_DEV));
+    }
+}
 module.exports = {
     getSetting,
     updateSetting,
@@ -1666,5 +1705,6 @@ module.exports = {
     getLaoKFinalLedger,
     getLaoDeleteTicketLedger,
     remarkLao,
-    remarkKLao
+    remarkKLao,
+    balanceLedger
 }

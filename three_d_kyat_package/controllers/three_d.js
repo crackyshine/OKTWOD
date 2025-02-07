@@ -216,14 +216,14 @@ let threeDTicketNumber = async (req, res, next) => {
         end_date = MOMENT(Date.parse(end_date)).tz("Asia/Rangoon").endOf("days");
         let data = [];
         // if (auth_user.is_agent == true) {
-            data = await DB.THREE_D_KYAT_TICKET_DB.find({
-                $and: [{
-                    "date.created": {
-                        $gte: start_date,
-                        $lte: end_date
-                    }
-                }, { "delete.is_delete": false }]
-            });
+        data = await DB.THREE_D_KYAT_TICKET_DB.find({
+            $and: [{
+                "date.created": {
+                    $gte: start_date,
+                    $lte: end_date
+                }
+            }, { "delete.is_delete": false }]
+        });
         // } else {
         //     data = await DB.THREE_D_KYAT_TICKET_DB.find({
         //         $and: [{
@@ -597,9 +597,9 @@ let getThreeDFinalLedger = async (req, res, next) => {
 }
 let remarkThreeD = async (req, res, next) => {
     try {
-        let search_id =req.body.search_id;
-        let remark =req.body.remark;
-        await DB.THREE_D_KYAT_TICKET_DB.updateOne({_id:search_id},{$set:{remark:remark}});
+        let search_id = req.body.search_id;
+        let remark = req.body.remark;
+        await DB.THREE_D_KYAT_TICKET_DB.updateOne({ _id: search_id }, { $set: { remark: remark } });
         res.send({ status: 1 });
     } catch (error) {
         console.log("Error From Three D Remark => ", error);
