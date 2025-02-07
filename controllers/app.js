@@ -4714,25 +4714,31 @@ let changeWinTicketNumber = async (req, res, next) => {
         let key = req.body.key;
         let index = req.body.index;
         let value = req.body.value;
-        console.log(key, index, value);
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let win_data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (win_data) {
-            let update_data = win_data[key];
-            if (key == "first_prize" || key == "first_back_two_prize") {
-                update_data.num = `${value}`;
-            } else {
-                let num = update_data.num;
-                num[index] = `${value}`;
-                update_data.num = num;
+            if (win_data.first_prize != "") {
+                let update_data = win_data[key];
+                if (key == "first_prize" || key == "first_back_two_prize") {
+                    update_data.num = `${value}`;
+                } else {
+                    let num = update_data.num;
+                    num[index] = `${value}`;
+                    update_data.num = num;
+                }
+                win_data[key] = update_data;
+                win_data["pdf_url"] = "custom";
+                await DB.WinNumberDB.updateOne({ _id: win_data._id }, { $set: win_data });
+                res.send({
+                    status: 1,
+                    msg: `${value} နံပါတ်ချိန်းပြီးပါပြီ။`
+                });
+            }else{
+                res.send({
+                    status: 0,
+                    msg: `ပထမဆု မထွက်ခင် နံပါတ်အမှားများကို ပြင်လို့မရပါ။`
+                });
             }
-            win_data[key] = update_data;
-            win_data["pdf_url"] = "custom";
-            await DB.WinNumberDB.updateOne({ _id: win_data._id }, { $set: win_data });
-            res.send({
-                status: 1,
-                msg: `${value} နံပါတ်ချိန်းပြီးပါပြီ။`
-            });
         } else {
             res.send({ status: 0, msg: `မအောင်မြင်ပါ။` });
         }

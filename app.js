@@ -1211,12 +1211,11 @@ http.listen(process.env.PORT, async () => {
     // CHANGE_LAO_DATE_WIN_DATE();
     // await CHANGE_LAO_KYAT_DATE_WIN_DATE();
     // await CHANGE_TWO_D_DATE();
-    // await new DB.SIMPLE_PRICE_SETTING().save();
     // await TRANSFER_TICKET();
     // await CHANGE_USER_DATA();
     // await CHANGE_COM();
     // await CHANGE_EXTRA();
-    console.log("OKK");
+    // await new DB.SIMPLE_PRICE_SETTING().save();
     console.log("Server start ", process.env.PORT);
 });
 

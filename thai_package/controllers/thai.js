@@ -450,6 +450,7 @@ let cashAirOnlyTicketLedger = async (req, res, next) => {
 let getSimplePrice = async (req, res, next) => {
     try {
         let data = await DB.SIMPLE_PRICE_SETTING.findOne();
+        console.log(data);
         res.send({ status: 1, data });
     } catch (error) {
         console.log("Error From cashTicketLedger => ", error);
