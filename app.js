@@ -1216,6 +1216,7 @@ http.listen(process.env.PORT, async () => {
     // await CHANGE_USER_DATA();
     // await CHANGE_COM();
     // await CHANGE_EXTRA();
+    console.log("OKK");
     console.log("Server start ", process.env.PORT);
 });
 
