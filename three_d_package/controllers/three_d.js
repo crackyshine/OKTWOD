@@ -513,7 +513,25 @@ let saveThreeDWinNumber = async (req, res, next) => {
             let items = ticket.items;
             let win_amount = 0;
             items.forEach((item) => {
-                if (item.num == win_number) {
+                if (item.num.length == 2) {
+                    let item_ary = item.num.split("");
+                    let win_num_ary = win_number.split("");
+                    if (item_ary[1] == "p" && win_number.includes(item_ary[0])) {
+                        item.win_amount = item.bet_amount * setting.apar;
+                        win_amount += item.bet_amount * setting.apar;
+                    } else if (item_ary[1] == "f" && item_ary[0] == win_num_ary[0]) {
+                        item.win_amount = item.bet_amount * setting.one_num;
+                        win_amount += item.bet_amount * setting.one_num;
+                    } else if (item_ary[1] == "m" && item_ary[0] == win_num_ary[1]) {
+                        item.win_amount = item.bet_amount * setting.one_num;
+                        win_amount += item.bet_amount * setting.one_num;
+                    } else if (item_ary[1] == "e" && item_ary[0] == win_num_ary[2]) {
+                        item.win_amount = item.bet_amount * setting.one_num;
+                        win_amount += item.bet_amount * setting.one_num;
+                    } else {
+                        item.win_amount = 0;
+                    }
+                } else if (item.num == win_number) {
                     // item.win_amount = item.bet_amount * setting.win_percent;
                     // win_amount += item.bet_amount * setting.win_percent;
                     let agent = agents[ticket.agent.id];

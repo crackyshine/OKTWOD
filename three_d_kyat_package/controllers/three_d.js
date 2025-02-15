@@ -52,6 +52,11 @@ let checkThreeD = async (req, res, next) => {
             if (item.num in tickets) {
                 server_amount = tickets[item.num].amount;
             }
+            if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+                item.server_amount = server_amount;
+                data.push(item);
+                continue;
+            }
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
@@ -72,6 +77,9 @@ let checkThreeD = async (req, res, next) => {
         block_tickets = _.indexBy(block_tickets, 'bet_num');
         let b_amount = name == "Company" ? setting.kyat_za_amount : setting.three_d_kyat_cut_amount;
         for (let item of data) {
+            if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+                continue;
+            }
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;
                 confirm = true;
@@ -135,6 +143,11 @@ let saveThreeD = async (req, res, next) => {
             if (item.num in tickets) {
                 server_amount = tickets[item.num].amount;
             }
+            if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+                item.server_amount = server_amount;
+                data.push(item);
+                continue;
+            }
             if (data.some(e => e.num == item.num)) {
                 for (let d of data) {
                     if (d.num == item.num) {
@@ -151,10 +164,13 @@ let saveThreeD = async (req, res, next) => {
             }
         }
         let nums = _.uniq(_.pluck(items, "num"));
-        let block_tickets = await DB.THREE_D_BLOCK_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
+        let block_tickets = await DB.THREE_D_BLOCK_KYAT_NUMBER_DB.find({ block_num: { $in: Array.from(new Set(nums)) } });
         block_tickets = _.indexBy(block_tickets, 'bet_num');
         let b_amount = name == "Company" ? setting.kyat_za_amount : setting.three_d_kyat_cut_amount;
         for (let item of data) {
+            if (item.num.length == 2 && (item.num.endsWith("p") || item.num.endsWith("f") || item.num.endsWith("m") || item.num.endsWith("l"))) {
+                continue;
+            }
             if ((item.num in block_tickets) || item.server_amount >= b_amount) {
                 item.bet_amount = 0;
                 confirm = true;
@@ -401,7 +417,7 @@ let cashVoucher = async (req, res, next) => {
             next(new Error(`ဘောင်ချာ နံပါတ်မှားယွင်နေပါသည်။`));
             return;
         }
-        await DB.THREE_D_TICKET_DB.updateOne({ _id: data._id }, {
+        await DB.THREE_D_KYAT_TICKET_DB.updateOne({ _id: data._id }, {
             $set: {
                 "status.cash": true
             }
@@ -606,6 +622,137 @@ let remarkThreeD = async (req, res, next) => {
         next(new Error(process.env.CONNECT_DEV));
     }
 }
+let getProfitSingleLedger = async (req, res, next) => {
+    try {
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        if (!start_date || UTILS.is_date(start_date) || !end_date || UTILS.is_date(end_date)) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        let setting = await DB.THREE_D_SETTING_DB.findOne({ show_id: 0 });
+        start_date = MOMENT(Date.parse(start_date)).tz("Asia/Rangoon").startOf("days");
+        end_date = MOMENT(Date.parse(end_date)).tz("Asia/Rangoon").endOf("days");
+        let users = await DB.UserDB.find();
+        users = _.indexBy(users, "_id");
+        let tickets = await DB.THREE_D_KYAT_TICKET_DB.find({
+            $and: [{
+                "date.win": {
+                    $gte: start_date,
+                    $lte: end_date
+                }
+            }, { "delete.is_delete": false }]
+        });
+        tickets = _.groupBy(tickets, (e) => e.agent.id);
+        let data = [];
+        for (let [key, value] of Object.entries(tickets)) {
+            if (key in users) {
+                let user = users[key];
+                let user_data = {
+                    name: user.name,
+                    bet: 0,
+                    win_amount: 0,
+                    bet_win: 0,
+                    total_plus: 0,
+                    total_minus: 0
+                }
+                for (let bet of value) {
+                    for (let item of bet.items) {
+                        if (item.num.length == 2) {
+                            user_data.bet += item.bet_amount;
+                            user_data.win_amount += item.win_amount;
+                            if (item.win_amount > 0) {
+                                user_data.bet_win += item.bet_amount;
+                            }
+                        }
+                    }
+                }
+                data.push(user_data);
+            }
+        }
+        let total = {
+            name: "Total",
+            bet: 0,
+            win_amount: 0,
+            bet_win: 0,
+            total_plus: 0,
+            total_minus: 0,
+        }
+        for (let d of data) {
+            let total_win_lose = d.bet - d.win_amount;
+            if (total_win_lose >= 0) {
+                d.total_plus = total_win_lose;
+            } else {
+                d.total_minus = Math.abs(total_win_lose);
+            }
+            delete d.apo;
+            total.bet += d.bet;
+            total.win_amount += d.win_amount;
+            total.bet_win += d.bet_win;
+            total.total_plus += d.total_plus;
+            total.total_minus += d.total_minus;
+        }
+        if (total.total_plus >= total.total_minus) {
+            total.total_plus = total.total_plus - total.total_minus;
+            total.total_minus = 0;
+        } else {
+            total.total_minus = total.total_minus - total.total_plus;
+            total.total_plus = 0;
+        }
+
+        let cut_tickets = await DB.THREE_D_CUT_KYAT_NUMBER_DB.find({ win_date: { $gte: start_date, $lte: end_date } });
+        let cut_data = [];
+        let win_numbers = await DB.THREE_D_WIN_NUMBER_DB.find({ win_date: { $gte: start_date, $lte: end_date } });
+        win_numbers = _.indexBy(win_numbers, "win_date");
+        cut_tickets = _.groupBy(cut_tickets, "name");
+
+
+        for (let [key, values] of Object.entries(cut_tickets)) {
+            if (key.trim().toLowerCase() != "company" && key.trim().toLowerCase() != "hnh") {
+                let d = {
+                    name: key,
+                    bet: 0,
+                    bet_apo: 0,
+                    com: 0,
+                    bet_com: 0,
+                    win_amount: 0,
+                    bet_win: 0,
+                    total_plus: 0,
+                    total_minus: 0,
+                }
+                for (let item of values) {
+                    if (item.bet_num.length == 2) {
+                        d.bet += item.amount;
+                        if (item.win_date in win_numbers) {
+                            let win_number = win_numbers[item.win_date].win_number;
+                            d.bet_apo += item.amount / 1.4;
+                            d.bet_com += item.amount * 0.6;
+                            d.com += (item.amount / 1.4) - (item.amount * 0.6);
+                            if (item.bet_num == win_number) {
+                                d.win_amount += item.amount * setting.win_percent;
+                                d.bet_win += item.amount;
+                            }
+                        }
+                    }
+                }
+                if (d.bet_com > d.win_amount) {
+                    d.total_minus += Math.abs(d.bet_com - d.win_amount);
+                } else {
+                    d.total_plus += Math.abs(d.win_amount - d.bet_com);
+                }
+                cut_data.push(d);
+            }
+        }
+        res.send({
+            status: 1,
+            data,
+            total, cut_data,
+        })
+    } catch (error) {
+        console.log("Error From getProfitLedger => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
 module.exports = {
     checkThreeD,
     saveThreeD,
@@ -618,5 +765,6 @@ module.exports = {
     getProfitLedger,
     getThreeDFinalLedger,
     threeDDeleteTicketNumber,
-    remarkThreeD
+    remarkThreeD,
+    getProfitSingleLedger
 }

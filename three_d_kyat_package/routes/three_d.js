@@ -14,5 +14,6 @@ ROUTER.post('/cash_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.c
 ROUTER.post('/profit_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitLedger);
 ROUTER.post('/three_d_final_ledger',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.getThreeDFinalLedger);
 ROUTER.post('/remark',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkThreeD);
+ROUTER.post('/profit_single_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.getProfitSingleLedger);
 module.exports = ROUTER;
 

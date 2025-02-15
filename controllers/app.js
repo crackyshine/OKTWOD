@@ -3320,8 +3320,10 @@ let checkTwoDKyatNumbers = async (req, res) => {
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
+
 let saveTwoDNumber = async (req, res) => {
     try {
+        
         let name = req.body.name;
         let items = req.body.items;
         let setting = await DB.TwoDSettingDB.findOne({ show_id: 0 });
@@ -4733,7 +4735,7 @@ let changeWinTicketNumber = async (req, res, next) => {
                     status: 1,
                     msg: `${value} နံပါတ်ချိန်းပြီးပါပြီ။`
                 });
-            }else{
+            } else {
                 res.send({
                     status: 0,
                     msg: `ပထမဆု မထွက်ခင် နံပါတ်အမှားများကို ပြင်လို့မရပါ။`
