@@ -985,10 +985,15 @@ let laoAllCutNumber = async (req, res, next) => {
     try {
         let search_date = req.body.search_date;
         search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
+        let win_number ="";
+        let win_data =await DB.LAO_WIN_NUMBER_DB.findOne({win_date:search_date});
+        if(win_data){
+            win_number =win_data.win_number;
+        }
         let data = await DB.LAO_CUT_NUMBER_DB.find({ win_date: search_date });
         data = _.filter(data, (e) => e.bet_amount > 0);
         data = _.groupBy(data, 'name');
-        res.send({ status: 1, data });
+        res.send({ status: 1, data:{items:data,win_number} });
     } catch (error) {
         console.log("Error From laoCutNumber => ", error);
         next(new Error(process.env.connect_dev));

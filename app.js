@@ -59,7 +59,7 @@ app.use((err, req, res, next) => {
 
 let getTesting = async () => {
     let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
-    let date = MOMENT(settingData.date).tz("Asia/Rangoon").subtract('days', 1);
+    let date = MOMENT(settingData.date).tz("Asia/Rangoon").subtract(1,'days');
     const { body } = await got.post("https://www.glo.or.th/api/lottery/getLotteryAward", {
         json: {
             "date": date.format("DD"),
@@ -1205,6 +1205,34 @@ let CHANGE_EXTRA = async () => {
     // console.log("Done");
 }
 
+let DELETE_THAI_LEDGER_RESTORE = async () => {
+    let exist_ledgers = await DB.THAI_EXTRA.find({ "device.delete": { $ne: "" } });
+    let ids = _.pluck(exist_ledgers, 'ticket_id');
+    let ledgers = await DB.THAI_LEDGER.find({ $and: [{ _id: { $in: Array.from(new Set(ids)) } }, { status: "WIN" }] });
+    let count =1;
+    for (let ledger of ledgers) {
+        await DB.THAI_CASH_LEDGER.updateOne({ user_id: ledger.income.user_id }, {
+            $inc: {
+                amount: -ledger.win_amount.total
+            }
+        });
+        await DB.THAI_LEDGER.updateOne({ _id: ledger._id }, {
+            $set: {
+                status: "DELETE",
+                win_amount: {
+                    air: 0,
+                    simple: 0,
+                    simple_show: 0,
+                    total: 0
+                },
+                prizes: []
+            }
+        });
+        console.log("Update One",count++);
+    }
+    console.log("OK")
+}
+
 http.listen(process.env.PORT, async () => {
     // await UPDATE_LAO_SETTING();
     // await CHANGE_LAO_DATE();
@@ -1216,6 +1244,7 @@ http.listen(process.env.PORT, async () => {
     // await CHANGE_COM();
     // await CHANGE_EXTRA();
     // await new DB.SIMPLE_PRICE_SETTING().save();
+    // await DELETE_THAI_LEDGER_RESTORE();
     console.log("Server start ", process.env.PORT);
 });
 

@@ -357,10 +357,15 @@ let threeDCutNumber = async (req, res, next) => {
     try {
         let search_date = req.body.search_date;
         let win_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
-        let data = await DB.THREE_D_CUT_KYAT_NUMBER_DB.find({ win_date: win_date });
+        let win_number ="";
+        let win_data =await DB.THREE_D_WIN_NUMBER_DB.findOne({win_date:win_date});
+        if(win_data){
+            win_number =win_data.win_number;
+        }
+        let data = await DB.THREE_D_CUT_KYAT_NUMBER_DB.find({ $and: [{ "bet_num": { "$exists": true }, "$expr": { "$gte": [{ "$strLenCP": "$bet_num" }, 3] } }, { win_date: win_date }] });
         data = _.filter(data, (e) => e.amount != 0);
         data = _.groupBy(data, 'name');
-        res.send({ status: 1, data });
+        res.send({ status: 1, data:{items:data,win_number} });
     } catch (error) {
         console.log("Error From threeDCutNumber => ", error);
         next(new Error(process.env.connect_dev));

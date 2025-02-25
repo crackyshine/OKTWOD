@@ -32,6 +32,7 @@ let getTicketLedgers = async (req, res, next) => {
     try {
         let search_date = req.body.search_date;
         let data = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { status: { $ne: "DELETE" } }] });
+        // let data = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }] });
         res.send({ status: 1, data });
     } catch (err) {
         console.log("Error From ticketLedgerByAgent => ", err);
@@ -42,6 +43,9 @@ let getAgentSoldOutTicketLedgers = async (req, res, next) => {
     try {
         let search_date = req.body.search_date;
         let auth_user = res.locals.auth_user;
+        if (auth_user.name == "MKHNH" || auth_user.name == "HLHNH") {
+            console.log("Auth User => ", search_date);
+        }
         let items = await DB.THAI_LEDGER.find({ $and: [{ "win_date": search_date }, { status: { $ne: "DELETE" } }, { $or: [{ "income.user_id": auth_user._id }, { "sold_out.user_id": auth_user._id }] }] });
         let shop = await DB.THAI_SHOP_LEDGER.findOne({ $and: [{ win_date: search_date }, { user_id: auth_user._id }] });
         res.send({ status: 1, data: { items, shop } });
@@ -107,14 +111,14 @@ let soldOutSingleTicket = async (req, res, next) => {
             return;
         }
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        if (setting.open ==false) {
+        if (setting.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
-        if (MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').isBefore(MOMENT(Date.now()).tz("Asia/Rangoon"))) {
-            res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
-            return;
-        }
+        // if (MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').isBefore(MOMENT(Date.now()).tz("Asia/Rangoon"))) {
+        //     res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
+        //     return;
+        // }
         let search_date = MOMENT(Date.parse(setting.date)).tz('Asia/Rangoon').unix();
         let ticket_ledger = await DB.THAI_LEDGER.findOne({
             $and: [
@@ -202,14 +206,14 @@ let soldOutMultiTicket = async (req, res, next) => {
             return;
         }
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        if (setting.open ==false) {
+        if (setting.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
-        if (MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').isBefore(MOMENT(Date.now()).tz("Asia/Rangoon"))) {
-            res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
-            return;
-        }
+        // if (MOMENT(setting.date).tz("Asia/Rangoon").startOf('day').isBefore(MOMENT(Date.now()).tz("Asia/Rangoon"))) {
+        //     res.send({ status: 0, msg: "ရက်စွဲမှားယွင်းနေပါသည်။" });
+        //     return;
+        // }
         let search_date = MOMENT(Date.parse(setting.date)).tz('Asia/Rangoon').unix();
         let sold_out_date = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
         if (THAI_GEN.IS_CLOSE(setting.win_date, sold_out_date)) {
@@ -317,7 +321,7 @@ let deleteTicketLedger = async (req, res, next) => {
             return;
         }
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        if (setting.open ==false) {
+        if (setting.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
@@ -351,7 +355,7 @@ let unSellTicketLedger = async (req, res, next) => {
             return;
         }
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
-        if (setting.open ==false) {
+        if (setting.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
@@ -450,7 +454,6 @@ let cashAirOnlyTicketLedger = async (req, res, next) => {
 let getSimplePrice = async (req, res, next) => {
     try {
         let data = await DB.SIMPLE_PRICE_SETTING.findOne();
-        console.log(data);
         res.send({ status: 1, data });
     } catch (error) {
         console.log("Error From cashTicketLedger => ", error);
@@ -568,7 +571,7 @@ let closeTickets = async (req, res, next) => {
         let items = req.body.ids;
         let auth_user = res.locals.auth_user;
         let settings = await DB.SettingDB.findOne();
-        if (settings.open ==false) {
+        if (settings.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
@@ -582,7 +585,7 @@ let closeTickets = async (req, res, next) => {
         await DB.THAI_LEDGER.updateMany({ _id: { $in: Array.from(new Set(ids)) } }, { $set: { status: "CLOSE" } });
         res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
     } catch (error) {
-        console.log("Error From cashBalance => ", err);
+        console.log("Error From cashBalance => ", error);
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
@@ -590,7 +593,7 @@ let sellActiveTickets = async (req, res, next) => {
     try {
         let auth_user = res.locals.auth_user;
         let settings = await DB.SettingDB.findOne();
-        if (settings.open ==false) {
+        if (settings.open == false) {
             res.send({ status: 0, msg: "ပိတ်သွားပါပြီ။" });
             return;
         }
@@ -624,7 +627,153 @@ let sellActiveTickets = async (req, res, next) => {
         }
         res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
     } catch (error) {
-        console.log("Error From cashBalance => ", err);
+        console.log("Error From cashBalance => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+// let getOtherHtee = async (req, res, next) => {
+//     try {
+//         let auth_user = res.locals.auth_user;
+//         let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ status: "ACTIVE" }, { "income.user_id": auth_user._id }] }).sort({ created: -1 });
+//         res.send({ status: 1, data });
+//     } catch (error) {
+//         console.log("Error From getOtherHtee => ", error);
+//         res.send({ status: 0, msg: process.env.connect_dev });
+//     }
+// }
+let getOtherHteeLedger = async (req, res, next) => {
+    try {
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        start_date = MOMENT.unix(start_date).startOf('days').unix();
+        end_date = MOMENT.unix(end_date).endOf('days').unix();
+        let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date } }, { status: { $ne: 'DELETE' } }] });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From getOtherHteeLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let getOtherHteeByAgent = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        start_date = MOMENT.unix(start_date).startOf('days').unix();
+        end_date = MOMENT.unix(end_date).endOf('days').unix();
+        let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date } }, { "income.user_id": search_id },{status:{$ne:"DELETE"}}] });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From getOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let getOtherHtee = async (req, res, next) => {
+    try {
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        let auth_user =res.locals.auth_user;
+        start_date = MOMENT.unix(start_date).startOf('days').unix();
+        end_date = MOMENT.unix(end_date).endOf('days').unix();
+        let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ status: { $ne: "DELETE" } }, { "income.user_id": auth_user._id }, { cash_date: { $gte: start_date, $lte: end_date } }] }).sort({ cash_date: -1 });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From getOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let createOtherHtee = async (req, res, next) => {
+    try {
+        let number = req.body.number;
+        let amount = req.body.amount;
+        let contact = req.body.contact;
+        let remark = req.body.remark;
+        let auth_user = res.locals.auth_user;
+        if (number == "") {
+            res.send({ status: 0, msg: "ထီနံပါတ်မှားယွင်းနေပါသည်။" });
+            return;
+        }
+        let created = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        let save_data = new DB.THAI_OTHER_TICKET_LEDGER();
+        save_data.number = number;
+        save_data.amount = amount;
+        save_data.contact = contact;
+        save_data.remark = remark;
+        save_data.income = {
+            user_id: auth_user._id,
+            name: auth_user.full_name
+        };
+        save_data.cash_date = created;
+        save_data.created = created;
+        await save_data.save();
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From createOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let deleteOtherHtee = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let remark = req.body.remark;
+        let auth_user = res.locals.auth_user;
+        let check_ticket = await DB.THAI_OTHER_TICKET_LEDGER.findOne({ $and: [{ _id: search_id }, { "income.user_id": auth_user._id }, { status: 'ACTIVE' }] });
+        if (!check_ticket) {
+            res.send({ status: 0, msg: "လက်မှတ်မှားနေပါသည်။" });
+            return;
+        }
+        await DB.THAI_OTHER_TICKET_LEDGER.updateOne({ _id: check_ticket._id }, { $set: { status: 'DELETE', remark: remark } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From deleteOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let deleteOtherHteeByAgent = async (req, res, next) => {
+    try {
+        let remark = req.body.remark;
+        let auth_user = res.locals.auth_user;
+        let check_ticket = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ "income.user_id": auth_user._id }, { status: 'ACTIVE' }] });
+        if (check_ticket.length == 0) {
+            res.send({ status: 0, msg: "လက်မှတ်မှားနေပါသည်။" });
+            return;
+        }
+        await DB.THAI_OTHER_TICKET_LEDGER.updateMany({ $and: [{ "income.user_id": auth_user._id }, { status: 'ACTIVE' }] }, { $set: { status: 'DELETE', remark: remark } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From deleteOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let remarkOtherHtee = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let remark = req.body.remark;
+        let check_ticket = await DB.THAI_OTHER_TICKET_LEDGER.findById(search_id);
+        if (!check_ticket) {
+            res.send({ status: 0, msg: "လက်မှတ်မှားနေပါသည်။" });
+            return;
+        }
+        await DB.THAI_OTHER_TICKET_LEDGER.updateOne({ _id: check_ticket._id }, { $set: { remark: remark } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From remarkOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+let companyOtherHtee = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let check_tickets = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ status: "ACTIVE" }, { "income.user_id": search_id }] });
+        if (check_tickets.length == 0) {
+            res.send({ status: 0, msg: "လက်မှတ်မှားနေပါသည်။" });
+            return;
+        }
+        let sold_out_date = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        await DB.THAI_OTHER_TICKET_LEDGER.updateMany({ $and: [{ status: "ACTIVE" }, { "income.user_id": search_id }] }, { $set: { status: 'COMPANY', created: sold_out_date } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From companyOtherHtee => ", error);
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
@@ -651,5 +800,13 @@ module.exports = {
     cashPrePay,
     cashBalance,
     closeTickets,
-    sellActiveTickets
+    sellActiveTickets,
+    getOtherHtee,
+    getOtherHteeByAgent,
+    getOtherHteeLedger,
+    createOtherHtee,
+    deleteOtherHtee,
+    deleteOtherHteeByAgent,
+    remarkOtherHtee,
+    companyOtherHtee
 }

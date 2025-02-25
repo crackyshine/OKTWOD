@@ -853,7 +853,7 @@ let saveTickets = async (req, res) => {
         //     });
         // }
         for (let item of items) {
-            let check_ledger = await DB.THAI_LEDGER.findOne({ $and: [{ "date.win": search_date }, { "ticket.scanner": item["scanner"] }] });
+            let check_ledger = await DB.THAI_LEDGER.findOne({ $and: [{ win_date: search_date }, { "ticket.scanner": item["scanner"] }, { status: { $ne: "DELETE" } }] });
             if (check_ledger) {
                 can_save = false;
                 msg = `${item["scanner"]} ဖြင့် စာရင်းရှိနေပါသဖြင့် ထက်စရင်းသွင်း၍ မရနိုင်ပါ။`;
@@ -869,7 +869,6 @@ let saveTickets = async (req, res) => {
             let amount = setting.sold_out.air;
             let auth_amount = agent.com.air;
             let created = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
-            console.log(created);
             if (item["is_air"] == false) {
                 let pair = _.indexBy(setting.pair, (e) => e.count);
                 let auth_pair = _.indexBy(agent.pair, (e) => e.count);
@@ -879,7 +878,7 @@ let saveTickets = async (req, res) => {
             if (item["is_air"] == true) {
                 let exist_count = items.filter(element => element["number"].substr(3) == item["number"].substr(3)).length;
                 let pattern = new RegExp(`${item["number"].substr(3)}$`);
-                let count = await DB.THAI_LEDGER.find({ $and: [{ "date.win": search_date }, { "delete": null }, { "ticket.air_simple": true }, { "ticket.number": pattern }] }).countDocuments();
+                let count = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { status: { $ne: "DELETE" } }, { "ticket.air_simple": true }, { "ticket.number": pattern }, { status: { $ne: "DELETE" } }] }).countDocuments();
                 if ((exist_count + count) > setting.air_count) {
                     let exist_msg = "";
                     let total_msg = "";
@@ -1254,13 +1253,13 @@ let checkTicket = async (req, res) => {
 
         let setting = await DB.SettingDB.findOne({ show_id: 0 });
         let search_date = MOMENT(Date.parse(setting.date)).tz('Asia/Rangoon').unix();
-        let scanCount = await DB.THAI_LEDGER.find({ $and: [{ "delete": null }, { "date.win": search_date }, { "ticket.air_simple": true }, { "ticket.scanner": scanner }] }).countDocuments();
+        let scanCount = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { "ticket.air_simple": true }, { "ticket.scanner": scanner }, { status: { $ne: "DELETE" } }] }).countDocuments();
         if (scanCount > 0) {
             res.send({ status: 0, msg: `${scanner} ဖြင့် စရင်းသွင်းပြီးသွားပါပြီ။` });
             return;
         }
         let pattern = new RegExp(`${number.substr(3)}$`);
-        let count = await DB.THAI_LEDGER.find({ $and: [{ "delete": null }, { "date.win": search_date }, { "ticket.air_simple": true }, { "ticket.number": pattern }] }).countDocuments();
+        let count = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { "ticket.air_simple": true }, { "ticket.number": pattern }, { status: { $ne: "DELETE" } }] }).countDocuments();
         if ((exist_count + count + 1) > setting.air_count) {
             let exist_msg = "";
             let total_msg = "";
@@ -3169,8 +3168,8 @@ let checkTwoDNumbers = async (req, res) => {
         let auth_user = res.locals.auth_user;
         let confirm = false;
         const { is_close, type, date } = UTILS.getTwoDData(setting);
-        if (is_close && auth_user.is_agent == false) {
-            // if (is_close) {
+        // if (is_close && auth_user.is_agent == false) {
+        if (is_close) {
             res.send({ status: 0, msg: "လောင်းကြေးပိတ်သွားပါပြီ။" });
             return;
         }
@@ -3249,7 +3248,8 @@ let checkTwoDKyatNumbers = async (req, res) => {
         let confirm = false;
         let auth_user = res.locals.auth_user;
         const { is_close, type, date } = UTILS.getTwoDData(setting);
-        if (is_close && auth_user.is_agent == false) {
+        // if (is_close && auth_user.is_agent == false) {
+        if (is_close) {
             res.send({ status: 0, msg: "လောင်းကြေးပိတ်သွားပါပြီ။" });
             return;
         }
@@ -3323,14 +3323,15 @@ let checkTwoDKyatNumbers = async (req, res) => {
 
 let saveTwoDNumber = async (req, res) => {
     try {
-        
+
         let name = req.body.name;
         let items = req.body.items;
         let setting = await DB.TwoDSettingDB.findOne({ show_id: 0 });
         let auth_user = res.locals.auth_user;
         const { is_close, type, date } = UTILS.getTwoDData(setting);
         let confirm = false;
-        if (is_close && auth_user.is_agent == false) {
+        // if (is_close && auth_user.is_agent == false) {
+        if (is_close) {
             res.send({ status: 0, msg: "လောင်းကြေးပိတ်သွားပါပြီ။" });
             return;
         }
@@ -3441,7 +3442,8 @@ let saveTwoDKyatNumber = async (req, res) => {
         let setting = await DB.TwoDSettingDB.findOne({ show_id: 0 });
         let auth_user = res.locals.auth_user;
         const { is_close, type, date } = UTILS.getTwoDData(setting);
-        if (is_close && auth_user.is_agent == false) {
+        // if (is_close && auth_user.is_agent == false) {
+        if (is_close) {
             res.send({ status: 0, msg: "လောင်းကြေးပိတ်သွားပါပြီ။" });
             return;
         }
@@ -3884,8 +3886,10 @@ let getTwoDCutNumbers = async (req, res) => {
             return;
         }
         search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
+        let win_numbers = await DB.TwoDWinNumberDB.find({ win_date: search_date });
+        win_numbers =_.indexBy(win_numbers,"type");
         let data = await DB.TwoDCutNumber.find({ win_date: search_date });
-        res.send({ status: 1, data });
+        res.send({ status: 1, data:{items: data, win_numbers} });
     } catch (err) {
         console.log("Error From getTwoDCutNumbers => ", err);
         res.send({ status: 0, msg: process.env.connect_dev });
@@ -3973,8 +3977,10 @@ let getTwoDCutKyatNumbers = async (req, res) => {
             return;
         }
         search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
+        let win_numbers = await DB.TwoDWinNumberDB.find({ win_date: search_date });
+        win_numbers =_.indexBy(win_numbers,"type");
         let data = await DB.TwoDKyatCutNumber.find({ win_date: search_date });
-        res.send({ status: 1, data });
+        res.send({ status: 1, data:{items:data,win_numbers} });
     } catch (err) {
         console.log("Error From getTwoDCutKyatNumbers => ", err);
         res.send({ status: 0, msg: process.env.connect_dev });

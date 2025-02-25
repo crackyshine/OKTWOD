@@ -36,6 +36,7 @@ const THAI_SHOP_LEDGER = require('../thai_package/models/thai_shop_ledgers');
 const SIMPLE_PRICE_SETTING = require('../thai_package/models/simple_price_settings');
 const THAI_CASH_LEDGER = require('../thai_package/models/thai_cash_ledgers');
 const THAI_EXTRA = require('../thai_package/models/thai_extras');
+const THAI_OTHER_TICKET_LEDGER = require('../thai_package/models/thai_other_ticket_ledgers');
 module.exports = {
     UserDB,
     SettingDB,
@@ -74,6 +75,7 @@ module.exports = {
     THAI_SHOP_LEDGER,
     SIMPLE_PRICE_SETTING,
     THAI_CASH_LEDGER,
-    THAI_EXTRA
+    THAI_EXTRA,
+    THAI_OTHER_TICKET_LEDGER
 }
 
