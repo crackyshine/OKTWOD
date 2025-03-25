@@ -868,36 +868,36 @@ let UPDATE_LAO_SETTING = async () => {
 // }
 
 
-// let CHANGE_LAO_DATE=async()=>{
-//     let old_date = MOMENT("2024-09-11").tz("Asia/Rangoon").startOf("days");
-//     let new_date = MOMENT("2024-09-16").tz("Asia/Rangoon").startOf("days");
-//     let old_data =await DB.LAO_CUT_NUMBER_DB.find({win_date:old_date});
-//     for(let item of old_data){
-//         if(item.bet_num.length ==3){
-//             let exist_data =await DB.LAO_CUT_NUMBER_DB.findOne({$and:[{win_date:new_date},{bet_num:item.bet_num}]});
-//             if(exist_data){
-//                 await DB.LAO_CUT_NUMBER_DB.updateOne({_id:exist_data._id},{$set:{bet_amount:exist_data.bet_amount+item.bet_amount}});
-//                 await DB.LAO_CUT_NUMBER_DB.deleteOne({_id:item._id});
-//                 console.log("Update Three D");
-//             }else{
-//                 await DB.LAO_CUT_NUMBER_DB.updateOne({_id:item._id},{$set:{win_date:new_date}});
-//                 console.log("Save Three D");
-//             }
-//         }else{
-//             let exist_data =await DB.LAO_CUT_NUMBER_DB.findOne({$and:[{win_date:new_date},{bet_num:item.bet_num},{original_amount:item.original_amount}]});
-//             if(exist_data){
-//                 await DB.LAO_CUT_NUMBER_DB.updateOne({_id:exist_data._id},{$set:{bet_amount:exist_data.bet_amount+item.bet_amount}});
-//                 await DB.LAO_CUT_NUMBER_DB.deleteOne({_id:item._id});
-//                 console.log("Update Four D");
-//             }else{
-//                 await DB.LAO_CUT_NUMBER_DB.updateOne({_id:item._id},{$set:{win_date:new_date}});
-//                 console.log("Save Four D");
-//             }
-//         }
-//     }
-//     await DB.LAO_TICKET_DB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
-//     console.log("Change Date Success");
-// };
+let CHANGE_LAO_DATE=async()=>{
+    let old_date = MOMENT("2025-03-10").tz("Asia/Rangoon").startOf("days");
+    let new_date = MOMENT("2025-03-12").tz("Asia/Rangoon").startOf("days");
+    // let old_data =await DB.LAO_CUT_NUMBER_DB.find({win_date:old_date});
+    // for(let item of old_data){
+    //     if(item.bet_num.length ==3){
+    //         let exist_data =await DB.LAO_CUT_NUMBER_DB.findOne({$and:[{win_date:new_date},{bet_num:item.bet_num}]});
+    //         if(exist_data){
+    //             await DB.LAO_CUT_NUMBER_DB.updateOne({_id:exist_data._id},{$set:{bet_amount:exist_data.bet_amount+item.bet_amount}});
+    //             await DB.LAO_CUT_NUMBER_DB.deleteOne({_id:item._id});
+    //             console.log("Update Three D");
+    //         }else{
+    //             await DB.LAO_CUT_NUMBER_DB.updateOne({_id:item._id},{$set:{win_date:new_date}});
+    //             console.log("Save Three D");
+    //         }
+    //     }else{
+    //         let exist_data =await DB.LAO_CUT_NUMBER_DB.findOne({$and:[{win_date:new_date},{bet_num:item.bet_num},{original_amount:item.original_amount}]});
+    //         if(exist_data){
+    //             await DB.LAO_CUT_NUMBER_DB.updateOne({_id:exist_data._id},{$set:{bet_amount:exist_data.bet_amount+item.bet_amount}});
+    //             await DB.LAO_CUT_NUMBER_DB.deleteOne({_id:item._id});
+    //             console.log("Update Four D");
+    //         }else{
+    //             await DB.LAO_CUT_NUMBER_DB.updateOne({_id:item._id},{$set:{win_date:new_date}});
+    //             console.log("Save Four D");
+    //         }
+    //     }
+    // }
+    await DB.LAO_KYAT_TICKET_DB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
+    console.log("Change Date Success");
+};
 
 // let CHANGE_LAO_DATE_WIN_DATE = async () => {
 //     let old_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");

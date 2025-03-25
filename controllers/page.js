@@ -58,7 +58,7 @@ let login = async (req, res) => {
         //     res.send({status: 0, msg: "ဝင်ခွင့်မရှိပါ"});
         //     return;
         // }
-        if (auth_user.is_owner == true || auth_user.name == "ksl") {
+        if (auth_user.is_owner == true || auth_user.name == "ksl"  || auth_user.name == "MKHNH") {
             is_confirm = true;
         }
         if (is_confirm) {

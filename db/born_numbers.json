@@ -1,5 +1,4 @@
 {"_id":{"$oid":"62bec33dbb876709bf3146e9"},"agent_name":"Pr Sat","created":{"$date":"2022-07-01T09:49:49.629Z"},"name":"09445202831","born_num":"530","__v":0}
-{"_id":{"$oid":"62bfc646bb876709bf32c761"},"agent_name":"ksl","created":{"$date":"2022-07-02T04:15:02.896Z"},"name":"mee thwe","born_num":"911","__v":0}
 {"_id":{"$oid":"62bfc653bb876709bf32c76a"},"agent_name":"ksl","created":{"$date":"2022-07-02T04:15:15.999Z"},"name":"mee thwe","born_num":"138","__v":0}
 {"_id":{"$oid":"62bfd137bb876709bf32cd8d"},"agent_name":"Pr Sat","created":{"$date":"2022-07-02T05:01:43.329Z"},"name":"09450483334","born_num":"258","__v":0}
 {"_id":{"$oid":"62bfd165bb876709bf32cdc2"},"agent_name":"Pr Sat","created":{"$date":"2022-07-02T05:02:29.837Z"},"name":"09444448389","born_num":"385","__v":0}
@@ -217,7 +216,6 @@
 {"_id":{"$oid":"63acf337812ef65f7e40e99d"},"agent_name":"ps","created":{"$date":"2022-12-29T01:53:59.448Z"},"name":"09447371205","born_num":"022","__v":0}
 {"_id":{"$oid":"63acf33d812ef65f7e40e9a7"},"agent_name":"ps","created":{"$date":"2022-12-29T01:54:05.182Z"},"name":"09447371205","born_num":"061","__v":0}
 {"_id":{"$oid":"63af9e46ab46b61a2913d204"},"agent_name":"UH","created":{"$date":"2022-12-31T02:28:22.535Z"},"name":"09695866714","born_num":"382","__v":0}
-{"_id":{"$oid":"63af9e59a333511a2f9a8358"},"agent_name":"UH","created":{"$date":"2022-12-31T02:28:41.362Z"},"name":"09261567586","born_num":"492","__v":0}
 {"_id":{"$oid":"63af9ed2ab46b61a2913d235"},"agent_name":"UH","created":{"$date":"2022-12-31T02:30:42.929Z"},"name":"09695866714","born_num":"684","__v":0}
 {"_id":{"$oid":"63af9efca333511a2f9a839c"},"agent_name":"UH","created":{"$date":"2022-12-31T02:31:24.274Z"},"name":"09695866714","born_num":"715","__v":0}
 {"_id":{"$oid":"63b0efe3a333511a2f9a88da"},"agent_name":"SB","created":{"$date":"2023-01-01T02:28:51.444Z"},"name":"SB","born_num":"042","__v":0}
@@ -243,7 +241,6 @@
 {"_id":{"$oid":"63ca2bfc36e03526f341b53b"},"agent_name":"ps","created":{"$date":"2023-01-20T05:51:56.919Z"},"name":"09265146711","born_num":"458","__v":0}
 {"_id":{"$oid":"63ca2c07e5618126ed4dd2ba"},"agent_name":"ps","created":{"$date":"2023-01-20T05:52:07.016Z"},"name":"09265146711","born_num":"457","__v":0}
 {"_id":{"$oid":"63ca2c0e36e03526f341b547"},"agent_name":"ps","created":{"$date":"2023-01-20T05:52:14.048Z"},"name":"09265146711","born_num":"887","__v":0}
-{"_id":{"$oid":"63ce2e8d36e03526f3444f23"},"agent_name":"ksl","created":{"$date":"2023-01-23T06:51:57.923Z"},"name":"09402754587","born_num":"444","__v":0}
 {"_id":{"$oid":"63db3497db9e1f3ac4332730"},"agent_name":"mm","created":{"$date":"2023-02-02T03:57:11.571Z"},"name":"mm","born_num":"172","__v":0}
 {"_id":{"$oid":"63db83d28a08f13abee1e991"},"agent_name":"Nandar","created":{"$date":"2023-02-02T09:35:14.81Z"},"name":"Nandar","born_num":"968","__v":0}
 {"_id":{"$oid":"63db83d98a08f13abee1e996"},"agent_name":"Nandar","created":{"$date":"2023-02-02T09:35:21.232Z"},"name":"Nandar","born_num":"681","__v":0}
@@ -302,7 +299,6 @@
 {"_id":{"$oid":"6453235ecb4992517b010b0c"},"agent_name":"UHPL","created":{"$date":"2023-05-04T03:15:42.782Z"},"name":"09457146977","born_num":"075","__v":0}
 {"_id":{"$oid":"6453245ccb4992517b010bbf"},"agent_name":"UHPL","created":{"$date":"2023-05-04T03:19:56.13Z"},"name":"09453735550","born_num":"409","__v":0}
 {"_id":{"$oid":"6453256dda071d518128f58e"},"agent_name":"UHPL","created":{"$date":"2023-05-04T03:24:29.612Z"},"name":"09453735550","born_num":"463","__v":0}
-{"_id":{"$oid":"645dbb42cb4992517b09bb5a"},"agent_name":"UH","created":{"$date":"2023-05-12T04:06:26.43Z"},"name":"09428213384(noodle)","born_num":"784","__v":0}
 {"_id":{"$oid":"64647258d4f2a4257463fec8"},"agent_name":"UHPL","created":{"$date":"2023-05-17T06:21:12.596Z"},"name":"09252484076","born_num":"726","__v":0}
 {"_id":{"$oid":"6465c5bcd4f2a4257466534e"},"agent_name":"UH","created":{"$date":"2023-05-18T06:29:16.794Z"},"name":"095241364","born_num":"684","__v":0}
 {"_id":{"$oid":"6465f318d4f2a4257466d966"},"agent_name":"hnh","created":{"$date":"2023-05-18T09:42:48.976Z"},"name":"ANTY","born_num":"559","__v":0}
@@ -310,7 +306,6 @@
 {"_id":{"$oid":"646b22aa4dd9442575bbc5e0"},"agent_name":"hnh","created":{"$date":"2023-05-22T08:07:06.124Z"},"name":"258oolay","born_num":"173","__v":0}
 {"_id":{"$oid":"646c2e0b4dd9442575bd3591"},"agent_name":"ps","created":{"$date":"2023-05-23T03:07:55.959Z"},"name":"09441159443","born_num":"805","__v":0}
 {"_id":{"$oid":"646c703cd4f2a425746c8e7c"},"agent_name":"ksl","created":{"$date":"2023-05-23T07:50:20.124Z"},"name":"09454041841","born_num":"816","__v":0}
-{"_id":{"$oid":"646c7046d4f2a425746c8edd"},"agent_name":"ksl","created":{"$date":"2023-05-23T07:50:30.074Z"},"name":"09454041841","born_num":"817","__v":0}
 {"_id":{"$oid":"646d907fd4f2a425746d7fb3"},"agent_name":"MYHNH","created":{"$date":"2023-05-24T04:20:15.212Z"},"name":"U SHAN","born_num":"332","__v":0}
 {"_id":{"$oid":"646d908f4dd9442575becfd7"},"agent_name":"MYHNH","created":{"$date":"2023-05-24T04:20:31.137Z"},"name":"U SHAN","born_num":"323","__v":0}
 {"_id":{"$oid":"646d90984dd9442575bed052"},"agent_name":"MYHNH","created":{"$date":"2023-05-24T04:20:40.983Z"},"name":"U SHAN","born_num":"125","__v":0}
@@ -385,7 +380,6 @@
 {"_id":{"$oid":"64c898d8d2650e3a7517a227"},"agent_name":"zm","created":{"$date":"2023-08-01T05:32:08.229Z"},"name":"zm","born_num":"052","__v":0}
 {"_id":{"$oid":"64c89906a229233a770ccd62"},"agent_name":"zm","created":{"$date":"2023-08-01T05:32:54.271Z"},"name":"zm","born_num":"470","__v":0}
 {"_id":{"$oid":"64c8990aa229233a770ccd67"},"agent_name":"zm","created":{"$date":"2023-08-01T05:32:58.306Z"},"name":"zm","born_num":"740","__v":0}
-{"_id":{"$oid":"64c8a855a229233a770ccefb"},"agent_name":"WP","created":{"$date":"2023-08-01T06:38:13.095Z"},"name":"WP","born_num":"111","__v":0}
 {"_id":{"$oid":"64c8a867a229233a770ccf03"},"agent_name":"WP","created":{"$date":"2023-08-01T06:38:31.68Z"},"name":"WP","born_num":"222","__v":0}
 {"_id":{"$oid":"64c8a872d2650e3a7517a3d1"},"agent_name":"WP","created":{"$date":"2023-08-01T06:38:42.726Z"},"name":"WP","born_num":"000","__v":0}
 {"_id":{"$oid":"64c8a87ed2650e3a7517a3d9"},"agent_name":"WP","created":{"$date":"2023-08-01T06:38:54.411Z"},"name":"WP","born_num":"333","__v":0}
@@ -442,7 +436,6 @@
 {"_id":{"$oid":"64f2c311c9239d5a2703ac06"},"agent_name":"zm","created":{"$date":"2023-09-02T05:07:29.873Z"},"name":"zm","born_num":"841","__v":0}
 {"_id":{"$oid":"64f2df231307a25a21cca088"},"agent_name":"TTT","created":{"$date":"2023-09-02T07:07:15.233Z"},"name":"TNT","born_num":"278","__v":0}
 {"_id":{"$oid":"64f2e4e6c9239d5a2703aecd"},"agent_name":"ksl","created":{"$date":"2023-09-02T07:31:50.024Z"},"name":"09453733789","born_num":"162","__v":0}
-{"_id":{"$oid":"64f2e4f8c9239d5a2703aed2"},"agent_name":"ksl","created":{"$date":"2023-09-02T07:32:08.494Z"},"name":"09453733789","born_num":"162","__v":0}
 {"_id":{"$oid":"64f3fa44c9239d5a2704084b"},"agent_name":"4UH","created":{"$date":"2023-09-03T03:15:16.554Z"},"name":"09252079676","born_num":"305","__v":0}
 {"_id":{"$oid":"64f45a251307a25a21ccfdf5"},"agent_name":"hnh","created":{"$date":"2023-09-03T10:04:21.374Z"},"name":"gas","born_num":"920","__v":0}
 {"_id":{"$oid":"64f4604e1307a25a21ccfed7"},"agent_name":"hnh","created":{"$date":"2023-09-03T10:30:38.814Z"},"name":"sn","born_num":"531","__v":0}
@@ -522,7 +515,6 @@
 {"_id":{"$oid":"6556c49589cc7621fb83cd1f"},"agent_name":"ksl","created":{"$date":"2023-11-17T01:40:37.835Z"},"name":"1142","born_num":"624","__v":0}
 {"_id":{"$oid":"6556c49b89cc7621fb83cd29"},"agent_name":"ksl","created":{"$date":"2023-11-17T01:40:43.005Z"},"name":"1142","born_num":"654","__v":0}
 {"_id":{"$oid":"6556ef6189cc7621fb8465e3"},"agent_name":"UHPL","created":{"$date":"2023-11-17T04:43:13.021Z"},"name":"PL","born_num":"359","__v":0}
-{"_id":{"$oid":"65571200ea614621fac9af23"},"agent_name":"UH","created":{"$date":"2023-11-17T07:10:56.783Z"},"name":"09448893440","born_num":"532","__v":0}
 {"_id":{"$oid":"6557175eea614621fac9c504"},"agent_name":"HLHNH","created":{"$date":"2023-11-17T07:33:50.552Z"},"name":"ice shop","born_num":"605","__v":0}
 {"_id":{"$oid":"6557607f89cc7621fb867e4e"},"agent_name":"ksl","created":{"$date":"2023-11-17T12:45:51.671Z"},"name":"09253934930","born_num":"410","__v":0}
 {"_id":{"$oid":"6558565e89cc7621fb872d69"},"agent_name":"MKO","created":{"$date":"2023-11-18T06:14:54.272Z"},"name":"09250857350","born_num":"670","__v":0}
@@ -530,7 +522,6 @@
 {"_id":{"$oid":"655c89bc89cc7621fb8bc228"},"agent_name":"ksl","created":{"$date":"2023-11-21T10:43:08.645Z"},"name":"09450000462","born_num":"500","__v":0}
 {"_id":{"$oid":"6567389789cc7621fb9b05e6"},"agent_name":"4UH","created":{"$date":"2023-11-29T13:11:51.072Z"},"name":"09698615633","born_num":"0719","__v":0}
 {"_id":{"$oid":"656983b4ea614621fae52790"},"agent_name":"UHPL","created":{"$date":"2023-12-01T06:56:52.991Z"},"name":"oolay","born_num":"655","__v":0}
-{"_id":{"$oid":"656a96ad89cc7621fba22339"},"agent_name":"ps","created":{"$date":"2023-12-02T02:30:05.392Z"},"name":"09686861334","born_num":"334","__v":0}
 {"_id":{"$oid":"656aa7c9ea614621fae798f0"},"agent_name":"MYHNH","created":{"$date":"2023-12-02T03:43:05.339Z"},"name":"09259097883","born_num":"806","__v":0}
 {"_id":{"$oid":"656ab33d89cc7621fba226b9"},"agent_name":"WP","created":{"$date":"2023-12-02T04:31:57.43Z"},"name":"09428215350","born_num":"852","__v":0}
 {"_id":{"$oid":"656c31a3ea614621fae80e7d"},"agent_name":"4UH","created":{"$date":"2023-12-03T07:43:31.904Z"},"name":"09786147391","born_num":"654","__v":0}
@@ -608,7 +599,6 @@
 {"_id":{"$oid":"65952e065b0c1c4f8690dbeb"},"agent_name":"ksl","created":{"$date":"2024-01-03T09:51:02.446Z"},"name":"09250474865","born_num":"204","__v":0}
 {"_id":{"$oid":"65955d11a070e94f85485fcb"},"agent_name":"ksl","created":{"$date":"2024-01-03T13:11:45.79Z"},"name":"09264271623","born_num":"095","__v":0}
 {"_id":{"$oid":"659622655b0c1c4f8692da1f"},"agent_name":"ps","created":{"$date":"2024-01-04T03:13:41.875Z"},"name":"09441159443","born_num":"501","__v":0}
-{"_id":{"$oid":"65963d485b0c1c4f86936cb1"},"agent_name":"MKO","created":{"$date":"2024-01-04T05:08:24.963Z"},"name":"09252233711","born_num":"381","__v":0}
 {"_id":{"$oid":"6597a1bea070e94f854b9528"},"agent_name":"MKO","created":{"$date":"2024-01-05T06:29:18.955Z"},"name":"09897279442","born_num":"0613","__v":0}
 {"_id":{"$oid":"6597f58a5b0c1c4f8697adc8"},"agent_name":"ksl","created":{"$date":"2024-01-05T12:26:50.73Z"},"name":"09264271623","born_num":"095","__v":0}
 {"_id":{"$oid":"6598cb9b5b0c1c4f86984811"},"agent_name":"MKHNH","created":{"$date":"2024-01-06T03:40:11.897Z"},"name":"09250474281","born_num":"605 642 303","__v":0}
@@ -620,7 +610,6 @@
 {"_id":{"$oid":"65a3c4c58c558f25f1d5bea5"},"agent_name":"UH","created":{"$date":"2024-01-14T11:25:57.333Z"},"name":"09890323342","born_num":"078","__v":0}
 {"_id":{"$oid":"65a4bce1803bda25f061656a"},"agent_name":"ksl","created":{"$date":"2024-01-15T05:04:33.291Z"},"name":"09254599235","born_num":"393","__v":0}
 {"_id":{"$oid":"65a614668c558f25f1da950c"},"agent_name":"DMY","created":{"$date":"2024-01-16T05:30:14.502Z"},"name":"09454061280","born_num":"864","__v":0}
-{"_id":{"$oid":"65a89dec1e1ed53b46c20c85"},"agent_name":"MKO","created":{"$date":"2024-01-18T03:41:32.001Z"},"name":"mko","born_num":"168","__v":0}
 {"_id":{"$oid":"65a8cbfd1e1ed53b46c2ad97"},"agent_name":"WP","created":{"$date":"2024-01-18T06:58:05.282Z"},"name":"627Ako","born_num":"627","__v":0}
 {"_id":{"$oid":"65a8cc061e1ed53b46c2ad9f"},"agent_name":"WP","created":{"$date":"2024-01-18T06:58:14.976Z"},"name":"627 Ako","born_num":"627","__v":0}
 {"_id":{"$oid":"65a8cc0e5e2ef03b400dec59"},"agent_name":"WP","created":{"$date":"2024-01-18T06:58:22.873Z"},"name":"627 Ako","born_num":"627","__v":0}
@@ -628,7 +617,6 @@
 {"_id":{"$oid":"65a8cc211e1ed53b46c2adae"},"agent_name":"WP","created":{"$date":"2024-01-18T06:58:41.705Z"},"name":"627 Ako","born_num":"627","__v":0}
 {"_id":{"$oid":"65a9d6535e2ef03b400ea1c3"},"agent_name":"4UH","created":{"$date":"2024-01-19T01:54:27.739Z"},"name":"09422084945","born_num":"844","__v":0}
 {"_id":{"$oid":"65aa33291e1ed53b46c58579"},"agent_name":"ksl","created":{"$date":"2024-01-19T08:30:33.911Z"},"name":"09450000462","born_num":"272","__v":0}
-{"_id":{"$oid":"65aa7a681e1ed53b46c732cf"},"agent_name":"HLHNH","created":{"$date":"2024-01-19T13:34:32.911Z"},"name":"09449743704","born_num":"704 930","__v":0}
 {"_id":{"$oid":"65ab68005e2ef03b40129c3f"},"agent_name":"WLL","created":{"$date":"2024-01-20T06:28:16.346Z"},"name":"09401110458","born_num":"545","__v":0}
 {"_id":{"$oid":"65bcc25009e65878d2c18fc1"},"agent_name":"ksl","created":{"$date":"2024-02-02T10:22:08.192Z"},"name":"09450801399","born_num":"727","__v":0}
 {"_id":{"$oid":"65bcc25309e65878d2c18fd2"},"agent_name":"ksl","created":{"$date":"2024-02-02T10:22:11.865Z"},"name":"09450801399","born_num":"709","__v":0}
@@ -636,13 +624,7 @@
 {"_id":{"$oid":"65bcc262e2574c78d35b3ef0"},"agent_name":"ksl","created":{"$date":"2024-02-02T10:22:26.405Z"},"name":"09450801399","born_num":"717","__v":0}
 {"_id":{"$oid":"65be1cafe2574c78d35d2d7d"},"agent_name":"POL","created":{"$date":"2024-02-03T10:59:59.34Z"},"name":"09895047585","born_num":"211","__v":0}
 {"_id":{"$oid":"65be1f5009e65878d2c3362e"},"agent_name":"POL","created":{"$date":"2024-02-03T11:11:12.059Z"},"name":"09895047585","born_num":"629","__v":0}
-{"_id":{"$oid":"65bef86309e65878d2c33c2b"},"agent_name":"POL","created":{"$date":"2024-02-04T02:37:23.925Z"},"name":"pol","born_num":"117","__v":0}
-{"_id":{"$oid":"65bef872e2574c78d35d333f"},"agent_name":"POL","created":{"$date":"2024-02-04T02:37:38.893Z"},"name":"POL","born_num":"619","__v":0}
-{"_id":{"$oid":"65bef87de2574c78d35d3344"},"agent_name":"POL","created":{"$date":"2024-02-04T02:37:49.383Z"},"name":"POL","born_num":"855","__v":0}
-{"_id":{"$oid":"65bef88be2574c78d35d3349"},"agent_name":"POL","created":{"$date":"2024-02-04T02:38:03.56Z"},"name":"POL","born_num":"213","__v":0}
 {"_id":{"$oid":"65c04c32e2574c78d35d71f1"},"agent_name":"DMY","created":{"$date":"2024-02-05T02:47:14.674Z"},"name":"09458236140","born_num":"571","__v":0}
-{"_id":{"$oid":"65c9b1775d0cda3804dd440a"},"agent_name":"HLHNH","created":{"$date":"2024-02-12T05:49:43.446Z"},"name":"09449743704","born_num":"135 206 ","__v":0}
-{"_id":{"$oid":"65c9b18ebe6d3a37fe31cc4d"},"agent_name":"HLHNH","created":{"$date":"2024-02-12T05:50:06.551Z"},"name":"09449743704","born_num":"474","__v":0}
 {"_id":{"$oid":"65cd9135be6d3a37fe3a84b7"},"agent_name":"WLL","created":{"$date":"2024-02-15T04:21:09.21Z"},"name":"09687465661 AIR OR SIMPLE","born_num":"909","__v":0}
 {"_id":{"$oid":"65cdab47be6d3a37fe3b22f7"},"agent_name":"HLHNH","created":{"$date":"2024-02-15T06:12:23.188Z"},"name":"09694338108","born_num":"164 356","__v":0}
 {"_id":{"$oid":"65cdab685d0cda3804e62a3c"},"agent_name":"HLHNH","created":{"$date":"2024-02-15T06:12:56.722Z"},"name":"09694338108","born_num":"108 275","__v":0}
@@ -790,13 +772,11 @@
 {"_id":{"$oid":"65dc5175305b88112a223b28"},"agent_name":"dk","created":{"$date":"2024-02-26T08:53:09.158Z"},"name":"09680631800","born_num":"411","__v":0}
 {"_id":{"$oid":"65dc517f305b88112a223b39"},"agent_name":"dk","created":{"$date":"2024-02-26T08:53:19.508Z"},"name":"09680631800","born_num":"141","__v":0}
 {"_id":{"$oid":"65dc518548700111290c5cab"},"agent_name":"dk","created":{"$date":"2024-02-26T08:53:25.124Z"},"name":"09680631800","born_num":"441","__v":0}
-{"_id":{"$oid":"65ddb59948700111290ff157"},"agent_name":"UH","created":{"$date":"2024-02-27T10:12:41.299Z"},"name":"095241364","born_num":"910","__v":0}
 {"_id":{"$oid":"65e1547c305b88112a2cbd69"},"agent_name":"hnh","created":{"$date":"2024-03-01T04:07:24.103Z"},"name":"09i","born_num":"219","__v":0}
 {"_id":{"$oid":"65e1a24248700111291a1e02"},"agent_name":"dk","created":{"$date":"2024-03-01T09:39:14.162Z"},"name":"09680631800","born_num":"114","__v":0}
 {"_id":{"$oid":"65e1a296305b88112a3076c7"},"agent_name":"dk","created":{"$date":"2024-03-01T09:40:38.161Z"},"name":"Anty SW","born_num":"067","__v":0}
 {"_id":{"$oid":"65e1a29b48700111291a1e2e"},"agent_name":"dk","created":{"$date":"2024-03-01T09:40:43.968Z"},"name":"Anty SW","born_num":"767","__v":0}
 {"_id":{"$oid":"65e1d6ba48700111291bccfe"},"agent_name":"UH","created":{"$date":"2024-03-01T13:23:06.168Z"},"name":"09650065899","born_num":"671","__v":0}
-{"_id":{"$oid":"65e2c39548700111291bd883"},"agent_name":"WP","created":{"$date":"2024-03-02T06:13:41.348Z"},"name":"09697564996","born_num":"631","__v":0}
 {"_id":{"$oid":"65e3fdc248700111291c4b43"},"agent_name":"dk","created":{"$date":"2024-03-03T04:34:10.993Z"},"name":"09428120348","born_num":"900","__v":0}
 {"_id":{"$oid":"65e3fdcb48700111291c4b48"},"agent_name":"dk","created":{"$date":"2024-03-03T04:34:19.295Z"},"name":"09428120348","born_num":"400","__v":0}
 {"_id":{"$oid":"65e3fdd048700111291c4b4d"},"agent_name":"dk","created":{"$date":"2024-03-03T04:34:24.592Z"},"name":"09428120348","born_num":"378","__v":0}
@@ -812,7 +792,6 @@
 {"_id":{"$oid":"65eebc3fbb21041127826082"},"agent_name":"dk","created":{"$date":"2024-03-11T08:09:35.868Z"},"name":"09457145157","born_num":"614","__v":0}
 {"_id":{"$oid":"65eec04b278896112da3266e"},"agent_name":"UHPL","created":{"$date":"2024-03-11T08:26:51.437Z"},"name":"pl","born_num":"467","__v":0}
 {"_id":{"$oid":"65f04162bb210411278668e1"},"agent_name":"dk","created":{"$date":"2024-03-12T11:49:54.128Z"},"name":"ahlakabar","born_num":"449","__v":0}
-{"_id":{"$oid":"65f129b7bb2104112787168b"},"agent_name":"hnh","created":{"$date":"2024-03-13T04:21:11.578Z"},"name":"09428221457","born_num":"512","__v":0}
 {"_id":{"$oid":"65f4f74dbb21041127908efd"},"agent_name":"4UH","created":{"$date":"2024-03-16T01:35:09.793Z"},"name":"719oolay","born_num":"919","__v":0}
 {"_id":{"$oid":"65f6696dbb210411279350a9"},"agent_name":"dk","created":{"$date":"2024-03-17T03:54:21.561Z"},"name":"09448777725\r\r","born_num":"725","__v":0}
 {"_id":{"$oid":"65f66975bb210411279350ae"},"agent_name":"dk","created":{"$date":"2024-03-17T03:54:29.754Z"},"name":"09448777725\r\r","born_num":"725","__v":0}
@@ -845,7 +824,6 @@
 {"_id":{"$oid":"66066042bb21041127aea086"},"agent_name":"UHWK","created":{"$date":"2024-03-29T06:31:30.621Z"},"name":"09253630700","born_num":"385","__v":0}
 {"_id":{"$oid":"6607e3f6bb21041127b12c6b"},"agent_name":"dk","created":{"$date":"2024-03-30T10:05:42.389Z"},"name":"Ahla kabar","born_num":"456","__v":0}
 {"_id":{"$oid":"660a0b20bb21041127b1ccc1"},"agent_name":"ksl","created":{"$date":"2024-04-01T01:17:20.219Z"},"name":"09403909436","born_num":"017","__v":0}
-{"_id":{"$oid":"660a24ef278896112dd50181"},"agent_name":"ksl","created":{"$date":"2024-04-01T03:07:27.2Z"},"name":"sq","born_num":"195","__v":0}
 {"_id":{"$oid":"660b7277bb21041127b6dcc6"},"agent_name":"ps","created":{"$date":"2024-04-02T02:50:31.888Z"},"name":"09258801971","born_num":"736","__v":0}
 {"_id":{"$oid":"660b727ebb21041127b6dccb"},"agent_name":"ps","created":{"$date":"2024-04-02T02:50:38.143Z"},"name":"09258801971","born_num":"736","__v":0}
 {"_id":{"$oid":"660b7284278896112dda400b"},"agent_name":"ps","created":{"$date":"2024-04-02T02:50:44.771Z"},"name":"09258801971","born_num":"736","__v":0}
@@ -887,7 +865,6 @@
 {"_id":{"$oid":"6623a49df1062f6b2e48b13d"},"agent_name":"4UH","created":{"$date":"2024-04-20T11:18:53.501Z"},"name":"09774054051","born_num":"897","__v":0}
 {"_id":{"$oid":"662794e8f1062f6b2e4d900c"},"agent_name":"AKZ","created":{"$date":"2024-04-23T11:00:56.065Z"},"name":"ULAY","born_num":"484","__v":0}
 {"_id":{"$oid":"66288c6798598e6b2ceba6f3"},"agent_name":"POL","created":{"$date":"2024-04-24T04:36:55.017Z"},"name":"japan vision","born_num":"159","__v":0}
-{"_id":{"$oid":"6628b054f1062f6b2e4ebb62"},"agent_name":"ksl","created":{"$date":"2024-04-24T07:10:12.928Z"},"name":"09408924388","born_num":"937","__v":0}
 {"_id":{"$oid":"662a31c4f1062f6b2e51f93d"},"agent_name":"4UH","created":{"$date":"2024-04-25T10:34:44.2Z"},"name":"09261300123","born_num":"959","__v":0}
 {"_id":{"$oid":"662b1ce6f1062f6b2e52462f"},"agent_name":"ps","created":{"$date":"2024-04-26T03:17:58.853Z"},"name":"09450792949","born_num":"473","__v":0}
 {"_id":{"$oid":"662b874398598e6b2cf1b5ef"},"agent_name":"ksl","created":{"$date":"2024-04-26T10:51:47.487Z"},"name":"09266626299","born_num":"237","__v":0}
@@ -914,11 +891,6 @@
 {"_id":{"$oid":"663eca0f7838e2524ce3d197"},"agent_name":"WP","created":{"$date":"2024-05-11T01:29:51.091Z"},"name":"09453849858","born_num":"239","__v":0}
 {"_id":{"$oid":"663ed6218120a45252917303"},"agent_name":"ps","created":{"$date":"2024-05-11T02:21:21.135Z"},"name":"09668915443","born_num":"803","__v":0}
 {"_id":{"$oid":"663ed64e7838e2524ce3d3e2"},"agent_name":"ps","created":{"$date":"2024-05-11T02:22:06.943Z"},"name":"09668915443","born_num":"302","__v":0}
-{"_id":{"$oid":"664487d37838e2524ceb5581"},"agent_name":"POL","created":{"$date":"2024-05-15T10:00:51.957Z"},"name":"pol","born_num":"438","__v":0}
-{"_id":{"$oid":"664487dd8120a4525298ec40"},"agent_name":"POL","created":{"$date":"2024-05-15T10:01:01.345Z"},"name":"pol","born_num":"787","__v":0}
-{"_id":{"$oid":"664487e68120a4525298ec4c"},"agent_name":"POL","created":{"$date":"2024-05-15T10:01:10.293Z"},"name":"pol","born_num":"282","__v":0}
-{"_id":{"$oid":"664487ee7838e2524ceb55d9"},"agent_name":"POL","created":{"$date":"2024-05-15T10:01:18.431Z"},"name":"pol","born_num":"362","__v":0}
-{"_id":{"$oid":"664487f77838e2524ceb5633"},"agent_name":"POL","created":{"$date":"2024-05-15T10:01:27.594Z"},"name":"pol","born_num":"504","__v":0}
 {"_id":{"$oid":"6644a7f48120a452529999e1"},"agent_name":"dk","created":{"$date":"2024-05-15T12:17:56.242Z"},"name":"09402224605","born_num":"973","__v":0}
 {"_id":{"$oid":"66455f7d7838e2524ced0ca2"},"agent_name":"AKZ","created":{"$date":"2024-05-16T01:21:01.857Z"},"name":"268305768","born_num":"599","__v":0}
 {"_id":{"$oid":"6645af067838e2524cf04f56"},"agent_name":"UHWK","created":{"$date":"2024-05-16T07:00:22.667Z"},"name":"09451507005","born_num":"752","__v":0}
@@ -966,8 +938,6 @@
 {"_id":{"$oid":"666a7dc1b8468c6d0c2774b3"},"agent_name":"dk","created":{"$date":"2024-06-13T05:04:01.674Z"},"name":"09670548787","born_num":"511","__v":0}
 {"_id":{"$oid":"666a7dc7b8468c6d0c2774c4"},"agent_name":"dk","created":{"$date":"2024-06-13T05:04:07.851Z"},"name":"09670548787","born_num":"511","__v":0}
 {"_id":{"$oid":"666accdab8468c6d0c289d65"},"agent_name":"ps","created":{"$date":"2024-06-13T10:41:30.187Z"},"name":"09428795594","born_num":"594","__v":0}
-{"_id":{"$oid":"666c2410b8468c6d0c2b6280"},"agent_name":"WKL","created":{"$date":"2024-06-14T11:05:52.727Z"},"name":"09671941523","born_num":"759","__v":0}
-{"_id":{"$oid":"666cf589b8468c6d0c2c762d"},"agent_name":"UHWK","created":{"$date":"2024-06-15T01:59:37.425Z"},"name":"09696185065","born_num":"0500","__v":0}
 {"_id":{"$oid":"666d228ab8468c6d0c2c8cd7"},"agent_name":"UHPL","created":{"$date":"2024-06-15T05:11:38.313Z"},"name":"pu","born_num":"3490","__v":0}
 {"_id":{"$oid":"666fdb2108ed6c6d123f7d08"},"agent_name":"ksl","created":{"$date":"2024-06-17T06:43:45.804Z"},"name":"09403712042","born_num":"197","__v":0}
 {"_id":{"$oid":"66723a48b8468c6d0c369af6"},"agent_name":"ps","created":{"$date":"2024-06-19T01:54:16.234Z"},"name":"09450140556","born_num":"556","__v":0}
@@ -993,12 +963,10 @@
 {"_id":{"$oid":"66877a23f2f8870ab5fe7aa0"},"agent_name":"ksl","created":{"$date":"2024-07-05T04:44:19.39Z"},"name":"09262721311","born_num":"767","__v":0}
 {"_id":{"$oid":"6688b8a510f88a0aaf395ff4"},"agent_name":"WM","created":{"$date":"2024-07-06T03:23:17.755Z"},"name":"wm","born_num":"555","__v":0}
 {"_id":{"$oid":"6688b8ddf2f8870ab50247d9"},"agent_name":"WM","created":{"$date":"2024-07-06T03:24:13.344Z"},"name":"wm","born_num":"444","__v":0}
-{"_id":{"$oid":"668b6d02f2f8870ab5031d66"},"agent_name":"AKZ","created":{"$date":"2024-07-08T04:37:22.327Z"},"name":"AKZ","born_num":"624","__v":0}
 {"_id":{"$oid":"668b847c10f88a0aaf3abefc"},"agent_name":"UH5","created":{"$date":"2024-07-08T06:17:32.238Z"},"name":"09898056129","born_num":"112","__v":0}
 {"_id":{"$oid":"668b8498f2f8870ab5038a2e"},"agent_name":"UH5","created":{"$date":"2024-07-08T06:18:00.711Z"},"name":"09898056129","born_num":"211","__v":0}
 {"_id":{"$oid":"668b84b110f88a0aaf3abf43"},"agent_name":"UH5","created":{"$date":"2024-07-08T06:18:25.179Z"},"name":"09898056129","born_num":"121","__v":0}
 {"_id":{"$oid":"668bc32610f88a0aaf3bec99"},"agent_name":"WM","created":{"$date":"2024-07-08T10:44:54.108Z"},"name":"WM","born_num":"251","__v":0}
-{"_id":{"$oid":"668bc33ef2f8870ab504aa42"},"agent_name":"WM","created":{"$date":"2024-07-08T10:45:18.038Z"},"name":"WM","born_num":"168","__v":0}
 {"_id":{"$oid":"668bc36bf2f8870ab504aab1"},"agent_name":"WM","created":{"$date":"2024-07-08T10:46:03.015Z"},"name":"WM","born_num":"999","__v":0}
 {"_id":{"$oid":"668c9bc510f88a0aaf3d3566"},"agent_name":"WM","created":{"$date":"2024-07-09T02:09:09.176Z"},"name":"wm","born_num":"097","__v":0}
 {"_id":{"$oid":"668c9bcbf2f8870ab5063fd4"},"agent_name":"WM","created":{"$date":"2024-07-09T02:09:15.84Z"},"name":"wm","born_num":"907","__v":0}
@@ -1007,8 +975,6 @@
 {"_id":{"$oid":"669486e510f88a0aaf49fe22"},"agent_name":"UH","created":{"$date":"2024-07-15T02:18:13.245Z"},"name":"704anti","born_num":"7704","__v":0}
 {"_id":{"$oid":"6694b05d10f88a0aaf4aec5a"},"agent_name":"WM","created":{"$date":"2024-07-15T05:15:09.549Z"},"name":"09426770736","born_num":"950  307","__v":0}
 {"_id":{"$oid":"6695c83a10f88a0aaf4e6909"},"agent_name":"ksl","created":{"$date":"2024-07-16T01:09:14.032Z"},"name":"09255028653","born_num":"649","__v":0}
-{"_id":{"$oid":"6697ad11c86d631580e02655"},"agent_name":"UH5","created":{"$date":"2024-07-17T11:37:53.246Z"},"name":"09459957150","born_num":"952","__v":0}
-{"_id":{"$oid":"6697ad368e5baa15814a3c10"},"agent_name":"UH5","created":{"$date":"2024-07-17T11:38:30.953Z"},"name":"09459957150","born_num":"065","__v":0}
 {"_id":{"$oid":"6697b9b48e5baa15814ab08e"},"agent_name":"UH","created":{"$date":"2024-07-17T12:31:48.803Z"},"name":"ko aung lwin","born_num":"612","__v":0}
 {"_id":{"$oid":"66989516c86d631580e1f962"},"agent_name":"ksl","created":{"$date":"2024-07-18T04:07:50.552Z"},"name":"09403712042","born_num":"824","__v":0}
 {"_id":{"$oid":"6698952ac86d631580e1f9be"},"agent_name":"ksl","created":{"$date":"2024-07-18T04:08:10.047Z"},"name":"09403712042","born_num":"825","__v":0}
@@ -1044,18 +1010,15 @@
 {"_id":{"$oid":"66a6fa8ec86d631580f6cade"},"agent_name":"hnh","created":{"$date":"2024-07-29T02:12:30.314Z"},"name":"5241587","born_num":"073","__v":0}
 {"_id":{"$oid":"66a6fae68e5baa15816034c0"},"agent_name":"hnh","created":{"$date":"2024-07-29T02:13:58.317Z"},"name":"otg","born_num":"833 ","__v":0}
 {"_id":{"$oid":"66a6fd08c86d631580f6cc55"},"agent_name":"ps","created":{"$date":"2024-07-29T02:23:04.917Z"},"name":"09252052798","born_num":"088","__v":0}
-{"_id":{"$oid":"66a72fd58e5baa15816057ff"},"agent_name":"4UH","created":{"$date":"2024-07-29T05:59:49.078Z"},"name":"981AKO","born_num":"361","__v":0}
 {"_id":{"$oid":"66a7768f8e5baa158160bc98"},"agent_name":"4UH","created":{"$date":"2024-07-29T11:01:35.435Z"},"name":"09428210228","born_num":"416","__v":0}
 {"_id":{"$oid":"66a8a33d8e5baa1581635161"},"agent_name":"UHWK","created":{"$date":"2024-07-30T08:24:29.568Z"},"name":"09778980087","born_num":"369","__v":0}
 {"_id":{"$oid":"66aa057bc86d631580fcc138"},"agent_name":"dk","created":{"$date":"2024-07-31T09:35:55.467Z"},"name":"09670209226","born_num":"226","__v":0}
-{"_id":{"$oid":"66aa0f22c86d631580fcf390"},"agent_name":"HLHNH","created":{"$date":"2024-07-31T10:17:06.75Z"},"name":"09663813316","born_num":"236","__v":0}
 {"_id":{"$oid":"66ac86dfc86d63158004b7cd"},"agent_name":"AKZ","created":{"$date":"2024-08-02T07:12:31.229Z"},"name":"U AUNG","born_num":"438","__v":0}
 {"_id":{"$oid":"66ad95248e5baa1581719203"},"agent_name":"POL","created":{"$date":"2024-08-03T02:25:40.114Z"},"name":"09895047585","born_num":"0637","__v":0}
 {"_id":{"$oid":"66adb8fac86d63158007c844"},"agent_name":"ps","created":{"$date":"2024-08-03T04:58:34.754Z"},"name":"09258008430","born_num":"589-1","__v":0}
 {"_id":{"$oid":"66aee7c28e5baa158171cb85"},"agent_name":"POL","created":{"$date":"2024-08-04T02:30:26.348Z"},"name":"261-4","born_num":" 261","__v":0}
 {"_id":{"$oid":"66af12b08e5baa158171d002"},"agent_name":"dk","created":{"$date":"2024-08-04T05:33:36.54Z"},"name":"09770111241","born_num":"2632","__v":0}
 {"_id":{"$oid":"66b0607ec86d63158009026c"},"agent_name":"dk","created":{"$date":"2024-08-05T05:17:50.004Z"},"name":"09456510273","born_num":"773","__v":0}
-{"_id":{"$oid":"66b0c7dec86d6315800b623d"},"agent_name":"ksl","created":{"$date":"2024-08-05T12:38:54.274Z"},"name":"09250250489","born_num":"629","__v":0}
 {"_id":{"$oid":"66b0cf168e5baa158175a0e9"},"agent_name":"WM","created":{"$date":"2024-08-05T13:09:42.259Z"},"name":"09453848951","born_num":"778","__v":0}
 {"_id":{"$oid":"66b207fb8e5baa158177eadf"},"agent_name":"4UH","created":{"$date":"2024-08-06T11:24:43.956Z"},"name":"09440642366","born_num":"703","__v":0}
 {"_id":{"$oid":"66b430cfc86d631580137297"},"agent_name":"ps","created":{"$date":"2024-08-08T02:43:27.79Z"},"name":"09665635646","born_num":"646","__v":0}
@@ -1063,7 +1026,6 @@
 {"_id":{"$oid":"66b60ae38e5baa1581822191"},"agent_name":"ksl","created":{"$date":"2024-08-09T12:26:11.294Z"},"name":"09254966340","born_num":"627","__v":0}
 {"_id":{"$oid":"66b7130fc86d6315801a3ee1"},"agent_name":"4UH","created":{"$date":"2024-08-10T07:13:19.352Z"},"name":"09684761963","born_num":"461","__v":0}
 {"_id":{"$oid":"66b71332c86d6315801a3ee6"},"agent_name":"4UH","created":{"$date":"2024-08-10T07:13:54.688Z"},"name":"09684761963","born_num":"860","__v":0}
-{"_id":{"$oid":"66b762d68e5baa15818340c0"},"agent_name":"MKO","created":{"$date":"2024-08-10T12:53:42.742Z"},"name":"09","born_num":"511","__v":0}
 {"_id":{"$oid":"66b9ff9b8e5baa1581846127"},"agent_name":"DMY","created":{"$date":"2024-08-12T12:27:07.57Z"},"name":"09455489484","born_num":"0072","__v":0}
 {"_id":{"$oid":"66bc6e8ebbfeeb71f09d22a3"},"agent_name":"WM","created":{"$date":"2024-08-14T08:45:02.489Z"},"name":"09252652573","born_num":"435 487","__v":0}
 {"_id":{"$oid":"66beb490ef52de71ef6642d0"},"agent_name":"MKO","created":{"$date":"2024-08-16T02:08:16.194Z"},"name":"09267762559","born_num":"840","__v":0}
@@ -1074,7 +1036,6 @@
 {"_id":{"$oid":"66bf2efaef52de71ef6c1a09"},"agent_name":"hnh","created":{"$date":"2024-08-16T10:50:34.818Z"},"name":"608","born_num":"603","__v":0}
 {"_id":{"$oid":"66bf472dbbfeeb71f0a6f1b5"},"agent_name":"hnh","created":{"$date":"2024-08-16T12:33:49.305Z"},"name":"eip","born_num":"886","__v":0}
 {"_id":{"$oid":"66bf473def52de71ef6ca203"},"agent_name":"hnh","created":{"$date":"2024-08-16T12:34:05.517Z"},"name":"eip","born_num":"668","__v":0}
-{"_id":{"$oid":"66bf4aa5bbfeeb71f0a706c4"},"agent_name":"4UH","created":{"$date":"2024-08-16T12:48:37.054Z"},"name":"09402546467","born_num":"757","__v":0}
 {"_id":{"$oid":"66c00d5fbbfeeb71f0a76b38"},"agent_name":"WM","created":{"$date":"2024-08-17T02:39:27.448Z"},"name":"09400241178","born_num":"327 327","__v":0}
 {"_id":{"$oid":"66c01b08bbfeeb71f0a76d45"},"agent_name":"UHPL","created":{"$date":"2024-08-17T03:37:44.465Z"},"name":"taxi","born_num":"866","__v":0}
 {"_id":{"$oid":"66c01b29bbfeeb71f0a76d4c"},"agent_name":"UHPL","created":{"$date":"2024-08-17T03:38:17.05Z"},"name":"taxi","born_num":"409","__v":0}
@@ -1099,20 +1060,16 @@
 {"_id":{"$oid":"66d1bf32a499026c759d25ef"},"agent_name":"WP","created":{"$date":"2024-08-30T12:46:42.886Z"},"name":"09250780624","born_num":"133","__v":0}
 {"_id":{"$oid":"66d29efd501ed46c74b06d6c"},"agent_name":"ksl","created":{"$date":"2024-08-31T04:41:33.752Z"},"name":"09260893341","born_num":"357","__v":0}
 {"_id":{"$oid":"66d29f01a499026c759d83c0"},"agent_name":"ksl","created":{"$date":"2024-08-31T04:41:37.446Z"},"name":"09260893341","born_num":"173","__v":0}
-{"_id":{"$oid":"66d3c562a499026c759e2388"},"agent_name":"WLL","created":{"$date":"2024-09-01T01:37:38.468Z"},"name":"IC","born_num":"511","__v":0}
 {"_id":{"$oid":"66d53dd0a499026c75a1f40c"},"agent_name":"ps","created":{"$date":"2024-09-02T04:23:44.393Z"},"name":"09444666042","born_num":"042","__v":0}
 {"_id":{"$oid":"66d83699501ed46c74bfeb12"},"agent_name":"UHPL","created":{"$date":"2024-09-04T10:29:45.095Z"},"name":"09674188581","born_num":"575","__v":0}
 {"_id":{"$oid":"66d836a6a499026c75ac1af4"},"agent_name":"UHPL","created":{"$date":"2024-09-04T10:29:58.46Z"},"name":"09674188581","born_num":"557","__v":0}
 {"_id":{"$oid":"66d836b6501ed46c74bfebfd"},"agent_name":"UHPL","created":{"$date":"2024-09-04T10:30:14.06Z"},"name":"09674188581","born_num":"755","__v":0}
-{"_id":{"$oid":"66d92608a499026c75addef8"},"agent_name":"WP","created":{"$date":"2024-09-05T03:31:20.81Z"},"name":"09445122438","born_num":"224","__v":0}
 {"_id":{"$oid":"66d95336501ed46c74c35aab"},"agent_name":"DMY","created":{"$date":"2024-09-05T06:44:06.396Z"},"name":"09400959383","born_num":"5963","__v":0}
 {"_id":{"$oid":"66d95367501ed46c74c35ac6"},"agent_name":"DMY","created":{"$date":"2024-09-05T06:44:55.616Z"},"name":"09253994120","born_num":"355","__v":0}
 {"_id":{"$oid":"66d9538ca499026c75af12e6"},"agent_name":"DMY","created":{"$date":"2024-09-05T06:45:32.75Z"},"name":"09453735586","born_num":"277","__v":0}
 {"_id":{"$oid":"66da7adaa499026c75b154ae"},"agent_name":"ps","created":{"$date":"2024-09-06T03:45:30.518Z"},"name":"09988249326","born_num":"205","__v":0}
 {"_id":{"$oid":"66da7adfa499026c75b154eb"},"agent_name":"ps","created":{"$date":"2024-09-06T03:45:35.365Z"},"name":"09988249326","born_num":"878","__v":0}
 {"_id":{"$oid":"66da9134501ed46c74c66326"},"agent_name":"WP","created":{"$date":"2024-09-06T05:20:52.821Z"},"name":"09887869827","born_num":"682","__v":0}
-{"_id":{"$oid":"66e7db0c2c2023283a3ad947"},"agent_name":"hnh","created":{"$date":"2024-09-16T07:15:24.904Z"},"name":"pl","born_num":"508","__v":0}
-{"_id":{"$oid":"66e8ed49c68b20283ba8c5e6"},"agent_name":"UHWK","created":{"$date":"2024-09-17T02:45:29.274Z"},"name":"TP","born_num":"622","__v":0}
 {"_id":{"$oid":"66e8ed6dc68b20283ba8c5fb"},"agent_name":"UHWK","created":{"$date":"2024-09-17T02:46:05.157Z"},"name":"MN","born_num":"428","__v":0}
 {"_id":{"$oid":"66e8f6abc68b20283ba8d957"},"agent_name":"ksl","created":{"$date":"2024-09-17T03:25:31.286Z"},"name":"09660139301","born_num":"264","__v":0}
 {"_id":{"$oid":"66ea4dbfc68b20283baa75af"},"agent_name":"ps","created":{"$date":"2024-09-18T03:49:19.679Z"},"name":"09444090573","born_num":"912","__v":0}
@@ -1123,10 +1080,6 @@
 {"_id":{"$oid":"66eabdaf2c2023283a40a558"},"agent_name":"ps","created":{"$date":"2024-09-18T11:46:55.986Z"},"name":"3045","born_num":"137","__v":0}
 {"_id":{"$oid":"66f15dffc68b20283bb56bf8"},"agent_name":"HLHNH","created":{"$date":"2024-09-23T12:24:31.443Z"},"name":"09889927051","born_num":"908 472","__v":0}
 {"_id":{"$oid":"66f15f7a2c2023283a49e654"},"agent_name":"TL","created":{"$date":"2024-09-23T12:30:50.911Z"},"name":"KO Min Htet Naing","born_num":"057","__v":0}
-{"_id":{"$oid":"66f25018c68b20283bb6b240"},"agent_name":"hnh","created":{"$date":"2024-09-24T05:37:28.149Z"},"name":"bic","born_num":"027","__v":0}
-{"_id":{"$oid":"66f25025c68b20283bb6b245"},"agent_name":"hnh","created":{"$date":"2024-09-24T05:37:41.685Z"},"name":"bic","born_num":"702","__v":0}
-{"_id":{"$oid":"66f2502fc68b20283bb6b24a"},"agent_name":"hnh","created":{"$date":"2024-09-24T05:37:51.549Z"},"name":"bic","born_num":"270","__v":0}
-{"_id":{"$oid":"66f2503bc68b20283bb6b24f"},"agent_name":"hnh","created":{"$date":"2024-09-24T05:38:03.965Z"},"name":"bic","born_num":"720","__v":0}
 {"_id":{"$oid":"66f250432c2023283a4bc97d"},"agent_name":"hnh","created":{"$date":"2024-09-24T05:38:11.599Z"},"name":"bic","born_num":"227","__v":0}
 {"_id":{"$oid":"66f272042c2023283a4c04f9"},"agent_name":"DMY","created":{"$date":"2024-09-24T08:02:12.727Z"},"name":"09690999889","born_num":"737","__v":0}
 {"_id":{"$oid":"66f3ae0a2c2023283a4e1107"},"agent_name":"WM","created":{"$date":"2024-09-25T06:30:34.698Z"},"name":"09459965081","born_num":"712","__v":0}
@@ -1154,7 +1107,6 @@
 {"_id":{"$oid":"66fcd09f2c2023283a60eec5"},"agent_name":"AKZ","created":{"$date":"2024-10-02T04:48:31.544Z"},"name":"11","born_num":"469","__v":0}
 {"_id":{"$oid":"66fcd0cb2c2023283a60f188"},"agent_name":"AKZ","created":{"$date":"2024-10-02T04:49:15.941Z"},"name":"11","born_num":"648","__v":0}
 {"_id":{"$oid":"66fcd0d32c2023283a60f1a5"},"agent_name":"AKZ","created":{"$date":"2024-10-02T04:49:23.602Z"},"name":"11","born_num":"583","__v":0}
-{"_id":{"$oid":"66fcd0ee2c2023283a60f2a9"},"agent_name":"AKZ","created":{"$date":"2024-10-02T04:49:50.316Z"},"name":"22","born_num":"526","__v":0}
 {"_id":{"$oid":"66fcd544c68b20283bcb7ac2"},"agent_name":"WLL","created":{"$date":"2024-10-02T05:08:20.02Z"},"name":"09422761439","born_num":"8825","__v":0}
 {"_id":{"$oid":"66fce66c2c2023283a614c83"},"agent_name":"WM","created":{"$date":"2024-10-02T06:21:32.893Z"},"name":"09676065170","born_num":"170","__v":0}
 {"_id":{"$oid":"66fcef4fc68b20283bcbd643"},"agent_name":"UHWK","created":{"$date":"2024-10-02T06:59:27.354Z"},"name":"09263077489","born_num":"125","__v":0}
@@ -1162,12 +1114,9 @@
 {"_id":{"$oid":"66fd0fb92c2023283a623697"},"agent_name":"DMY","created":{"$date":"2024-10-02T09:17:45.695Z"},"name":"09690999889","born_num":"1454","__v":0}
 {"_id":{"$oid":"66fe69fc2c2023283a666c4c"},"agent_name":"UHWK","created":{"$date":"2024-10-03T09:55:08.419Z"},"name":"262231009","born_num":"735","__v":0}
 {"_id":{"$oid":"66ff96d12c2023283a67f54a"},"agent_name":"WP","created":{"$date":"2024-10-04T07:18:41.234Z"},"name":"09698935163","born_num":"9420","__v":0}
-{"_id":{"$oid":"6703cd7bc68b20283bd78bab"},"agent_name":"hnh","created":{"$date":"2024-10-07T12:00:59.896Z"},"name":"09683637303","born_num":"531","__v":0}
-{"_id":{"$oid":"6703cd902c2023283a6d641d"},"agent_name":"hnh","created":{"$date":"2024-10-07T12:01:20.063Z"},"name":"09683637303","born_num":"289","__v":0}
 {"_id":{"$oid":"6703cf0b2c2023283a6d72ed"},"agent_name":"MKHNH","created":{"$date":"2024-10-07T12:07:39.599Z"},"name":"09260783709","born_num":"730","__v":0}
 {"_id":{"$oid":"67050627c68b20283bdb1526"},"agent_name":"UHPL","created":{"$date":"2024-10-08T10:15:03.541Z"},"name":"09256067520b","born_num":"384","__v":0}
 {"_id":{"$oid":"6705fdb12c2023283a707dbf"},"agent_name":"HLHNH","created":{"$date":"2024-10-09T03:51:13.887Z"},"name":"09254966996","born_num":"164","__v":0}
-{"_id":{"$oid":"67060fe4c68b20283bdc3372"},"agent_name":"UH5","created":{"$date":"2024-10-09T05:08:52.854Z"},"name":"095240850","born_num":"550 2","__v":0}
 {"_id":{"$oid":"670767fbc68b20283be06ecd"},"agent_name":"UH5","created":{"$date":"2024-10-10T05:36:59.792Z"},"name":"09890778557","born_num":"534","__v":0}
 {"_id":{"$oid":"6708911ac68b20283be1b342"},"agent_name":"AKZ","created":{"$date":"2024-10-11T02:44:42.616Z"},"name":"AD","born_num":"570","__v":0}
 {"_id":{"$oid":"6708d875c68b20283be2fc1c"},"agent_name":"WP","created":{"$date":"2024-10-11T07:49:09.488Z"},"name":"DTTM","born_num":"775","__v":0}
@@ -1185,7 +1134,6 @@
 {"_id":{"$oid":"670f19590f8d61117f430ee6"},"agent_name":"WKL","created":{"$date":"2024-10-16T01:39:37.715Z"},"name":"09450153632","born_num":"764","__v":0}
 {"_id":{"$oid":"670f39410f8d61117f447975"},"agent_name":"4UH","created":{"$date":"2024-10-16T03:55:45.461Z"},"name":"09767674989+","born_num":"808","__v":0}
 {"_id":{"$oid":"670f3a9f947e38117dc0df4e"},"agent_name":"POL","created":{"$date":"2024-10-16T04:01:35.904Z"},"name":"095251056","born_num":"400","__v":0}
-{"_id":{"$oid":"670f42560f8d61117f451751"},"agent_name":"4UH","created":{"$date":"2024-10-16T04:34:30.174Z"},"name":"09671310001","born_num":"820","__v":0}
 {"_id":{"$oid":"67108dde947e38117dc75db5"},"agent_name":"ksl","created":{"$date":"2024-10-17T04:09:02.172Z"},"name":"09660139301","born_num":"784","__v":0}
 {"_id":{"$oid":"671090580f8d61117f49f239"},"agent_name":"UHWK","created":{"$date":"2024-10-17T04:19:36.63Z"},"name":"09261551337","born_num":"681","__v":0}
 {"_id":{"$oid":"671090680f8d61117f49f269"},"agent_name":"UHWK","created":{"$date":"2024-10-17T04:19:52.281Z"},"name":"09261551337","born_num":"970","__v":0}
@@ -1216,7 +1164,6 @@
 {"_id":{"$oid":"671f7c840f8d61117f629323"},"agent_name":"UH","created":{"$date":"2024-10-28T11:59:00.594Z"},"name":"09449891900","born_num":"1147","__v":0}
 {"_id":{"$oid":"6721e6da0f8d61117f679d59"},"agent_name":"ps","created":{"$date":"2024-10-30T07:57:14.463Z"},"name":"09261297950","born_num":"572","__v":0}
 {"_id":{"$oid":"672476b8947e38117deff0fa"},"agent_name":"WKL","created":{"$date":"2024-11-01T06:35:36.093Z"},"name":"09890324140","born_num":"144","__v":0}
-{"_id":{"$oid":"6724adfa947e38117df25d00"},"agent_name":"ksl","created":{"$date":"2024-11-01T10:31:22.926Z"},"name":"09263034288","born_num":"50933","__v":0}
 {"_id":{"$oid":"6724adfb0f8d61117f72c1a5"},"agent_name":"WL","created":{"$date":"2024-11-01T10:31:23.83Z"},"name":"09880148889","born_num":"650","__v":0}
 {"_id":{"$oid":"6724ae080f8d61117f72c1be"},"agent_name":"WL","created":{"$date":"2024-11-01T10:31:36.5Z"},"name":"09880148889","born_num":"942","__v":0}
 {"_id":{"$oid":"6724b2630f8d61117f72d373"},"agent_name":"AKZ","created":{"$date":"2024-11-01T10:50:11.326Z"},"name":"459965787","born_num":"729","__v":0}
@@ -1229,11 +1176,8 @@
 {"_id":{"$oid":"6724ba240f8d61117f7300eb"},"agent_name":"dk","created":{"$date":"2024-11-01T11:23:16.594Z"},"name":"09262828729","born_num":"472","__v":0}
 {"_id":{"$oid":"6726fc960f8d61117f74d619"},"agent_name":"hnh","created":{"$date":"2024-11-03T04:31:18.631Z"},"name":"tgs","born_num":"624","__v":0}
 {"_id":{"$oid":"67270882947e38117df3ef24"},"agent_name":"dk","created":{"$date":"2024-11-03T05:22:10.779Z"},"name":"0943081964","born_num":"108","__v":0}
-{"_id":{"$oid":"672836f8947e38117df42bf0"},"agent_name":"UH","created":{"$date":"2024-11-04T02:52:40.856Z"},"name":"09254965516","born_num":"445","__v":0}
-{"_id":{"$oid":"6728408a0f8d61117f753947"},"agent_name":"WM","created":{"$date":"2024-11-04T03:33:30.069Z"},"name":"09673072694","born_num":"175","__v":0}
 {"_id":{"$oid":"6728410c0f8d61117f753c3a"},"agent_name":"UH5","created":{"$date":"2024-11-04T03:35:40.797Z"},"name":"09776266302","born_num":"642","__v":0}
 {"_id":{"$oid":"672895090f8d61117f771572"},"agent_name":"WM","created":{"$date":"2024-11-04T09:34:01.468Z"},"name":"09444477717","born_num":"392","__v":0}
-{"_id":{"$oid":"6728ac3f947e38117df6c483"},"agent_name":"UHPL","created":{"$date":"2024-11-04T11:13:03.914Z"},"name":"311","born_num":"092600","__v":0}
 {"_id":{"$oid":"6729ccd30f8d61117f7ac22b"},"agent_name":"4UH","created":{"$date":"2024-11-05T07:44:19.088Z"},"name":"09680392694","born_num":"695","__v":0}
 {"_id":{"$oid":"6729ccef947e38117df9396d"},"agent_name":"4UH","created":{"$date":"2024-11-05T07:44:47.944Z"},"name":"09680392694","born_num":"664","__v":0}
 {"_id":{"$oid":"6729eb5e0f8d61117f7ba590"},"agent_name":"HLHNH","created":{"$date":"2024-11-05T09:54:38.766Z"},"name":"09429356660 67UL","born_num":"408 730","__v":0}
@@ -1255,16 +1199,13 @@
 {"_id":{"$oid":"672f1c7a0f8d61117f87b6e6"},"agent_name":"ps","created":{"$date":"2024-11-09T08:25:30.835Z"},"name":"09792946112","born_num":"141","__v":0}
 {"_id":{"$oid":"672f1c800f8d61117f87b6eb"},"agent_name":"ps","created":{"$date":"2024-11-09T08:25:36.301Z"},"name":"09792946112","born_num":"411","__v":0}
 {"_id":{"$oid":"672f1c8b0f8d61117f87b6f0"},"agent_name":"ps","created":{"$date":"2024-11-09T08:25:47.099Z"},"name":"09792946112","born_num":"114-1","__v":0}
-{"_id":{"$oid":"6731df7b947e38117d091622"},"agent_name":"TL","created":{"$date":"2024-11-11T10:42:03.692Z"},"name":" KO Min OO","born_num":"735","__v":0}
 {"_id":{"$oid":"6734a200947e38117d1128cc"},"agent_name":"WKL","created":{"$date":"2024-11-13T12:56:32.333Z"},"name":"09899522209","born_num":"4114","__v":0}
 {"_id":{"$oid":"6734a207947e38117d1128e0"},"agent_name":"WKL","created":{"$date":"2024-11-13T12:56:39.852Z"},"name":"09899522209","born_num":"4224","__v":0}
 {"_id":{"$oid":"6734a20e0f8d61117f928e4d"},"agent_name":"WKL","created":{"$date":"2024-11-13T12:56:46.517Z"},"name":"09899522209","born_num":"9471","__v":0}
 {"_id":{"$oid":"6735ba78947e38117d13d9fa"},"agent_name":"UH5","created":{"$date":"2024-11-14T08:53:12.805Z"},"name":"09255635445","born_num":"358","__v":0}
 {"_id":{"$oid":"6735da290f8d61117f9581a3"},"agent_name":"UHWK","created":{"$date":"2024-11-14T11:08:25.277Z"},"name":"09258063876","born_num":"180","__v":0}
 {"_id":{"$oid":"67372d640f8d61117f98fb7c"},"agent_name":"ksl","created":{"$date":"2024-11-15T11:15:48.055Z"},"name":"09450801399","born_num":"677","__v":0}
-{"_id":{"$oid":"673803350f8d61117f9abf0a"},"agent_name":"WM","created":{"$date":"2024-11-16T02:28:05.967Z"},"name":"1919anti","born_num":"746","__v":0}
 {"_id":{"$oid":"67380a3d0f8d61117f9aeca4"},"agent_name":"MYHNH","created":{"$date":"2024-11-16T02:58:05.794Z"},"name":"09673780565","born_num":"416","__v":0}
-{"_id":{"$oid":"67396c040f8d61117f9e900c"},"agent_name":"MKHNH","created":{"$date":"2024-11-17T04:07:32.479Z"},"name":"09662381812","born_num":"980 603","__v":0}
 {"_id":{"$oid":"67396cc40f8d61117f9e9030"},"agent_name":"SS","created":{"$date":"2024-11-17T04:10:44.13Z"},"name":"09400206669","born_num":"422  3","__v":0}
 {"_id":{"$oid":"67396cd6947e38117d1ca38b"},"agent_name":"SS","created":{"$date":"2024-11-17T04:11:02.139Z"},"name":"09400206669","born_num":"920 3","__v":0}
 {"_id":{"$oid":"67396cf4947e38117d1ca390"},"agent_name":"SS","created":{"$date":"2024-11-17T04:11:32.049Z"},"name":"U san sai","born_num":"629","__v":0}
@@ -1288,25 +1229,11 @@
 {"_id":{"$oid":"673ac3830f8d61117f9fc89b"},"agent_name":"UH","created":{"$date":"2024-11-18T04:33:07.862Z"},"name":"ama","born_num":"763","__v":0}
 {"_id":{"$oid":"673ac38c0f8d61117f9fc8f6"},"agent_name":"UH","created":{"$date":"2024-11-18T04:33:16.273Z"},"name":"ama","born_num":"097","__v":0}
 {"_id":{"$oid":"673b1bab0f8d61117fa232db"},"agent_name":"HLHNH","created":{"$date":"2024-11-18T10:49:15.699Z"},"name":"09252161530","born_num":"701 017","__v":0}
-{"_id":{"$oid":"673b31f10f8d61117fa2f842"},"agent_name":"hnh","created":{"$date":"2024-11-18T12:24:17.185Z"},"name":"09891858249","born_num":"616","__v":0}
-{"_id":{"$oid":"673c07380f8d61117fa3b0ef"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:34:16.853Z"},"name":"mtpk","born_num":"392","__v":0}
-{"_id":{"$oid":"673c07440f8d61117fa3b114"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:34:28.081Z"},"name":"mptk","born_num":"632","__v":0}
-{"_id":{"$oid":"673c075a0f8d61117fa3b165"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:34:50.827Z"},"name":"mptk","born_num":"623","__v":0}
-{"_id":{"$oid":"673c0768947e38117d223bad"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:35:04.047Z"},"name":"mptk","born_num":"236","__v":0}
-{"_id":{"$oid":"673c07700f8d61117fa3b2e8"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:35:12.638Z"},"name":"mptk","born_num":"263","__v":0}
-{"_id":{"$oid":"673c07860f8d61117fa3b400"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:35:34.547Z"},"name":"mptk","born_num":"326","__v":0}
-{"_id":{"$oid":"673c07910f8d61117fa3b463"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:35:45.1Z"},"name":"mptk","born_num":"362","__v":0}
-{"_id":{"$oid":"673c07ae947e38117d223da3"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:36:14.412Z"},"name":"mptk","born_num":"677","__v":0}
-{"_id":{"$oid":"673c07bd0f8d61117fa3b5c7"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:36:29.838Z"},"name":"mptk","born_num":"776","__v":0}
-{"_id":{"$oid":"673c07ce0f8d61117fa3b67f"},"agent_name":"hnh","created":{"$date":"2024-11-19T03:36:46.758Z"},"name":"mptk","born_num":"767","__v":0}
 {"_id":{"$oid":"673d656b0f8d61117fa71249"},"agent_name":"dk","created":{"$date":"2024-11-20T04:28:27.377Z"},"name":"09696913704","born_num":"901","__v":0}
 {"_id":{"$oid":"673d71ec0f8d61117fa7a958"},"agent_name":"SS","created":{"$date":"2024-11-20T05:21:48.283Z"},"name":"09454412478","born_num":"615","__v":0}
-{"_id":{"$oid":"673d72de0f8d61117fa7aa05"},"agent_name":"MKO","created":{"$date":"2024-11-20T05:25:50.363Z"},"name":"0988758067","born_num":"0744","__v":0}
-{"_id":{"$oid":"673da485947e38117d278529"},"agent_name":"UH","created":{"$date":"2024-11-20T08:57:41.177Z"},"name":"09254173137","born_num":"445","__v":0}
 {"_id":{"$oid":"673da4c6947e38117d278aca"},"agent_name":"UH","created":{"$date":"2024-11-20T08:58:46.92Z"},"name":"09254173137","born_num":"140","__v":0}
 {"_id":{"$oid":"673db2be947e38117d27edde"},"agent_name":"AKZ","created":{"$date":"2024-11-20T09:58:22.309Z"},"name":"459965787","born_num":"117","__v":0}
 {"_id":{"$oid":"673db2d4947e38117d27ee38"},"agent_name":"AKZ","created":{"$date":"2024-11-20T09:58:44.413Z"},"name":"459965787","born_num":"951","__v":0}
-{"_id":{"$oid":"673db2de947e38117d27ee42"},"agent_name":"AKZ","created":{"$date":"2024-11-20T09:58:54.918Z"},"name":"114","born_num":"459965787","__v":0}
 {"_id":{"$oid":"673ea064947e38117d2a1b57"},"agent_name":"MYHNH","created":{"$date":"2024-11-21T02:52:20.015Z"},"name":"0926130225","born_num":"741","__v":0}
 {"_id":{"$oid":"673ea06d0f8d61117fab6dc6"},"agent_name":"MYHNH","created":{"$date":"2024-11-21T02:52:29.919Z"},"name":"0926130225","born_num":"395","__v":0}
 {"_id":{"$oid":"673ea07b0f8d61117fab6de3"},"agent_name":"MYHNH","created":{"$date":"2024-11-21T02:52:43.941Z"},"name":"0926130225","born_num":"161","__v":0}
@@ -1333,17 +1260,12 @@
 {"_id":{"$oid":"674918e1947e38117d400de5"},"agent_name":"dk","created":{"$date":"2024-11-29T01:29:05.823Z"},"name":"09251003502","born_num":"269","__v":0}
 {"_id":{"$oid":"674a996e947e38117d45567b"},"agent_name":"4UH","created":{"$date":"2024-11-30T04:49:50.625Z"},"name":"Ma Wai","born_num":"234","__v":0}
 {"_id":{"$oid":"674bd1660f8d61117fc7f500"},"agent_name":"WKL","created":{"$date":"2024-12-01T03:00:54.803Z"},"name":"BUU ","born_num":"553","__v":0}
-{"_id":{"$oid":"674be2810f8d61117fc8b1dd"},"agent_name":"WKL","created":{"$date":"2024-12-01T04:13:53.899Z"},"name":"09670209226","born_num":"744","__v":0}
-{"_id":{"$oid":"674be2920f8d61117fc8b289"},"agent_name":"WKL","created":{"$date":"2024-12-01T04:14:10.894Z"},"name":"09670209226","born_num":"226","__v":0}
 {"_id":{"$oid":"674bf040947e38117d47e27f"},"agent_name":"NY","created":{"$date":"2024-12-01T05:12:32.423Z"},"name":"ko myo naing","born_num":"796","__v":0}
 {"_id":{"$oid":"674c0a61947e38117d48e33c"},"agent_name":"dk","created":{"$date":"2024-12-01T07:04:01.563Z"},"name":"09262828729","born_num":"415","__v":0}
-{"_id":{"$oid":"674d19a60f8d61117fcbc98a"},"agent_name":"WLL","created":{"$date":"2024-12-02T02:21:26.021Z"},"name":"ic","born_num":"0000","__v":0}
 {"_id":{"$oid":"674d25850f8d61117fcbedc5"},"agent_name":"4UH","created":{"$date":"2024-12-02T03:12:05.265Z"},"name":"U Tayoke","born_num":"734","__v":0}
 {"_id":{"$oid":"674d25a10f8d61117fcbee2f"},"agent_name":"4UH","created":{"$date":"2024-12-02T03:12:33.438Z"},"name":"U Tayoke","born_num":"942","__v":0}
 {"_id":{"$oid":"674d25cc0f8d61117fcbef2b"},"agent_name":"4UH","created":{"$date":"2024-12-02T03:13:16.088Z"},"name":"U Tayoke","born_num":"700","__v":0}
 {"_id":{"$oid":"674d288f947e38117d49b7d1"},"agent_name":"AKZ","created":{"$date":"2024-12-02T03:25:03.735Z"},"name":"09254247843","born_num":"146","__v":0}
-{"_id":{"$oid":"674d37120f8d61117fcc7f1c"},"agent_name":"UH","created":{"$date":"2024-12-02T04:26:58.338Z"},"name":"09254965516","born_num":"343","__v":0}
-{"_id":{"$oid":"674d371c0f8d61117fcc7f6b"},"agent_name":"UH","created":{"$date":"2024-12-02T04:27:08.923Z"},"name":"09254965516","born_num":"504","__v":0}
 {"_id":{"$oid":"674d38b2947e38117d4a43df"},"agent_name":"SS","created":{"$date":"2024-12-02T04:33:54.16Z"},"name":"09400206669","born_num":"252","__v":0}
 {"_id":{"$oid":"674d3b1c0f8d61117fccac21"},"agent_name":"ksl","created":{"$date":"2024-12-02T04:44:12.657Z"},"name":"09403712042","born_num":"920","__v":0}
 {"_id":{"$oid":"674d3ee1947e38117d4a8742"},"agent_name":"MYHNH","created":{"$date":"2024-12-02T05:00:17.417Z"},"name":"09450232596","born_num":"257","__v":0}
@@ -1370,8 +1292,6 @@
 {"_id":{"$oid":"674eb288947e38117d4e4134"},"agent_name":"4UH","created":{"$date":"2024-12-03T07:26:00.504Z"},"name":"660ulay","born_num":"466","__v":0}
 {"_id":{"$oid":"674eb294947e38117d4e4144"},"agent_name":"4UH","created":{"$date":"2024-12-03T07:26:12.156Z"},"name":"660ulay","born_num":"145","__v":0}
 {"_id":{"$oid":"674eb29f0f8d61117fd0a069"},"agent_name":"4UH","created":{"$date":"2024-12-03T07:26:23.566Z"},"name":"660ulay","born_num":"358","__v":0}
-{"_id":{"$oid":"674fc13f947e38117d4fd983"},"agent_name":"UH","created":{"$date":"2024-12-04T02:41:03.754Z"},"name":" 09773160072","born_num":"484","__v":0}
-{"_id":{"$oid":"6750028343f01e7ea81c5b10"},"agent_name":"UHWK","created":{"$date":"2024-12-04T07:19:31.887Z"},"name":"09447271330","born_num":"670","__v":0}
 {"_id":{"$oid":"6750029843f01e7ea81c5b15"},"agent_name":"UHWK","created":{"$date":"2024-12-04T07:19:52.653Z"},"name":"09447271330","born_num":"421","__v":0}
 {"_id":{"$oid":"67514cc943f01e7ea81fda36"},"agent_name":"DMY","created":{"$date":"2024-12-05T06:48:41.861Z"},"name":"InnTharGyi","born_num":"1226","__v":0}
 {"_id":{"$oid":"6752750a2de00e7eadf3dd98"},"agent_name":"hnh","created":{"$date":"2024-12-06T03:52:42.566Z"},"name":"09441069294","born_num":"294","__v":0}
@@ -1396,8 +1316,6 @@
 {"_id":{"$oid":"67596bb72de00e7ead0032b5"},"agent_name":"HLHNH","created":{"$date":"2024-12-11T10:38:47.158Z"},"name":"09260701066  Lin","born_num":"976","__v":0}
 {"_id":{"$oid":"675a4bcb43f01e7ea82f90b3"},"agent_name":"AKZ","created":{"$date":"2024-12-12T02:34:51.025Z"},"name":"09694355832","born_num":"849","__v":0}
 {"_id":{"$oid":"675a4bdd2de00e7ead01da07"},"agent_name":"AKZ","created":{"$date":"2024-12-12T02:35:09.127Z"},"name":"09694355832","born_num":"849","__v":0}
-{"_id":{"$oid":"675bbc2b2de00e7ead060419"},"agent_name":"WM","created":{"$date":"2024-12-13T04:46:35.17Z"},"name":"09444060381","born_num":"908 251","__v":0}
-{"_id":{"$oid":"675c108c43f01e7ea8365a49"},"agent_name":"NY","created":{"$date":"2024-12-13T10:46:36.648Z"},"name":"ကိုအောင်မွှေး","born_num":"391","__v":0}
 {"_id":{"$oid":"675e431a2de00e7ead0ac1cd"},"agent_name":"UH","created":{"$date":"2024-12-15T02:46:50.996Z"},"name":"09254965516","born_num":"672","__v":0}
 {"_id":{"$oid":"675e98c32de00e7ead0ae13d"},"agent_name":"HLHNH","created":{"$date":"2024-12-15T08:52:19.263Z"},"name":"chbb","born_num":"664  387","__v":0}
 {"_id":{"$oid":"675f861243f01e7ea8389cb8"},"agent_name":"dk","created":{"$date":"2024-12-16T01:44:50.921Z"},"name":"09428925543","born_num":"913","__v":0}
@@ -1418,7 +1336,6 @@
 {"_id":{"$oid":"676140122de00e7ead16cff0"},"agent_name":"UHWK","created":{"$date":"2024-12-17T09:10:42.701Z"},"name":"09400530206","born_num":"633","__v":0}
 {"_id":{"$oid":"6761402043f01e7ea84356f6"},"agent_name":"UHWK","created":{"$date":"2024-12-17T09:10:56.598Z"},"name":"06400530206","born_num":"228","__v":0}
 {"_id":{"$oid":"6761403643f01e7ea84357ce"},"agent_name":"UHWK","created":{"$date":"2024-12-17T09:11:18.663Z"},"name":"09400530206","born_num":"642","__v":0}
-{"_id":{"$oid":"6762583743f01e7ea84583e1"},"agent_name":"MKO","created":{"$date":"2024-12-18T05:05:59.66Z"},"name":"09402464643","born_num":"659","__v":0}
 {"_id":{"$oid":"67625d8443f01e7ea845a52b"},"agent_name":"ksl","created":{"$date":"2024-12-18T05:28:36.231Z"},"name":"09263435613","born_num":"443","__v":0}
 {"_id":{"$oid":"67626a2a43f01e7ea845fc9b"},"agent_name":"dk","created":{"$date":"2024-12-18T06:22:34.021Z"},"name":"0941006509","born_num":"122","__v":0}
 {"_id":{"$oid":"67626a3043f01e7ea845fca5"},"agent_name":"dk","created":{"$date":"2024-12-18T06:22:40.812Z"},"name":"0941006509","born_num":"221","__v":0}
@@ -1442,13 +1359,9 @@
 {"_id":{"$oid":"6764ea9c43f01e7ea84dcd67"},"agent_name":"POL","created":{"$date":"2024-12-20T03:55:08.959Z"},"name":"09895047585","born_num":"941","__v":0}
 {"_id":{"$oid":"676513442de00e7ead221a4c"},"agent_name":"UHWK","created":{"$date":"2024-12-20T06:48:36.441Z"},"name":"09251596395","born_num":"642","__v":0}
 {"_id":{"$oid":"67651fb62de00e7ead2247bc"},"agent_name":"DMY","created":{"$date":"2024-12-20T07:41:42.641Z"},"name":"09690999889","born_num":"121","__v":0}
-{"_id":{"$oid":"67653d882de00e7ead23dbd5"},"agent_name":"MKO","created":{"$date":"2024-12-20T09:48:56.96Z"},"name":"09666425448","born_num":"241","__v":0}
-{"_id":{"$oid":"67654da52de00e7ead248711"},"agent_name":"hnh","created":{"$date":"2024-12-20T10:57:41.958Z"},"name":"09","born_num":"506","__v":0}
-{"_id":{"$oid":"67655ff543f01e7ea8522ee6"},"agent_name":"MYHNH","created":{"$date":"2024-12-20T12:15:49.333Z"},"name":"09252815041","born_num":"718","__v":0}
 {"_id":{"$oid":"676659182de00e7ead26ace8"},"agent_name":"WP","created":{"$date":"2024-12-21T05:58:48.491Z"},"name":"09885989989","born_num":"775","__v":0}
 {"_id":{"$oid":"6768d2a143f01e7ea853113b"},"agent_name":"POL","created":{"$date":"2024-12-23T03:01:53.648Z"},"name":"JV","born_num":"025","__v":0}
 {"_id":{"$oid":"6768f1842de00e7ead285b07"},"agent_name":"WM","created":{"$date":"2024-12-23T05:13:40.766Z"},"name":"09456706111","born_num":"641","__v":0}
-{"_id":{"$oid":"676a89b3aa01291eca3373d4"},"agent_name":"ksl","created":{"$date":"2024-12-24T10:15:15.578Z"},"name":"09422995862","born_num":"248","__v":0}
 {"_id":{"$oid":"676b95083848a51ecb99cde7"},"agent_name":"ksl","created":{"$date":"2024-12-25T05:15:52.598Z"},"name":"09429030331","born_num":"201","__v":0}
 {"_id":{"$oid":"676b950eaa01291eca354ddd"},"agent_name":"ksl","created":{"$date":"2024-12-25T05:15:58.619Z"},"name":"09429030331","born_num":"462","__v":0}
 {"_id":{"$oid":"676b95e6aa01291eca3554d2"},"agent_name":"MYHNH","created":{"$date":"2024-12-25T05:19:34.136Z"},"name":"1286","born_num":"286","__v":0}
@@ -1486,16 +1399,11 @@
 {"_id":{"$oid":"67727d833848a51ecbac92d7"},"agent_name":"ksl","created":{"$date":"2024-12-30T11:01:23.117Z"},"name":"UKL","born_num":"366","__v":0}
 {"_id":{"$oid":"67727d873848a51ecbac92ea"},"agent_name":"ksl","created":{"$date":"2024-12-30T11:01:27.529Z"},"name":"UKL","born_num":"366","__v":0}
 {"_id":{"$oid":"67727ff6aa01291eca468b42"},"agent_name":"UHPL","created":{"$date":"2024-12-30T11:11:50.513Z"},"name":"09693383311","born_num":"561","__v":0}
-{"_id":{"$oid":"677290103848a51ecbad3ea8"},"agent_name":"WLL","created":{"$date":"2024-12-30T12:20:32.439Z"},"name":"09251150340","born_num":"254","__v":0}
-{"_id":{"$oid":"677297a43848a51ecbad8aff"},"agent_name":"AKZ","created":{"$date":"2024-12-30T12:52:52.158Z"},"name":"09676671741","born_num":"369","__v":0}
-{"_id":{"$oid":"6774c07caa01291eca48dc53"},"agent_name":"MKO","created":{"$date":"2025-01-01T04:11:40.017Z"},"name":"09","born_num":"644","__v":0}
 {"_id":{"$oid":"67751c0aaa01291eca494088"},"agent_name":"hnh","created":{"$date":"2025-01-01T10:42:18.774Z"},"name":"417 shan","born_num":"996","__v":0}
-{"_id":{"$oid":"67773fd69766c822c8bcc267"},"agent_name":"DMY","created":{"$date":"2025-01-03T01:39:34.837Z"},"name":"DMY","born_num":"722","__v":0}
 {"_id":{"$oid":"6777511ced8a8a22c9b9ae99"},"agent_name":"UHWK","created":{"$date":"2025-01-03T02:53:16.729Z"},"name":"09255628370","born_num":"319","__v":0}
 {"_id":{"$oid":"67775130ed8a8a22c9b9aeb9"},"agent_name":"UHWK","created":{"$date":"2025-01-03T02:53:36.932Z"},"name":"09255628370","born_num":"328","__v":0}
 {"_id":{"$oid":"67775c3ded8a8a22c9b9f2d1"},"agent_name":"UHWK","created":{"$date":"2025-01-03T03:40:45.256Z"},"name":"09267856957","born_num":"157","__v":0}
 {"_id":{"$oid":"67775c9f9766c822c8bd4a77"},"agent_name":"4UH","created":{"$date":"2025-01-03T03:42:23.757Z"},"name":"09261300123","born_num":"498","__v":0}
-{"_id":{"$oid":"677768d0ed8a8a22c9ba97e6"},"agent_name":"MYHNH","created":{"$date":"2025-01-03T04:34:24.733Z"},"name":"09261302122","born_num":"344","__v":0}
 {"_id":{"$oid":"67776e48ed8a8a22c9bb0ab8"},"agent_name":"DMY","created":{"$date":"2025-01-03T04:57:44.943Z"},"name":"09458236140","born_num":"720","__v":0}
 {"_id":{"$oid":"677781829766c822c8bec2a3"},"agent_name":"MYHNH","created":{"$date":"2025-01-03T06:19:46.756Z"},"name":"09253118477","born_num":"154","__v":0}
 {"_id":{"$oid":"67778c6aed8a8a22c9bbc393"},"agent_name":"hnh","created":{"$date":"2025-01-03T07:06:18.57Z"},"name":"ma su nge","born_num":"844","__v":0}
@@ -1516,22 +1424,17 @@
 {"_id":{"$oid":"6778d1a93434382b62e0576b"},"agent_name":"ps","created":{"$date":"2025-01-04T06:14:01.828Z"},"name":"09666444042","born_num":"097-1","__v":0}
 {"_id":{"$oid":"6778fb902230692b617ffdd0"},"agent_name":"UHWK","created":{"$date":"2025-01-04T09:12:48.37Z"},"name":"09774246684","born_num":"711","__v":0}
 {"_id":{"$oid":"677b90742230692b6182a750"},"agent_name":"UHWK","created":{"$date":"2025-01-06T08:12:36.004Z"},"name":"09678159225","born_num":"201","__v":0}
-{"_id":{"$oid":"677b99e33434382b62e3e355"},"agent_name":"hnh","created":{"$date":"2025-01-06T08:52:51.738Z"},"name":"pl","born_num":"990","__v":0}
 {"_id":{"$oid":"677b9b482230692b61836c2c"},"agent_name":"TL","created":{"$date":"2025-01-06T08:58:48.242Z"},"name":"ma nann","born_num":"549","__v":0}
-{"_id":{"$oid":"677baa753434382b62e46276"},"agent_name":"TL","created":{"$date":"2025-01-06T10:03:33.263Z"},"name":" ko sai","born_num":"624","__v":0}
 {"_id":{"$oid":"677bc1f92230692b6184a117"},"agent_name":"POL","created":{"$date":"2025-01-06T11:43:53.58Z"},"name":"09898030235","born_num":"719","__v":0}
 {"_id":{"$oid":"677cc4ab2230692b618876da"},"agent_name":"4UH","created":{"$date":"2025-01-07T06:07:39.772Z"},"name":"09261300123","born_num":"0357","__v":0}
 {"_id":{"$oid":"677cc5022230692b61887779"},"agent_name":"4UH","created":{"$date":"2025-01-07T06:09:06.737Z"},"name":"09457090121","born_num":"408","__v":0}
 {"_id":{"$oid":"677cd4ee2230692b6188a358"},"agent_name":"dk","created":{"$date":"2025-01-07T07:17:02.968Z"},"name":"09456515228","born_num":"560","__v":0}
-{"_id":{"$oid":"677d0ba62230692b618a5d6e"},"agent_name":"WP","created":{"$date":"2025-01-07T11:10:30.122Z"},"name":"09250780861","born_num":"991","__v":0}
-{"_id":{"$oid":"677d0baa2230692b618a5d73"},"agent_name":"WP","created":{"$date":"2025-01-07T11:10:34.386Z"},"name":"09250780861","born_num":"256","__v":0}
 {"_id":{"$oid":"677ddbfc2230692b618a72ab"},"agent_name":"UH","created":{"$date":"2025-01-08T01:59:24.276Z"},"name":"09456153727","born_num":"592","__v":0}
 {"_id":{"$oid":"677dfa4e2230692b618b40b5"},"agent_name":"SS","created":{"$date":"2025-01-08T04:08:46.819Z"},"name":"09428230648","born_num":"135","__v":0}
 {"_id":{"$oid":"677e5f542230692b618f2985"},"agent_name":"DMY","created":{"$date":"2025-01-08T11:19:48.67Z"},"name":"09899405449","born_num":"754","__v":0}
 {"_id":{"$oid":"677f608e2230692b6192e709"},"agent_name":"MKHNH","created":{"$date":"2025-01-09T05:37:18.705Z"},"name":"09","born_num":"695","__v":0}
 {"_id":{"$oid":"677f70f73434382b62f293d6"},"agent_name":"ps","created":{"$date":"2025-01-09T06:47:19.983Z"},"name":"09890424449","born_num":"246","__v":0}
 {"_id":{"$oid":"6780bf073434382b62f6b328"},"agent_name":"HLHNH","created":{"$date":"2025-01-10T06:32:39.474Z"},"name":"NB","born_num":"097","__v":0}
-{"_id":{"$oid":"6780c1ec3434382b62f6bb1e"},"agent_name":"4UH","created":{"$date":"2025-01-10T06:45:00.007Z"},"name":"09422941905","born_num":"4512","__v":0}
 {"_id":{"$oid":"67811c1d3434382b62fa7c90"},"agent_name":"MKHNH","created":{"$date":"2025-01-10T13:09:49.591Z"},"name":"09263305755","born_num":"712","__v":0}
 {"_id":{"$oid":"6781ed813434382b62faf9c7"},"agent_name":"HLHNH","created":{"$date":"2025-01-11T04:03:13.429Z"},"name":"09889927051","born_num":"687","__v":0}
 {"_id":{"$oid":"6784b0af2230692b619d185c"},"agent_name":"MYHNH","created":{"$date":"2025-01-13T06:20:31.701Z"},"name":"915","born_num":"435","__v":0}
@@ -1541,49 +1444,36 @@
 {"_id":{"$oid":"678777ce3434382b620848e6"},"agent_name":"hnh","created":{"$date":"2025-01-15T08:54:38.89Z"},"name":"mtpk","born_num":"694 2s","__v":0}
 {"_id":{"$oid":"678777df3434382b62084b5c"},"agent_name":"hnh","created":{"$date":"2025-01-15T08:54:55.039Z"},"name":"mtpk","born_num":"612  2s","__v":0}
 {"_id":{"$oid":"67879b063434382b620974ba"},"agent_name":"ksl","created":{"$date":"2025-01-15T11:24:54.472Z"},"name":"09253630700","born_num":"386","__v":0}
-{"_id":{"$oid":"678875262230692b61aac4e7"},"agent_name":"MKHNH","created":{"$date":"2025-01-16T02:55:34.258Z"},"name":"985 472","born_num":"09782642287","__v":0}
 {"_id":{"$oid":"678889d73434382b620c6a74"},"agent_name":"SS","created":{"$date":"2025-01-16T04:23:51.783Z"},"name":"09424243429","born_num":"886-2","__v":0}
 {"_id":{"$oid":"678889fa2230692b61aba05f"},"agent_name":"SS","created":{"$date":"2025-01-16T04:24:26.571Z"},"name":"09424243429","born_num":"744-2","__v":0}
 {"_id":{"$oid":"67889bd62230692b61ace85d"},"agent_name":"UHWK","created":{"$date":"2025-01-16T05:40:38.883Z"},"name":"09263077489","born_num":"533","__v":0}
 {"_id":{"$oid":"67889be33434382b620de268"},"agent_name":"UHWK","created":{"$date":"2025-01-16T05:40:51.426Z"},"name":"09263077489","born_num":"810","__v":0}
 {"_id":{"$oid":"6788cf403434382b620fe87b"},"agent_name":"UH","created":{"$date":"2025-01-16T09:20:00.458Z"},"name":"09449891900","born_num":"327","__v":0}
 {"_id":{"$oid":"6788da9f2230692b61af214b"},"agent_name":"UHWK","created":{"$date":"2025-01-16T10:08:31.528Z"},"name":"09669966423","born_num":"546","__v":0}
-{"_id":{"$oid":"6788f3393434382b6210105b"},"agent_name":"4UH","created":{"$date":"2025-01-16T11:53:29.994Z"},"name":"09794309704","born_num":"1357","__v":0}
 {"_id":{"$oid":"6788f3753434382b62101121"},"agent_name":"UHWK","created":{"$date":"2025-01-16T11:54:29.379Z"},"name":"094258726431","born_num":"597","__v":0}
 {"_id":{"$oid":"6789aff13434382b62105950"},"agent_name":"MKO","created":{"$date":"2025-01-17T01:18:41.428Z"},"name":"09260898554","born_num":"916","__v":0}
 {"_id":{"$oid":"6789bf682230692b61b00372"},"agent_name":"UHPL","created":{"$date":"2025-01-17T02:24:40.347Z"},"name":"09261718063","born_num":"631","__v":0}
-{"_id":{"$oid":"6789d4d02230692b61b143c3"},"agent_name":"MKHNH","created":{"$date":"2025-01-17T03:56:00.333Z"},"name":"09","born_num":"361","__v":0}
-{"_id":{"$oid":"6789ebfe2230692b61b38376"},"agent_name":"hnh","created":{"$date":"2025-01-17T05:34:54.51Z"},"name":"09428221457","born_num":"043","__v":0}
 {"_id":{"$oid":"6789fbca3434382b62151854"},"agent_name":"KSPHNH","created":{"$date":"2025-01-17T06:42:18.771Z"},"name":"09428216478","born_num":"526","__v":0}
 {"_id":{"$oid":"678a0e433434382b6215ade3"},"agent_name":"4UH","created":{"$date":"2025-01-17T08:01:07.409Z"},"name":"00","born_num":"258","__v":0}
 {"_id":{"$oid":"678a0e4a2230692b61b519e2"},"agent_name":"4UH","created":{"$date":"2025-01-17T08:01:14.345Z"},"name":"00","born_num":"285","__v":0}
 {"_id":{"$oid":"678a4b66e560213864492f0b"},"agent_name":"ksl","created":{"$date":"2025-01-17T12:21:58.085Z"},"name":"09895541331","born_num":"721","__v":0}
 {"_id":{"$oid":"678a4fccbceac938651b16a4"},"agent_name":"UH","created":{"$date":"2025-01-17T12:40:44.938Z"},"name":"09660048502","born_num":"610","__v":0}
 {"_id":{"$oid":"678a59d5bceac938651b9030"},"agent_name":"4UH","created":{"$date":"2025-01-17T13:23:33.226Z"},"name":"09263568464","born_num":"485","__v":0}
-{"_id":{"$oid":"678b1790e56021386449d9dd"},"agent_name":"UH5","created":{"$date":"2025-01-18T02:53:04.486Z"},"name":"09891821588","born_num":"666 388 000 777","__v":0}
 {"_id":{"$oid":"678b2114bceac938651bf258"},"agent_name":"AKZ","created":{"$date":"2025-01-18T03:33:40.989Z"},"name":"09786201296","born_num":"465","__v":0}
 {"_id":{"$oid":"678b211de56021386449db69"},"agent_name":"ksl","created":{"$date":"2025-01-18T03:33:49.039Z"},"name":"09450795974","born_num":"974","__v":0}
-{"_id":{"$oid":"678b23ffbceac938651bf351"},"agent_name":"UHPL","created":{"$date":"2025-01-18T03:46:07.623Z"},"name":"09403149351","born_num":"864","__v":0}
 {"_id":{"$oid":"678b244abceac938651bf369"},"agent_name":"UHPL","created":{"$date":"2025-01-18T03:47:22.188Z"},"name":"09262323115","born_num":"918","__v":0}
 {"_id":{"$oid":"678b247bbceac938651bf36f"},"agent_name":"UHPL","created":{"$date":"2025-01-18T03:48:11.157Z"},"name":"taxi","born_num":"449","__v":0}
 {"_id":{"$oid":"678b2c3de56021386449ddcc"},"agent_name":"UH","created":{"$date":"2025-01-18T04:21:17.1Z"},"name":"09899208298","born_num":"341","__v":0}
-{"_id":{"$oid":"678b4a1bbceac938651bf837"},"agent_name":"WLL","created":{"$date":"2025-01-18T06:28:43.649Z"},"name":"ic","born_num":"522","__v":0}
-{"_id":{"$oid":"678b4a23bceac938651bf83c"},"agent_name":"WLL","created":{"$date":"2025-01-18T06:28:51.877Z"},"name":"ic","born_num":"557","__v":0}
-{"_id":{"$oid":"678b4a74e56021386449e17f"},"agent_name":"WLL","created":{"$date":"2025-01-18T06:30:12.295Z"},"name":"ic","born_num":"225","__v":0}
-{"_id":{"$oid":"678b4a7bbceac938651bf851"},"agent_name":"WLL","created":{"$date":"2025-01-18T06:30:19.76Z"},"name":"ic","born_num":"252","__v":0}
 {"_id":{"$oid":"678b4bf6e56021386449e1e0"},"agent_name":"NY","created":{"$date":"2025-01-18T06:36:38.403Z"},"name":"TNT","born_num":"459","__v":0}
-{"_id":{"$oid":"678b4e64bceac938651bf8fe"},"agent_name":"ksl","created":{"$date":"2025-01-18T06:47:00.597Z"},"name":"U TOE","born_num":"020","__v":0}
 {"_id":{"$oid":"678b4f19e56021386449e264"},"agent_name":"POL","created":{"$date":"2025-01-18T06:50:01.434Z"},"name":"09666526744","born_num":"774","__v":0}
 {"_id":{"$oid":"678b4f23bceac938651bf923"},"agent_name":"POL","created":{"$date":"2025-01-18T06:50:11.5Z"},"name":"09261427996","born_num":"244","__v":0}
 {"_id":{"$oid":"678b6f73e56021386449e55b"},"agent_name":"UHWK","created":{"$date":"2025-01-18T09:08:03.838Z"},"name":"09670236878","born_num":"472","__v":0}
 {"_id":{"$oid":"678c7905bceac938651c72d2"},"agent_name":"dk","created":{"$date":"2025-01-19T04:01:09.373Z"},"name":"09428216575\r","born_num":"517","__v":0}
-{"_id":{"$oid":"678c7b6be5602138644a61c8"},"agent_name":"ksl","created":{"$date":"2025-01-19T04:11:23.541Z"},"name":"MTK","born_num":"016","__v":0}
 {"_id":{"$oid":"678c7cdfe5602138644a62eb"},"agent_name":"hnh","created":{"$date":"2025-01-19T04:17:35.181Z"},"name":"137","born_num":"868","__v":0}
 {"_id":{"$oid":"678c81c0e5602138644a69bf"},"agent_name":"UH5","created":{"$date":"2025-01-19T04:38:24.248Z"},"name":"09670548787","born_num":"648 468","__v":0}
 {"_id":{"$oid":"678c8ba5e5602138644a6d24"},"agent_name":"dk","created":{"$date":"2025-01-19T05:20:37.359Z"},"name":"0940381964\r","born_num":"367","__v":0}
 {"_id":{"$oid":"678c8bcfe5602138644a6d2c"},"agent_name":"dk","created":{"$date":"2025-01-19T05:21:19.357Z"},"name":"0940381964\r","born_num":"964","__v":0}
 {"_id":{"$oid":"678c8bd9e5602138644a6d31"},"agent_name":"UHWK","created":{"$date":"2025-01-19T05:21:29.148Z"},"name":"09451824320","born_num":"148","__v":0}
-{"_id":{"$oid":"678daf2de5602138644a8858"},"agent_name":"UHWK","created":{"$date":"2025-01-20T02:04:29.092Z"},"name":"09899280206","born_num":"946","__v":0}
 {"_id":{"$oid":"678de1fee5602138644c75d8"},"agent_name":"ksl","created":{"$date":"2025-01-20T05:41:18.364Z"},"name":"09429030331","born_num":"740","__v":0}
 {"_id":{"$oid":"678e2023bceac938652041a8"},"agent_name":"WKL","created":{"$date":"2025-01-20T10:06:27.949Z"},"name":"DTZM","born_num":"639","__v":0}
 {"_id":{"$oid":"678e26fbe5602138644e9397"},"agent_name":"hnh","created":{"$date":"2025-01-20T10:35:39.588Z"},"name":"09694238041","born_num":"391","__v":0}
@@ -1594,7 +1484,6 @@
 {"_id":{"$oid":"678f2a70bceac9386524740a"},"agent_name":"UH","created":{"$date":"2025-01-21T05:02:40.771Z"},"name":"09454057797","born_num":"250","__v":0}
 {"_id":{"$oid":"678f2b3fbceac938652483df"},"agent_name":"UH","created":{"$date":"2025-01-21T05:06:07.087Z"},"name":"09454057797","born_num":"052","__v":0}
 {"_id":{"$oid":"678f2b47bceac93865248441"},"agent_name":"UH","created":{"$date":"2025-01-21T05:06:15.975Z"},"name":"09454057797","born_num":"025","__v":0}
-{"_id":{"$oid":"678f3057e56021386451b209"},"agent_name":"MKHNH","created":{"$date":"2025-01-21T05:27:51.563Z"},"name":"ABA","born_num":"155 276","__v":0}
 {"_id":{"$oid":"678f3378e56021386451b300"},"agent_name":"MKHNH","created":{"$date":"2025-01-21T05:41:12.838Z"},"name":"09451504637","born_num":" 637","__v":0}
 {"_id":{"$oid":"678f5721e560213864522a36"},"agent_name":"hnh","created":{"$date":"2025-01-21T08:13:21.589Z"},"name":"sn","born_num":"167  2s","__v":0}
 {"_id":{"$oid":"678f7847bceac9386526a5c9"},"agent_name":"WP","created":{"$date":"2025-01-21T10:34:47.549Z"},"name":"09257008889","born_num":"889","__v":0}
@@ -1604,12 +1493,10 @@
 {"_id":{"$oid":"67906ad4bceac93865273d8f"},"agent_name":"SSZ","created":{"$date":"2025-01-22T03:49:40.61Z"},"name":"SSZ barbecue","born_num":"261","__v":0}
 {"_id":{"$oid":"6790d6f4e56021386457ec65"},"agent_name":"UH5","created":{"$date":"2025-01-22T11:31:00.31Z"},"name":"09253212694","born_num":"960","__v":0}
 {"_id":{"$oid":"6790ec74bceac938652c070f"},"agent_name":"ksl","created":{"$date":"2025-01-22T13:02:44.764Z"},"name":"mee thwe","born_num":"271","__v":0}
-{"_id":{"$oid":"6790f353bceac938652cdc09"},"agent_name":"ksl","created":{"$date":"2025-01-22T13:32:03.278Z"},"name":"260743042uhl","born_num":"733","__v":0}
 {"_id":{"$oid":"6791b04fe5602138645948aa"},"agent_name":"4UH","created":{"$date":"2025-01-23T02:58:23.052Z"},"name":"09428216669","born_num":"029","__v":0}
 {"_id":{"$oid":"67931996bceac9386531e6a2"},"agent_name":"4UH","created":{"$date":"2025-01-24T04:39:50.123Z"},"name":"660ulay","born_num":"9843","__v":0}
 {"_id":{"$oid":"67932d9abceac93865331468"},"agent_name":"WKL","created":{"$date":"2025-01-24T06:05:14.07Z"},"name":"09450140556","born_num":"556","__v":0}
 {"_id":{"$oid":"67932d9fe5602138645ee33b"},"agent_name":"WKL","created":{"$date":"2025-01-24T06:05:19.305Z"},"name":"09450140556","born_num":"559","__v":0}
-{"_id":{"$oid":"67937770e560213864612ef1"},"agent_name":"UHPL","created":{"$date":"2025-01-24T11:20:16.22Z"},"name":"pl","born_num":"163","__v":0}
 {"_id":{"$oid":"6794675fbceac938653717ce"},"agent_name":"HLHNH","created":{"$date":"2025-01-25T04:23:59.04Z"},"name":"09889927051","born_num":"867","__v":0}
 {"_id":{"$oid":"67946e0cbceac93865371879"},"agent_name":"ps","created":{"$date":"2025-01-25T04:52:28.336Z"},"name":"09445202831","born_num":"831","__v":0}
 {"_id":{"$oid":"6794bac6bceac93865372007"},"agent_name":"SSZ","created":{"$date":"2025-01-25T10:19:50.444Z"},"name":"09261486061","born_num":"468","__v":0}
@@ -1621,14 +1508,9 @@
 {"_id":{"$oid":"6797765fe56021386466a980"},"agent_name":"MKO","created":{"$date":"2025-01-27T12:04:47.021Z"},"name":"09260149931","born_num":"661","__v":0}
 {"_id":{"$oid":"6797766bbceac938653b20cf"},"agent_name":"MKO","created":{"$date":"2025-01-27T12:04:59.392Z"},"name":"09260149931","born_num":"446","__v":0}
 {"_id":{"$oid":"67977677e56021386466aa9a"},"agent_name":"MKO","created":{"$date":"2025-01-27T12:05:11.555Z"},"name":"09260149931","born_num":"997","__v":0}
-{"_id":{"$oid":"6798800ce56021386469df74"},"agent_name":"MYHNH","created":{"$date":"2025-01-28T06:58:20.959Z"},"name":"09693978252                           ","born_num":"373  ","__v":0}
-{"_id":{"$oid":"67988be0e5602138646a0d99"},"agent_name":"MKHNH","created":{"$date":"2025-01-28T07:48:48.603Z"},"name":"09251149932","born_num":"166","__v":0}
-{"_id":{"$oid":"679894f5bceac938653e2281"},"agent_name":"ksl","created":{"$date":"2025-01-28T08:27:33.807Z"},"name":"09422995862","born_num":"333","__v":0}
 {"_id":{"$oid":"679894fae5602138646a78ab"},"agent_name":"ksl","created":{"$date":"2025-01-28T08:27:38.595Z"},"name":"09422995862","born_num":"222","__v":0}
 {"_id":{"$oid":"67998a34e5602138646b94a5"},"agent_name":"UH","created":{"$date":"2025-01-29T01:53:56.581Z"},"name":"09695866714","born_num":"961","__v":0}
 {"_id":{"$oid":"67998a41e5602138646b94ba"},"agent_name":"UH","created":{"$date":"2025-01-29T01:54:09.025Z"},"name":"09695866714","born_num":"157","__v":0}
-{"_id":{"$oid":"679a0242e5602138646f5a59"},"agent_name":"HLHNH","created":{"$date":"2025-01-29T10:26:10.874Z"},"name":"09266974458","born_num":"781 458","__v":0}
-{"_id":{"$oid":"679a192abceac9386543ffbb"},"agent_name":"MKO","created":{"$date":"2025-01-29T12:03:54.447Z"},"name":"09698831143","born_num":"398 ","__v":0}
 {"_id":{"$oid":"679ae943bceac93865459af9"},"agent_name":"ps","created":{"$date":"2025-01-30T02:51:47.556Z"},"name":"09682884883","born_num":"089","__v":0}
 {"_id":{"$oid":"679ae947e560213864711eaf"},"agent_name":"ps","created":{"$date":"2025-01-30T02:51:51.771Z"},"name":"09682884883","born_num":"185","__v":0}
 {"_id":{"$oid":"679b52febceac938654941dc"},"agent_name":"UH","created":{"$date":"2025-01-30T10:22:54.221Z"},"name":"AMA","born_num":"629","__v":0}
@@ -1636,24 +1518,16 @@
 {"_id":{"$oid":"679c693ee560213864778d12"},"agent_name":"ps","created":{"$date":"2025-01-31T06:10:06.575Z"},"name":"09260783325","born_num":"550","__v":0}
 {"_id":{"$oid":"679c82bae56021386477f5b9"},"agent_name":"4UH","created":{"$date":"2025-01-31T07:58:50.531Z"},"name":"774Aphwar","born_num":"5577","__v":0}
 {"_id":{"$oid":"679d6ff8bceac938654f69f5"},"agent_name":"UHWK","created":{"$date":"2025-02-01T00:51:04.675Z"},"name":"09890273565","born_num":"898","__v":0}
-{"_id":{"$oid":"679d78ebbceac938654fa4db"},"agent_name":"ksl","created":{"$date":"2025-02-01T01:29:15.127Z"},"name":"09260941397 *","born_num":"643","__v":0}
-{"_id":{"$oid":"679d78f3bceac938654fa552"},"agent_name":"ksl","created":{"$date":"2025-02-01T01:29:23.22Z"},"name":"09260941397 *","born_num":"807","__v":0}
-{"_id":{"$oid":"679d78fbbceac938654fa5ab"},"agent_name":"ksl","created":{"$date":"2025-02-01T01:29:31.662Z"},"name":"09260941397 *","born_num":"425","__v":0}
-{"_id":{"$oid":"679d7905e5602138647c1d10"},"agent_name":"ksl","created":{"$date":"2025-02-01T01:29:41.195Z"},"name":"09260941397 *","born_num":"948","__v":0}
-{"_id":{"$oid":"679d791ae5602138647c1e66"},"agent_name":"ksl","created":{"$date":"2025-02-01T01:30:02.094Z"},"name":"09260941397 *","born_num":"541","__v":0}
 {"_id":{"$oid":"679d9cf6bceac9386551276e"},"agent_name":"SSZ","created":{"$date":"2025-02-01T04:03:02.916Z"},"name":"09426509804","born_num":"105","__v":0}
 {"_id":{"$oid":"679da2ccbceac93865517a3b"},"agent_name":"ksl","created":{"$date":"2025-02-01T04:27:56.162Z"},"name":"09262775875","born_num":"535","__v":0}
 {"_id":{"$oid":"679da2dcbceac93865517bc3"},"agent_name":"ksl","created":{"$date":"2025-02-01T04:28:12.038Z"},"name":"09262775875","born_num":"553","__v":0}
 {"_id":{"$oid":"679da2e4bceac93865517cc8"},"agent_name":"ksl","created":{"$date":"2025-02-01T04:28:20.861Z"},"name":"09262775875","born_num":"355","__v":0}
 {"_id":{"$oid":"679dd3b63b55f97b1850d33a"},"agent_name":"HLHNH","created":{"$date":"2025-02-01T07:56:38.657Z"},"name":"09255648748","born_num":"244","__v":0}
 {"_id":{"$oid":"679ed14912e5281286c3d97b"},"agent_name":"WL","created":{"$date":"2025-02-02T01:58:33.779Z"},"name":"09455903461","born_num":"351","__v":0}
-{"_id":{"$oid":"679ed7df158ea6128072bab8"},"agent_name":"ksl","created":{"$date":"2025-02-02T02:26:39.056Z"},"name":"09444113298","born_num":"802","__v":0}
 {"_id":{"$oid":"679ed8ae158ea6128072bafe"},"agent_name":"WL","created":{"$date":"2025-02-02T02:30:06.65Z"},"name":"09899963737","born_num":"111","__v":0}
-{"_id":{"$oid":"679ed8b8158ea6128072bb06"},"agent_name":"WL","created":{"$date":"2025-02-02T02:30:16.273Z"},"name":"09899963737","born_num":"377","__v":0}
 {"_id":{"$oid":"679ed8bc158ea6128072bb0b"},"agent_name":"MKO","created":{"$date":"2025-02-02T02:30:20.262Z"},"name":"MKO","born_num":"776","__v":0}
 {"_id":{"$oid":"679ed8c3158ea6128072bb10"},"agent_name":"WL","created":{"$date":"2025-02-02T02:30:27.345Z"},"name":"0989963737","born_num":"077","__v":0}
 {"_id":{"$oid":"679ed8cd158ea6128072bb16"},"agent_name":"WL","created":{"$date":"2025-02-02T02:30:37.126Z"},"name":"09899963737","born_num":"039","__v":0}
-{"_id":{"$oid":"679ee36d34fb7734cfe744a4"},"agent_name":"WKL","created":{"$date":"2025-02-02T03:15:57.438Z"},"name":"TCK","born_num":"216","__v":0}
 {"_id":{"$oid":"679ee3b734fb7734cfe744b6"},"agent_name":"WKL","created":{"$date":"2025-02-02T03:17:11.025Z"},"name":"09672191379","born_num":"227","__v":0}
 {"_id":{"$oid":"679ee3d134fb7734cfe744d2"},"agent_name":"WKL","created":{"$date":"2025-02-02T03:17:37.351Z"},"name":"09672191379","born_num":"722","__v":0}
 {"_id":{"$oid":"679ee3da5f1a8a34ce2a25b2"},"agent_name":"WKL","created":{"$date":"2025-02-02T03:17:46.253Z"},"name":"09672191379","born_num":"272","__v":0}
@@ -1663,19 +1537,9 @@
 {"_id":{"$oid":"679ef5025f1a8a34ce2a29fc"},"agent_name":"UHPL","created":{"$date":"2025-02-02T04:30:58.837Z"},"name":"4407","born_num":"155","__v":0}
 {"_id":{"$oid":"679ef50b5f1a8a34ce2a2a01"},"agent_name":"UHPL","created":{"$date":"2025-02-02T04:31:07.326Z"},"name":"407","born_num":"551","__v":0}
 {"_id":{"$oid":"679ef5155f1a8a34ce2a2a0c"},"agent_name":"UHPL","created":{"$date":"2025-02-02T04:31:17.406Z"},"name":"4407","born_num":"515","__v":0}
-{"_id":{"$oid":"679ef5255f1a8a34ce2a2a14"},"agent_name":"UHPL","created":{"$date":"2025-02-02T04:31:33.322Z"},"name":"shan","born_num":"237","__v":0}
-{"_id":{"$oid":"679ef53434fb7734cfe74915"},"agent_name":"UHPL","created":{"$date":"2025-02-02T04:31:48.742Z"},"name":"a","born_num":"360","__v":0}
 {"_id":{"$oid":"679ef57334fb7734cfe74927"},"agent_name":"KSPHNH","created":{"$date":"2025-02-02T04:32:51.284Z"},"name":"09666116786","born_num":"118","__v":0}
-{"_id":{"$oid":"679ef59534fb7734cfe7492d"},"agent_name":"KSPHNH","created":{"$date":"2025-02-02T04:33:25.638Z"},"name":"09666116786","born_num":"307 402","__v":0}
-{"_id":{"$oid":"679efa4c5f1a8a34ce2a2ae8"},"agent_name":"ksl","created":{"$date":"2025-02-02T04:53:32.539Z"},"name":"09422995862","born_num":"9248","__v":0}
 {"_id":{"$oid":"679efe595f1a8a34ce2a2bad"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:10:49.015Z"},"name":"09267856957","born_num":"170","__v":0}
 {"_id":{"$oid":"679efee15f1a8a34ce2a2c1e"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:13:05.025Z"},"name":"09267856957","born_num":"370","__v":0}
-{"_id":{"$oid":"679eff005f1a8a34ce2a2c24"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:13:36.805Z"},"name":"09267856957","born_num":"150","__v":0}
-{"_id":{"$oid":"679eff2434fb7734cfe74a9a"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:14:12.654Z"},"name":"09267856957","born_num":"350","__v":0}
-{"_id":{"$oid":"679eff3234fb7734cfe74a9f"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:14:26.621Z"},"name":"09267856957","born_num":"190","__v":0}
-{"_id":{"$oid":"679eff5934fb7734cfe74ab0"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:15:05.362Z"},"name":"09267856957","born_num":"390","__v":0}
-{"_id":{"$oid":"679eff7d5f1a8a34ce2a2c3e"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:15:41.039Z"},"name":"09692062688","born_num":"879","__v":0}
-{"_id":{"$oid":"679eff9334fb7734cfe74abe"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:16:03.064Z"},"name":"09692062688","born_num":"704","__v":0}
 {"_id":{"$oid":"679effe25f1a8a34ce2a2c49"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:17:22.684Z"},"name":"09693135939","born_num":"915","__v":0}
 {"_id":{"$oid":"679efff334fb7734cfe74ac8"},"agent_name":"UHWK","created":{"$date":"2025-02-02T05:17:39.05Z"},"name":"09693135939","born_num":"134","__v":0}
 {"_id":{"$oid":"679f0c2d34fb7734cfe74d90"},"agent_name":"AKZ","created":{"$date":"2025-02-02T06:09:49.349Z"},"name":"AKZ","born_num":"638","__v":0}
@@ -1692,14 +1556,7 @@
 {"_id":{"$oid":"67a1cb2d84410a28c650b84d"},"agent_name":"WM","created":{"$date":"2025-02-04T08:09:17.174Z"},"name":"kalama","born_num":"628","__v":0}
 {"_id":{"$oid":"67a1dd1c3b00b928c53a8a6f"},"agent_name":"DMY","created":{"$date":"2025-02-04T09:25:48.789Z"},"name":"09691626238","born_num":"659","__v":0}
 {"_id":{"$oid":"67a3448b0e68d15ab3c7b204"},"agent_name":"HLHNH","created":{"$date":"2025-02-05T10:59:23.751Z"},"name":"09266974458BB","born_num":"781 458","__v":0}
-{"_id":{"$oid":"67a45db10e68d15ab3cbc2db"},"agent_name":"POL","created":{"$date":"2025-02-06T06:58:57.038Z"},"name":"09696913704","born_num":"715","__v":0}
-{"_id":{"$oid":"67a45db80e68d15ab3cbc30e"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:04.146Z"},"name":"09696913704","born_num":"597","__v":0}
-{"_id":{"$oid":"67a45dbf45c5c55ab4c5f276"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:11.457Z"},"name":"09696913704","born_num":"143","__v":0}
-{"_id":{"$oid":"67a45dc645c5c55ab4c5f27e"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:18.989Z"},"name":"09696913704","born_num":"950","__v":0}
-{"_id":{"$oid":"67a45dcf45c5c55ab4c5f28e"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:27.385Z"},"name":"09696913704","born_num":"016","__v":0}
-{"_id":{"$oid":"67a45dd745c5c55ab4c5f293"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:35.081Z"},"name":"09696913704","born_num":"393","__v":0}
 {"_id":{"$oid":"67a45de445c5c55ab4c5f2ae"},"agent_name":"POL","created":{"$date":"2025-02-06T06:59:48.123Z"},"name":"09696913704","born_num":"962","__v":0}
-{"_id":{"$oid":"67a45df30e68d15ab3cbc39f"},"agent_name":"POL","created":{"$date":"2025-02-06T07:00:03.587Z"},"name":"09696913704","born_num":"901","__v":0}
 {"_id":{"$oid":"67a46fbf45c5c55ab4c67494"},"agent_name":"UHPL","created":{"$date":"2025-02-06T08:15:59.627Z"},"name":"akbb","born_num":"944","__v":0}
 {"_id":{"$oid":"67a48a960e68d15ab3cda87b"},"agent_name":"4UH","created":{"$date":"2025-02-06T10:10:30.528Z"},"name":"09660634093","born_num":"893","__v":0}
 {"_id":{"$oid":"67a48aba0e68d15ab3cda891"},"agent_name":"4UH","created":{"$date":"2025-02-06T10:11:06.949Z"},"name":"09650525303","born_num":"0000","__v":0}
@@ -1710,3 +1567,178 @@
 {"_id":{"$oid":"67a5b29345c5c55ab4ca835e"},"agent_name":"WL","created":{"$date":"2025-02-07T07:13:23.836Z"},"name":"09899963737","born_num":"555","__v":0}
 {"_id":{"$oid":"67a5bc680e68d15ab3d07c31"},"agent_name":"dk","created":{"$date":"2025-02-07T07:55:20.2Z"},"name":"09695623978","born_num":"789","__v":0}
 {"_id":{"$oid":"67a5db0f0e68d15ab3d20bc3"},"agent_name":"NY","created":{"$date":"2025-02-07T10:06:07.885Z"},"name":"TUN 09250624423","born_num":"177","__v":0}
+{"_id":{"$oid":"67a6fa50a4887550919835e3"},"agent_name":"WKS","created":{"$date":"2025-02-08T06:31:44.989Z"},"name":"09765651823","born_num":"671","__v":0}
+{"_id":{"$oid":"67a6fa71a4887550919835e8"},"agent_name":"WKS","created":{"$date":"2025-02-08T06:32:17.974Z"},"name":"09459957150","born_num":"952","__v":0}
+{"_id":{"$oid":"67a6fa82885b0a5097e88b04"},"agent_name":"WKS","created":{"$date":"2025-02-08T06:32:34.074Z"},"name":"09459957150","born_num":"065","__v":0}
+{"_id":{"$oid":"67a96884a488755091988356"},"agent_name":"ps","created":{"$date":"2025-02-10T02:46:28.044Z"},"name":"09673969872","born_num":"872","__v":0}
+{"_id":{"$oid":"67a96888a488755091988372"},"agent_name":"ps","created":{"$date":"2025-02-10T02:46:32.361Z"},"name":"09673969872","born_num":"580","__v":0}
+{"_id":{"$oid":"67a9aa90a4887550919a4faa"},"agent_name":"DMY","created":{"$date":"2025-02-10T07:28:16.494Z"},"name":"09427455838","born_num":"682","__v":0}
+{"_id":{"$oid":"67a9dc05a4887550919c1e2f"},"agent_name":"UH","created":{"$date":"2025-02-10T10:59:17.866Z"},"name":"09260509766","born_num":"152","__v":0}
+{"_id":{"$oid":"67ab1f2a885b0a5097f1639a"},"agent_name":"HLHNH","created":{"$date":"2025-02-11T09:58:02.035Z"},"name":"09262232298","born_num":"327 372","__v":0}
+{"_id":{"$oid":"67ac42b5885b0a5097f209e5"},"agent_name":"WLL","created":{"$date":"2025-02-12T06:41:57.463Z"},"name":"09404736733","born_num":"9969","__v":0}
+{"_id":{"$oid":"67ac93caa488755091a40714"},"agent_name":"UH","created":{"$date":"2025-02-12T12:27:54.67Z"},"name":"09254173137","born_num":"280","__v":0}
+{"_id":{"$oid":"67ad586fa488755091a5018c"},"agent_name":"MKO","created":{"$date":"2025-02-13T02:26:55.851Z"},"name":"09260149931","born_num":"757","__v":0}
+{"_id":{"$oid":"67ad5881885b0a5097f4257d"},"agent_name":"MKO","created":{"$date":"2025-02-13T02:27:13.361Z"},"name":"09260149931","born_num":"757","__v":0}
+{"_id":{"$oid":"67ad58b6885b0a5097f426ee"},"agent_name":"MKO","created":{"$date":"2025-02-13T02:28:06.97Z"},"name":"09260149931","born_num":"846","__v":0}
+{"_id":{"$oid":"67ad58c4885b0a5097f42821"},"agent_name":"MKO","created":{"$date":"2025-02-13T02:28:20.493Z"},"name":"09260149931","born_num":"846","__v":0}
+{"_id":{"$oid":"67ad58e9885b0a5097f4286d"},"agent_name":"MKO","created":{"$date":"2025-02-13T02:28:57.851Z"},"name":"09260149931","born_num":"846","__v":0}
+{"_id":{"$oid":"67ad5af8a488755091a50c1e"},"agent_name":"ps","created":{"$date":"2025-02-13T02:37:44.705Z"},"name":"09793669355","born_num":"347","__v":0}
+{"_id":{"$oid":"67adbe9e885b0a5097f7a9f7"},"agent_name":"WP","created":{"$date":"2025-02-13T09:42:54.011Z"},"name":"09699588228","born_num":"538","__v":0}
+{"_id":{"$oid":"67aeec70a488755091ab3e33"},"agent_name":"WLL","created":{"$date":"2025-02-14T07:10:40.847Z"},"name":"ANTI SAN","born_num":"625","__v":0}
+{"_id":{"$oid":"67af00c4a488755091ac0c14"},"agent_name":"HLHNH","created":{"$date":"2025-02-14T08:37:24.901Z"},"name":"09665355415","born_num":"123","__v":0}
+{"_id":{"$oid":"67af0804885b0a5097fc159c"},"agent_name":"UHWK","created":{"$date":"2025-02-14T09:08:20.373Z"},"name":"09250474817","born_num":"564","__v":0}
+{"_id":{"$oid":"67af107f885b0a5097fc5fd1"},"agent_name":"HLHNH","created":{"$date":"2025-02-14T09:44:31.701Z"},"name":"09254006445","born_num":"403","__v":0}
+{"_id":{"$oid":"67b01b53885b0a5097fe9651"},"agent_name":"ps","created":{"$date":"2025-02-15T04:42:59.878Z"},"name":"09672653444","born_num":"709","__v":0}
+{"_id":{"$oid":"67b0273ca488755091af0c1d"},"agent_name":"HLHNH","created":{"$date":"2025-02-15T05:33:48.753Z"},"name":"09424474562","born_num":"475","__v":0}
+{"_id":{"$oid":"67b13c2cc41f6e1ed7cdceb2"},"agent_name":"hnh","created":{"$date":"2025-02-16T01:15:24.934Z"},"name":"09688057053","born_num":"097","__v":0}
+{"_id":{"$oid":"67b140aaf55d121ed155e365"},"agent_name":"MKO","created":{"$date":"2025-02-16T01:34:34.47Z"},"name":"mko","born_num":"978","__v":0}
+{"_id":{"$oid":"67b140b4f55d121ed155e42a"},"agent_name":"MKO","created":{"$date":"2025-02-16T01:34:44.126Z"},"name":"mko","born_num":"648","__v":0}
+{"_id":{"$oid":"67b292c66e41ef4fe6f2e6ef"},"agent_name":"AKZ","created":{"$date":"2025-02-17T01:37:10.774Z"},"name":"606 U LAY","born_num":"535","__v":0}
+{"_id":{"$oid":"67b292e727ae954fe5088cdc"},"agent_name":"AKZ","created":{"$date":"2025-02-17T01:37:43.179Z"},"name":"606 U LAY","born_num":"357","__v":0}
+{"_id":{"$oid":"67b2937927ae954fe5088dd7"},"agent_name":"AKZ","created":{"$date":"2025-02-17T01:40:09.033Z"},"name":"606 U LAY","born_num":"526","__v":0}
+{"_id":{"$oid":"67b293a56e41ef4fe6f2e8e3"},"agent_name":"AKZ","created":{"$date":"2025-02-17T01:40:53.63Z"},"name":"606 U LAY","born_num":"541","__v":0}
+{"_id":{"$oid":"67b29d598bda7252b92dbf9d"},"agent_name":"ps","created":{"$date":"2025-02-17T02:22:17.685Z"},"name":"09251630694","born_num":"964","__v":0}
+{"_id":{"$oid":"67b2aa01c6099f52b8f075bd"},"agent_name":"ps","created":{"$date":"2025-02-17T03:16:17.174Z"},"name":"09772975380","born_num":"380","__v":0}
+{"_id":{"$oid":"67b2acc58bda7252b92df57f"},"agent_name":"ksl","created":{"$date":"2025-02-17T03:28:05.42Z"},"name":"09699905580","born_num":"650","__v":0}
+{"_id":{"$oid":"67b2b513c6099f52b8f0c67f"},"agent_name":"HLHNH","created":{"$date":"2025-02-17T04:03:31.295Z"},"name":"09964283090","born_num":"954","__v":0}
+{"_id":{"$oid":"67b2b6aec6099f52b8f0d4d6"},"agent_name":"UHPL","created":{"$date":"2025-02-17T04:10:22.208Z"},"name":"oolay","born_num":"526","__v":0}
+{"_id":{"$oid":"67b2b6bec6099f52b8f0d5be"},"agent_name":"UHPL","created":{"$date":"2025-02-17T04:10:38.511Z"},"name":"oolay","born_num":"528","__v":0}
+{"_id":{"$oid":"67b2b987c6099f52b8f0f7a8"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:22:31.189Z"},"name":"WLL","born_num":"818","__v":0}
+{"_id":{"$oid":"67b2b996c6099f52b8f0f875"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:22:46.336Z"},"name":"SHAN","born_num":"818","__v":0}
+{"_id":{"$oid":"67b2bab98bda7252b92e7646"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:27:37.415Z"},"name":"EM","born_num":"170","__v":0}
+{"_id":{"$oid":"67b2bac48bda7252b92e769e"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:27:48.667Z"},"name":"EM","born_num":"451","__v":0}
+{"_id":{"$oid":"67b2baca8bda7252b92e76c3"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:27:54.499Z"},"name":"EM","born_num":"123","__v":0}
+{"_id":{"$oid":"67b2bad68bda7252b92e775f"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:28:06.425Z"},"name":"EM","born_num":"979","__v":0}
+{"_id":{"$oid":"67b2bb4dc6099f52b8f10716"},"agent_name":"WLL","created":{"$date":"2025-02-17T04:30:05.433Z"},"name":"NYS","born_num":"908","__v":0}
+{"_id":{"$oid":"67b2c7598bda7252b92f40a8"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:21:29.532Z"},"name":"09445215210","born_num":"284 - 6","__v":0}
+{"_id":{"$oid":"67b2c771c6099f52b8f1d1ac"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:21:53.373Z"},"name":"1500","born_num":"697","__v":0}
+{"_id":{"$oid":"67b2c77b8bda7252b92f40b6"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:03.909Z"},"name":"1500","born_num":"679","__v":0}
+{"_id":{"$oid":"67b2c7858bda7252b92f40c5"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:13.145Z"},"name":"1500","born_num":"796","__v":0}
+{"_id":{"$oid":"67b2c78b8bda7252b92f40f4"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:19.485Z"},"name":"1500","born_num":"769","__v":0}
+{"_id":{"$oid":"67b2c7998bda7252b92f410a"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:33.281Z"},"name":"1500","born_num":"967","__v":0}
+{"_id":{"$oid":"67b2c7a0c6099f52b8f1d211"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:40.017Z"},"name":"1500","born_num":"976","__v":0}
+{"_id":{"$oid":"67b2c7a7c6099f52b8f1d21b"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:47.866Z"},"name":"1500","born_num":"739","__v":0}
+{"_id":{"$oid":"67b2c7ae8bda7252b92f412c"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:22:54.836Z"},"name":"1500","born_num":"793","__v":0}
+{"_id":{"$oid":"67b2c7b7c6099f52b8f1d230"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:23:03.372Z"},"name":"1500","born_num":"397","__v":0}
+{"_id":{"$oid":"67b2c7cc8bda7252b92f4144"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:23:24.214Z"},"name":"1500","born_num":"937","__v":0}
+{"_id":{"$oid":"67b2c7ddc6099f52b8f1d253"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:23:41.872Z"},"name":"1500","born_num":"973","__v":0}
+{"_id":{"$oid":"67b2c7fd8bda7252b92f41b4"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:24:13.008Z"},"name":"1500","born_num":"237","__v":0}
+{"_id":{"$oid":"67b2c80ac6099f52b8f1d26b"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:24:26.628Z"},"name":"1500","born_num":"327","__v":0}
+{"_id":{"$oid":"67b2c818c6099f52b8f1d275"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:24:40.6Z"},"name":"1500","born_num":"732","__v":0}
+{"_id":{"$oid":"67b2c81ec6099f52b8f1d27a"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:24:46.548Z"},"name":"1500","born_num":"723","__v":0}
+{"_id":{"$oid":"67b2c83c8bda7252b92f41d3"},"agent_name":"DMY","created":{"$date":"2025-02-17T05:25:16.586Z"},"name":"1500","born_num":"605-2","__v":0}
+{"_id":{"$oid":"67b2cfd78bda7252b92f7e9e"},"agent_name":"UH5","created":{"$date":"2025-02-17T05:57:43.857Z"},"name":"09890778557","born_num":"435","__v":0}
+{"_id":{"$oid":"67b2d015c6099f52b8f1e35a"},"agent_name":"UH5","created":{"$date":"2025-02-17T05:58:45.257Z"},"name":"aunty","born_num":"550","__v":0}
+{"_id":{"$oid":"67b2d0208bda7252b92f7f99"},"agent_name":"UH5","created":{"$date":"2025-02-17T05:58:56.957Z"},"name":"aunty","born_num":"118","__v":0}
+{"_id":{"$oid":"67b2d04ac6099f52b8f1e3d5"},"agent_name":"UH5","created":{"$date":"2025-02-17T05:59:38.026Z"},"name":"aunty","born_num":"199","__v":0}
+{"_id":{"$oid":"67b2eb9dc6099f52b8f24474"},"agent_name":"NY","created":{"$date":"2025-02-17T07:56:13.34Z"},"name":"LMPT 09976694377","born_num":"666","__v":0}
+{"_id":{"$oid":"67b316c78bda7252b93190e6"},"agent_name":"TL","created":{"$date":"2025-02-17T11:00:23.346Z"},"name":"U Aung Myint","born_num":"6247","__v":0}
+{"_id":{"$oid":"67b31fe6c6099f52b8f401e5"},"agent_name":"TL","created":{"$date":"2025-02-17T11:39:18.884Z"},"name":"Ma Kay","born_num":"409","__v":0}
+{"_id":{"$oid":"67b3fca4c6099f52b8f67062"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:21:08.773Z"},"name":"09267856957","born_num":"412","__v":0}
+{"_id":{"$oid":"67b3fcb38bda7252b933fda6"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:21:23.457Z"},"name":"09267856957","born_num":"452","__v":0}
+{"_id":{"$oid":"67b3fcbec6099f52b8f67192"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:21:34.623Z"},"name":"09267856957","born_num":"413","__v":0}
+{"_id":{"$oid":"67b3fccdc6099f52b8f6722f"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:21:49.686Z"},"name":"09267856957","born_num":"153","__v":0}
+{"_id":{"$oid":"67b3fcecc6099f52b8f672df"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:22:20.633Z"},"name":"09267856957","born_num":"406","__v":0}
+{"_id":{"$oid":"67b3fd608bda7252b934018e"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:24:16.866Z"},"name":"09443306747","born_num":"243","__v":0}
+{"_id":{"$oid":"67b3fd6f8bda7252b93401d7"},"agent_name":"UHWK","created":{"$date":"2025-02-18T03:24:31.361Z"},"name":"09443306747","born_num":"125","__v":0}
+{"_id":{"$oid":"67b40c28c6099f52b8f71df4"},"agent_name":"ksl","created":{"$date":"2025-02-18T04:27:20.108Z"},"name":"09422998337 taxi","born_num":"607","__v":0}
+{"_id":{"$oid":"67b5466fc6099f52b8faa2fc"},"agent_name":"MYHNH","created":{"$date":"2025-02-19T02:48:15.406Z"},"name":"09441699640","born_num":"278","__v":0}
+{"_id":{"$oid":"67b54c2cc6099f52b8faba36"},"agent_name":"AKZ","created":{"$date":"2025-02-19T03:12:44.351Z"},"name":"09459965787","born_num":"114","__v":0}
+{"_id":{"$oid":"67b572df8bda7252b93980fa"},"agent_name":"UH","created":{"$date":"2025-02-19T05:57:51.023Z"},"name":"09408383288","born_num":"492","__v":0}
+{"_id":{"$oid":"67b59df68bda7252b93b0519"},"agent_name":"AKZ","created":{"$date":"2025-02-19T09:01:42.857Z"},"name":"U ZAW","born_num":"076","__v":0}
+{"_id":{"$oid":"67b5c98ec6099f52b8fee992"},"agent_name":"UHWK","created":{"$date":"2025-02-19T12:07:42.864Z"},"name":"09253212790","born_num":"374","__v":0}
+{"_id":{"$oid":"67b5cd18c6099f52b8ff1776"},"agent_name":"MYHNH","created":{"$date":"2025-02-19T12:22:48.256Z"},"name":"09250780608","born_num":"048","__v":0}
+{"_id":{"$oid":"67b5d3828bda7252b93cd481"},"agent_name":"UHWK","created":{"$date":"2025-02-19T12:50:10.921Z"},"name":"09424577523","born_num":"507","__v":0}
+{"_id":{"$oid":"67b6dfe58bda7252b93fefb6"},"agent_name":"WM","created":{"$date":"2025-02-20T07:55:17.958Z"},"name":"m war","born_num":"759","__v":0}
+{"_id":{"$oid":"67b707df8bda7252b9417e4a"},"agent_name":"4UH","created":{"$date":"2025-02-20T10:45:51.965Z"},"name":"09440642366","born_num":"492","__v":0}
+{"_id":{"$oid":"67b7de5b8bda7252b9419e1e"},"agent_name":"ksl","created":{"$date":"2025-02-21T02:00:59.245Z"},"name":"09679029442","born_num":"50933","__v":0}
+{"_id":{"$oid":"67b7f3c174276c7bcc34434b"},"agent_name":"WP","created":{"$date":"2025-02-21T03:32:17.148Z"},"name":"DAAW","born_num":"614","__v":0}
+{"_id":{"$oid":"67b8282399cf647bcb7a09bb"},"agent_name":"ksl","created":{"$date":"2025-02-21T07:15:47.039Z"},"name":"MTK","born_num":"594","__v":0}
+{"_id":{"$oid":"67b97e549270fb2e8b7f0525"},"agent_name":"ps","created":{"$date":"2025-02-22T07:35:48.105Z"},"name":"545","born_num":"09677580188","__v":0}
+{"_id":{"$oid":"67bc0f829270fb2e8b80c420"},"agent_name":"HLHNH","created":{"$date":"2025-02-24T06:19:46.135Z"},"name":"09663813316","born_num":"264","__v":0}
+{"_id":{"$oid":"67bc6151d9f8f12e8a557281"},"agent_name":"UH","created":{"$date":"2025-02-24T12:08:49.14Z"},"name":"09257660801","born_num":"254","__v":0}
+{"_id":{"$oid":"67bc6c2bd9f8f12e8a55e1f9"},"agent_name":"UHWK","created":{"$date":"2025-02-24T12:55:07.706Z"},"name":"09253702392","born_num":"371","__v":0}
+{"_id":{"$oid":"67bd5bb5d9f8f12e8a581041"},"agent_name":"MKO","created":{"$date":"2025-02-25T05:57:09.627Z"},"name":"09428215297","born_num":"378","__v":0}
+{"_id":{"$oid":"67bd90669270fb2e8b87dd13"},"agent_name":"dk","created":{"$date":"2025-02-25T09:41:58.677Z"},"name":"095241819","born_num":"452","__v":0}
+{"_id":{"$oid":"67bee18575659b4147268164"},"agent_name":"UH","created":{"$date":"2025-02-26T09:40:21.893Z"},"name":"09253783792","born_num":"648","__v":0}
+{"_id":{"$oid":"67beefed75659b414726d669"},"agent_name":"DMY","created":{"$date":"2025-02-26T10:41:49.26Z"},"name":"09","born_num":"651","__v":0}
+{"_id":{"$oid":"67bff52c75659b41472a4a09"},"agent_name":"WP","created":{"$date":"2025-02-27T05:16:28.583Z"},"name":"09670792561","born_num":"761","__v":0}
+{"_id":{"$oid":"67bff53575659b41472a4a3e"},"agent_name":"WP","created":{"$date":"2025-02-27T05:16:37.876Z"},"name":"09670792561","born_num":"762","__v":0}
+{"_id":{"$oid":"67c14538673b8541483887a6"},"agent_name":"AKZ","created":{"$date":"2025-02-28T05:10:16.101Z"},"name":"09449743704","born_num":"704","__v":0}
+{"_id":{"$oid":"67c1454d75659b41472e03d3"},"agent_name":"AKZ","created":{"$date":"2025-02-28T05:10:37.436Z"},"name":"09449743704","born_num":"930","__v":0}
+{"_id":{"$oid":"67c14554673b8541483889cf"},"agent_name":"AKZ","created":{"$date":"2025-02-28T05:10:44.643Z"},"name":"09449743704","born_num":"206","__v":0}
+{"_id":{"$oid":"67c1455d75659b41472e0575"},"agent_name":"AKZ","created":{"$date":"2025-02-28T05:10:53.969Z"},"name":"09449743704","born_num":"135","__v":0}
+{"_id":{"$oid":"67c1456475659b41472e05db"},"agent_name":"AKZ","created":{"$date":"2025-02-28T05:11:00.885Z"},"name":"09449743704","born_num":"474","__v":0}
+{"_id":{"$oid":"67c19a3a75659b414730b239"},"agent_name":"ksl","created":{"$date":"2025-02-28T11:12:58.639Z"},"name":"09692062690","born_num":"337","__v":0}
+{"_id":{"$oid":"67c1aa3075659b4147315a45"},"agent_name":"hnh","created":{"$date":"2025-02-28T12:21:04.707Z"},"name":"cq","born_num":"645","__v":0}
+{"_id":{"$oid":"67c1b082673b8541483bf694"},"agent_name":"WP","created":{"$date":"2025-02-28T12:48:02.355Z"},"name":"09261551337","born_num":"681","__v":0}
+{"_id":{"$oid":"67c281c475659b414734308f"},"agent_name":"ksl","created":{"$date":"2025-03-01T03:40:52.818Z"},"name":"09673072694","born_num":"251","__v":0}
+{"_id":{"$oid":"67c402d0673b854148430520"},"agent_name":"TL","created":{"$date":"2025-03-02T07:03:44.657Z"},"name":"Nann Woe Pat","born_num":"449","__v":0}
+{"_id":{"$oid":"67c403a475659b414736fe1c"},"agent_name":"SSZ","created":{"$date":"2025-03-02T07:07:16.093Z"},"name":"577uIay","born_num":"185","__v":0}
+{"_id":{"$oid":"67c51d3375659b414737c54e"},"agent_name":"ksl","created":{"$date":"2025-03-03T03:08:35.768Z"},"name":"09250250489","born_num":"947","__v":0}
+{"_id":{"$oid":"67c51d5d673b85414843d4af"},"agent_name":"ksl","created":{"$date":"2025-03-03T03:09:17.544Z"},"name":"SQ","born_num":"331","__v":0}
+{"_id":{"$oid":"67c525dd75659b4147380706"},"agent_name":"UH","created":{"$date":"2025-03-03T03:45:33.589Z"},"name":"09686272883","born_num":"954","__v":0}
+{"_id":{"$oid":"67c525f9673b854148440f7c"},"agent_name":"UH","created":{"$date":"2025-03-03T03:46:01.376Z"},"name":"09940084360","born_num":"135","__v":0}
+{"_id":{"$oid":"67c539c5673b8541484539f9"},"agent_name":"ksl","created":{"$date":"2025-03-03T05:10:29.291Z"},"name":"uhl","born_num":"373","__v":0}
+{"_id":{"$oid":"67c562c4673b85414845fba1"},"agent_name":"ps","created":{"$date":"2025-03-03T08:05:24.417Z"},"name":"09650336706","born_num":"620","__v":0}
+{"_id":{"$oid":"67c6806a673b8541484a3dcd"},"agent_name":"hnh","created":{"$date":"2025-03-04T04:24:10.968Z"},"name":"kan","born_num":"687","__v":0}
+{"_id":{"$oid":"67c6807e673b8541484a3e76"},"agent_name":"hnh","created":{"$date":"2025-03-04T04:24:30.888Z"},"name":"kan","born_num":"0997","__v":0}
+{"_id":{"$oid":"67c6d16c75659b414740ed8c"},"agent_name":"UH","created":{"$date":"2025-03-04T10:09:48.923Z"},"name":"09890323342","born_num":"5577","__v":0}
+{"_id":{"$oid":"67c6e13675659b414740f4c4"},"agent_name":"hnh","created":{"$date":"2025-03-04T11:17:10.074Z"},"name":"ko thi ha","born_num":"984","__v":0}
+{"_id":{"$oid":"67c825d3673b8541485196b0"},"agent_name":"ksl","created":{"$date":"2025-03-05T10:22:11.811Z"},"name":"GGH","born_num":"200 ","__v":0}
+{"_id":{"$oid":"67c8381b75659b4147461e7e"},"agent_name":"POL","created":{"$date":"2025-03-05T11:40:11.947Z"},"name":"09457145024","born_num":"873","__v":0}
+{"_id":{"$oid":"67c8382475659b4147461ebe"},"agent_name":"POL","created":{"$date":"2025-03-05T11:40:20.53Z"},"name":"09457145024","born_num":"641","__v":0}
+{"_id":{"$oid":"67c83ab1673b85414852190e"},"agent_name":"WP","created":{"$date":"2025-03-05T11:51:13.606Z"},"name":"09250857534","born_num":"442","__v":0}
+{"_id":{"$oid":"67c83b5b673b8541485220cc"},"agent_name":"MYHNH","created":{"$date":"2025-03-05T11:54:03.126Z"},"name":"3443","born_num":"080","__v":0}
+{"_id":{"$oid":"67c90e0b673b85414853baa4"},"agent_name":"WP","created":{"$date":"2025-03-06T02:52:59.19Z"},"name":"WP","born_num":"111","__v":0}
+{"_id":{"$oid":"67c925bd673b85414854850c"},"agent_name":"ksl","created":{"$date":"2025-03-06T04:34:05.911Z"},"name":"09253630700","born_num":"386","__v":0}
+{"_id":{"$oid":"67c92dbd673b8541485535cd"},"agent_name":"ksl","created":{"$date":"2025-03-06T05:08:13.829Z"},"name":"09422995862","born_num":"666","__v":0}
+{"_id":{"$oid":"67ca6551723b1016ea2ce558"},"agent_name":"ksl","created":{"$date":"2025-03-07T03:17:37.889Z"},"name":"09679493145","born_num":"711","__v":0}
+{"_id":{"$oid":"67ca8074919af516f0919225"},"agent_name":"WM","created":{"$date":"2025-03-07T05:13:24.656Z"},"name":"09650950110","born_num":"417","__v":0}
+{"_id":{"$oid":"67cad307919af516f093f027"},"agent_name":"HLHNH","created":{"$date":"2025-03-07T11:05:43.579Z"},"name":"09252788896 ","born_num":"297 523","__v":0}
+{"_id":{"$oid":"67cbd4f6919af516f095dc52"},"agent_name":"ksl","created":{"$date":"2025-03-08T05:26:14.35Z"},"name":"09674259531","born_num":"466","__v":0}
+{"_id":{"$oid":"67ce5130723b1016ea336c0a"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:40:48.608Z"},"name":"09265626329","born_num":"747","__v":0}
+{"_id":{"$oid":"67ce5143723b1016ea336d1e"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:41:07.638Z"},"name":"09265626329","born_num":"086","__v":0}
+{"_id":{"$oid":"67ce5154723b1016ea336d76"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:41:24.694Z"},"name":"09265626329","born_num":"400","__v":0}
+{"_id":{"$oid":"67ce5163723b1016ea336dbb"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:41:39.126Z"},"name":"09265626329","born_num":"329","__v":0}
+{"_id":{"$oid":"67ce5174919af516f0962083"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:41:56.568Z"},"name":"09265626329","born_num":"048","__v":0}
+{"_id":{"$oid":"67ce5193919af516f096214c"},"agent_name":"MYST","created":{"$date":"2025-03-10T02:42:27.756Z"},"name":"09265626329","born_num":"264","__v":0}
+{"_id":{"$oid":"67ce5515919af516f0962abd"},"agent_name":"WP","created":{"$date":"2025-03-10T02:57:25.844Z"},"name":"09425535308","born_num":"308","__v":0}
+{"_id":{"$oid":"67d122d11497a17825653b59"},"agent_name":"POL","created":{"$date":"2025-03-12T05:59:45.281Z"},"name":"09696913704","born_num":"711","__v":0}
+{"_id":{"$oid":"67d274ded74a7e1fd2df1342"},"agent_name":"HLHNH","created":{"$date":"2025-03-13T06:02:06.63Z"},"name":"09408932172","born_num":"336","__v":0}
+{"_id":{"$oid":"67d2a456ad67641fd84a3753"},"agent_name":"hnh","created":{"$date":"2025-03-13T09:24:38.297Z"},"name":"ko thi ha","born_num":"1660","__v":0}
+{"_id":{"$oid":"67d3e1e4d74a7e1fd2e34d72"},"agent_name":"NY","created":{"$date":"2025-03-14T07:59:32.299Z"},"name":"ကိုအောင်မွှေး","born_num":"709","__v":0}
+{"_id":{"$oid":"67d5215aad67641fd850820c"},"agent_name":"4UH","created":{"$date":"2025-03-15T06:42:34.774Z"},"name":"09426142478","born_num":"640","__v":0}
+{"_id":{"$oid":"67d52166d74a7e1fd2e7049e"},"agent_name":"4UH","created":{"$date":"2025-03-15T06:42:46.668Z"},"name":"09426142478","born_num":"408","__v":0}
+{"_id":{"$oid":"67d54816d74a7e1fd2e71e91"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:27:50.512Z"},"name":"my","born_num":"709","__v":0}
+{"_id":{"$oid":"67d54863ad67641fd8509dad"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:29:07.945Z"},"name":"my","born_num":"307","__v":0}
+{"_id":{"$oid":"67d54872d74a7e1fd2e71ebe"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:29:22.154Z"},"name":"09755455458","born_num":"908","__v":0}
+{"_id":{"$oid":"67d5487cd74a7e1fd2e71ec8"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:29:32.216Z"},"name":"09755455458","born_num":"097","__v":0}
+{"_id":{"$oid":"67d54892ad67641fd8509dcd"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:29:54.064Z"},"name":"09755455458","born_num":"592","__v":0}
+{"_id":{"$oid":"67d5489bd74a7e1fd2e71ee8"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:30:03.307Z"},"name":"09755455458","born_num":"422","__v":0}
+{"_id":{"$oid":"67d54a2bd74a7e1fd2e7202e"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:36:43.512Z"},"name":"09899436743","born_num":"625","__v":0}
+{"_id":{"$oid":"67d54a72d74a7e1fd2e72045"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:37:54.289Z"},"name":"09755455458","born_num":"9692","__v":0}
+{"_id":{"$oid":"67d54a77d74a7e1fd2e7204a"},"agent_name":"ksl","created":{"$date":"2025-03-15T09:37:59.418Z"},"name":"GGH","born_num":"939","__v":0}
+{"_id":{"$oid":"67d54d97d74a7e1fd2e722c8"},"agent_name":"MYHNH","created":{"$date":"2025-03-15T09:51:19.872Z"},"name":"09899436743","born_num":"427","__v":0}
+{"_id":{"$oid":"67d635a7d74a7e1fd2e8402d"},"agent_name":"SS","created":{"$date":"2025-03-16T02:21:27.733Z"},"name":"09669490131","born_num":"353","__v":0}
+{"_id":{"$oid":"67d635b9d74a7e1fd2e840db"},"agent_name":"SS","created":{"$date":"2025-03-16T02:21:45.513Z"},"name":"09669490131","born_num":"402","__v":0}
+{"_id":{"$oid":"67d7849bd74a7e1fd2ec3b40"},"agent_name":"HLHNH","created":{"$date":"2025-03-17T02:10:35.785Z"},"name":"09796536361","born_num":"361","__v":0}
+{"_id":{"$oid":"67d78f84d74a7e1fd2ec5532"},"agent_name":"KSPHNH","created":{"$date":"2025-03-17T02:57:08.581Z"},"name":"560U lay","born_num":"630","__v":0}
+{"_id":{"$oid":"67d78f93ad67641fd857275d"},"agent_name":"KSPHNH","created":{"$date":"2025-03-17T02:57:23.159Z"},"name":"560 ulay","born_num":"305","__v":0}
+{"_id":{"$oid":"67d78f99d74a7e1fd2ec5570"},"agent_name":"KSPHNH","created":{"$date":"2025-03-17T02:57:29.784Z"},"name":"560 ulay","born_num":"636","__v":0}
+{"_id":{"$oid":"67d78fa5d74a7e1fd2ec55c9"},"agent_name":"KSPHNH","created":{"$date":"2025-03-17T02:57:41.74Z"},"name":"560 ulay","born_num":"258","__v":0}
+{"_id":{"$oid":"67d7a6f4ad67641fd857f323"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:08.56Z"},"name":"09260941397*","born_num":"224","__v":0}
+{"_id":{"$oid":"67d7a6fad74a7e1fd2ed1e08"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:14.519Z"},"name":"09260941397*","born_num":"359","__v":0}
+{"_id":{"$oid":"67d7a700d74a7e1fd2ed1e82"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:20.693Z"},"name":"09260941397*","born_num":"643","__v":0}
+{"_id":{"$oid":"67d7a706ad67641fd857f4c5"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:26.551Z"},"name":"09260941397*","born_num":"541","__v":0}
+{"_id":{"$oid":"67d7a70cad67641fd857f538"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:32.299Z"},"name":"09260941397*","born_num":"948","__v":0}
+{"_id":{"$oid":"67d7a713ad67641fd857f605"},"agent_name":"ksl","created":{"$date":"2025-03-17T04:37:39.505Z"},"name":"09260941397*","born_num":"807","__v":0}
+{"_id":{"$oid":"67d7ac80d74a7e1fd2ed9b3b"},"agent_name":"UHPL","created":{"$date":"2025-03-17T05:00:48.381Z"},"name":"09267050510","born_num":"722","__v":0}
+{"_id":{"$oid":"67d7b030ad67641fd858b928"},"agent_name":"UH","created":{"$date":"2025-03-17T05:16:32.069Z"},"name":"09261551501","born_num":"134","__v":0}
+{"_id":{"$oid":"67d7b036d74a7e1fd2edeee9"},"agent_name":"UH","created":{"$date":"2025-03-17T05:16:38.231Z"},"name":"09261551501","born_num":"134","__v":0}
+{"_id":{"$oid":"67d7b7d2ad67641fd858f6f4"},"agent_name":"MKHNH","created":{"$date":"2025-03-17T05:49:06.179Z"},"name":"09256693593","born_num":"1980","__v":0}
+{"_id":{"$oid":"67d7bf60d74a7e1fd2ee1eaf"},"agent_name":"WM","created":{"$date":"2025-03-17T06:21:20.653Z"},"name":"1919anti","born_num":"315","__v":0}
+{"_id":{"$oid":"67d7c934ad67641fd85936c8"},"agent_name":"WP","created":{"$date":"2025-03-17T07:03:16.364Z"},"name":"09403735811","born_num":"938","__v":0}
+{"_id":{"$oid":"67d7d1e5ad67641fd8595369"},"agent_name":"UHPL","created":{"$date":"2025-03-17T07:40:21.258Z"},"name":"p","born_num":"117","__v":0}
+{"_id":{"$oid":"67d7d6a8ad67641fd8596d76"},"agent_name":"4UH","created":{"$date":"2025-03-17T08:00:40.268Z"},"name":"357ama","born_num":"0684","__v":0}
+{"_id":{"$oid":"67d7f472d74a7e1fd2efdc55"},"agent_name":"4UH","created":{"$date":"2025-03-17T10:07:46.422Z"},"name":"09456873482","born_num":"619","__v":0}
