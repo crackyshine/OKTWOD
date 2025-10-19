@@ -25,6 +25,7 @@ ROUTER.post('/cut_numbers',VALIDATOR.validateBody(SCHEMA.check_cut_date),CONTROL
 ROUTER.post('/cut_by_name_three_d',VALIDATOR.validateBody(SCHEMA.cut_number_three_d),CONTROLLER.cutByNameThreeD);
 ROUTER.post('/cut_by_name',VALIDATOR.validateBody(SCHEMA.cut_number),CONTROLLER.cutByName);
 ROUTER.post('/all_cut_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutNumber);
+ROUTER.post('/all_kyat_cut_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllKyatCutNumber);
 ROUTER.post('/all_cut_win_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutWinNumbers);
 ROUTER.post('/all_cut_win_k_numbers',VALIDATOR.validateBody(SCHEMA.check_date),CONTROLLER.laoAllCutWinKNumbers);
 ROUTER.post('/cash_voucher',VALIDATOR.validateBody(SCHEMA.check_id),CONTROLLER.cashVoucher);
@@ -36,5 +37,10 @@ ROUTER.post('/lao_final_ledger_k',VALIDATOR.validateBody(SCHEMA.check_date),CONT
 ROUTER.post('/remark',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkLao);
 ROUTER.post('/remark_k',VALIDATOR.validateBody(SCHEMA.check_remark),CONTROLLER.remarkKLao);
 ROUTER.post('/balance_ledger',VALIDATOR.validateBody(SCHEMA.check_between_date),CONTROLLER.balanceLedger);
+ROUTER.post('/cut_kyat_numbers',VALIDATOR.validateBody(SCHEMA.check_cut_date),CONTROLLER.laoKyatCutNumber);
+ROUTER.post('/cut_by_name_three_d_kyat',VALIDATOR.validateBody(SCHEMA.cut_number_three_d),CONTROLLER.cutByNameThreeDKyat);
+ROUTER.post('/lao_cash_ledgers',CONTROLLER.laoCashLedgers);
+ROUTER.post('/lao_pre_pay_balance',CONTROLLER.laoPrePayBalance);
+ROUTER.post('/lao_shop_amount',CONTROLLER.laoShopAmount);
 module.exports = ROUTER;
 

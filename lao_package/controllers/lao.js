@@ -27,17 +27,32 @@ let SAVE_CUT_LAO = async (items, name, win_date) => {
 }
 let SAVE_CUT_LAO_K = async (items, name, win_date) => {
     for await (let item of items) {
-        let data = await DB.LAO_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }, { original_amount: item.original_amount }] });
-        if (data) {
-            await DB.LAO_CUT_NUMBER_DB.updateOne({ _id: data._id }, { $inc: { bet_amount: item.original_amount } });
+        if (item.num.length == 3) {
+            data = await DB.LAO_KYAT_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }] });
+            if (data) {
+                await DB.LAO_KYAT_CUT_NUMBER_DB.updateOne({ _id: data._id }, { $inc: { bet_amount: item.bet_amount } });
+            } else {
+                await DB.LAO_KYAT_CUT_NUMBER_DB({
+                    name: name,
+                    win_date: win_date,
+                    bet_num: item.num,
+                    original_amount: item.bet_amount,
+                    bet_amount: item.bet_amount,
+                }).save();
+            }
         } else {
-            await DB.LAO_CUT_NUMBER_DB({
-                name: name,
-                win_date: win_date,
-                bet_num: item.num,
-                original_amount: item.original_amount,
-                bet_amount: item.original_amount,
-            }).save();
+            let data = await DB.LAO_CUT_NUMBER_DB.findOne({ $and: [{ name: name }, { win_date: win_date }, { bet_num: item.num }, { original_amount: item.original_amount }] });
+            if (data) {
+                await DB.LAO_CUT_NUMBER_DB.updateOne({ _id: data._id }, { $inc: { bet_amount: item.original_amount } });
+            } else {
+                await DB.LAO_CUT_NUMBER_DB({
+                    name: name,
+                    win_date: win_date,
+                    bet_num: item.num,
+                    original_amount: item.original_amount,
+                    bet_amount: item.original_amount,
+                }).save();
+            }
         }
     }
 }
@@ -204,10 +219,10 @@ let checkLaoKNumber = async (req, res, next) => {
         let price_items = setting.lao;
         price_items = _.indexBy(price_items, 'amount_k');
         for (let item of items) {
-            if (item.num.length == 3) {
-                next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
-                return;
-            }
+            // if (item.num.length == 3) {
+            //     next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
+            //     return;
+            // }
             if (item.num.includes(' ')) {
                 next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
                 return;
@@ -313,10 +328,10 @@ let saveLaoKNumber = async (req, res, next) => {
         let price_items = setting.lao;
         price_items = _.indexBy(price_items, 'amount_k');
         for (let item of items) {
-            if (item.num.length == 3) {
-                next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
-                return;
-            }
+            // if (item.num.length == 3) {
+            //     next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
+            //     return;
+            // }
             if (item.num.includes(' ')) {
                 next(new Error(`${item.num} မှားယွင်းနေပါသည်။`));
                 return;
@@ -334,7 +349,7 @@ let saveLaoKNumber = async (req, res, next) => {
         if (count) {
             name = "HNH";
         }
-        let data = await LAO_GEN.checkLaoNumber(items, win_date, name, setting, price_items);
+        let data = await LAO_GEN.checkLaoKNumber(items, win_date, name, setting, price_items);
         if (data.confirm) {
             res.send({ status: 1, data: data });
             return;
@@ -406,7 +421,7 @@ let getLaoTicketLedger = async (req, res, next) => {
         });
 
     } catch (error) {
-        console.log("Error From getLaoTicketLedger => ", error);
+        console.log("Error§§±±'' From getLaoTicketLedger => ", error);
         next(new Error(process.env.connect_dev));
     }
 }
@@ -701,7 +716,7 @@ let laoKTableNumber = async (req, res, next) => {
     }
 }
 
-let saveLaoKyatWinNumer = async (win_number, setting) => {
+let saveLaoKyatWinNumer = async (win_number, setting, agents) => {
     let tickets = await DB.LAO_KYAT_TICKET_DB.find({
         $and: [
             { "delete.is_delete": false },
@@ -714,14 +729,28 @@ let saveLaoKyatWinNumer = async (win_number, setting) => {
         let items = ticket.items;
         let win_amount = 0;
         items.forEach((item) => {
-            const { win_item, is_win } = RULE.calculateWinKNumber(win_number, item, price_items);
-            if (is_win) {
-                item.win.amount = win_item.win.amount;
-                item.win.str = win_item.win.str;
-                win_amount += win_item.win.amount;
+            if (item.num.length == 3) {
+                if (item.num == win_number.toString().substr(1, 4)) {
+                    let agent = agents[ticket.agent.id];
+                    item.win.str = "လာအို (ချဲ)";
+                    if (agent.is_permission == true) {
+                        item.win.amount = Math.ceil(((item.bet_amount * setting.three_d.win_percent) / 14) * 13);
+                        win_amount += Math.ceil(((item.bet_amount * setting.three_d.win_percent) / 14) * 13);
+                    } else {
+                        item.win.amount = item.bet_amount * setting.three_d.win_percent;
+                        win_amount += item.bet_amount * setting.three_d.win_percent;
+                    }
+                }
             } else {
-                item.win.amount = 0;
-                item.win.str = "";
+                const { win_item, is_win } = RULE.calculateWinKNumber(win_number, item, price_items);
+                if (is_win) {
+                    item.win.amount = win_item.win.amount;
+                    item.win.str = win_item.win.str;
+                    win_amount += win_item.win.amount;
+                } else {
+                    item.win.amount = 0;
+                    item.win.str = "";
+                }
             }
         });
         await DB.LAO_KYAT_TICKET_DB.findByIdAndUpdate(ticket._id, {
@@ -739,13 +768,40 @@ let saveLaoWinNumber = async (req, res, next) => {
         let agents = await DB.UserDB.find();
         agents = _.indexBy(agents, '_id');
         let setting = await DB.LAO_SETTING_DB.findOne({ show_id: 0 });
+        await DB.LAO_TICKET_DB.updateMany({
+            $and: [
+                { "delete.is_delete": false },
+                { "date.win": setting.win_date }
+            ]
+        }, {
+            $set: {
+                "items.$[].win.str": "",
+                "items.$[].win.amount": 0,
+                "status.cash": false,
+                "status.finish": false,
+                "amount.win": 0,
+            }
+        });
+        await DB.LAO_KYAT_TICKET_DB.updateMany({
+            $and: [
+                { "delete.is_delete": false },
+                { "date.win": setting.win_date }
+            ]
+        }, {
+            $set: {
+                "items.$[].win.str": "",
+                "items.$[].win.amount": 0,
+                "status.cash": false,
+                "status.finish": false,
+                "amount.win": 0,
+            }
+        });
         let tickets = await DB.LAO_TICKET_DB.find({
             $and: [
                 { "delete.is_delete": false },
                 { "date.win": setting.win_date }
             ]
         });
-
         let price_items = setting.lao;
         price_items = _.indexBy(price_items, 'amount');
         for await (let ticket of tickets) {
@@ -754,6 +810,7 @@ let saveLaoWinNumber = async (req, res, next) => {
             items.forEach((item) => {
                 if (item.num.length == 3) {
                     if (item.num == win_number.toString().substr(1, 4)) {
+                        console.log(item.num, win_number.toString().substr(1, 4));
                         let agent = agents[ticket.agent.id];
                         item.win.str = "လာအို (ချဲ)";
                         if (agent.is_permission == true) {
@@ -785,7 +842,7 @@ let saveLaoWinNumber = async (req, res, next) => {
                 "status.finish": true,
             });
         }
-        await saveLaoKyatWinNumer(win_number, setting);
+        await saveLaoKyatWinNumer(win_number, setting, agents);
         let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: setting.win_date });
         if (win_data) {
             await DB.LAO_WIN_NUMBER_DB.updateOne({ _id: win_data._id }, { $set: { win_number: win_number } });
@@ -811,7 +868,7 @@ let saveLaoWinNumber = async (req, res, next) => {
 let winNumberLedger = async (req, res, next) => {
     try {
         let data = await DB.LAO_WIN_NUMBER_DB.find().sort({ created: -1 }).limit(306);
-        data =_.sortBy(data,'win_date');
+        data = _.sortBy(data, 'win_date');
         data = _.pluck(data, 'win_number');
         res.send({
             status: 1,
@@ -985,15 +1042,33 @@ let laoAllCutNumber = async (req, res, next) => {
     try {
         let search_date = req.body.search_date;
         search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
-        let win_number ="";
-        let win_data =await DB.LAO_WIN_NUMBER_DB.findOne({win_date:search_date});
-        if(win_data){
-            win_number =win_data.win_number;
+        let win_number = "";
+        let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: search_date });
+        if (win_data) {
+            win_number = win_data.win_number;
         }
         let data = await DB.LAO_CUT_NUMBER_DB.find({ win_date: search_date });
         data = _.filter(data, (e) => e.bet_amount > 0);
         data = _.groupBy(data, 'name');
-        res.send({ status: 1, data:{items:data,win_number} });
+        res.send({ status: 1, data: { items: data, win_number } });
+    } catch (error) {
+        console.log("Error From laoCutNumber => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+let laoAllKyatCutNumber = async (req, res, next) => {
+    try {
+        let search_date = req.body.search_date;
+        search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
+        let win_number = "";
+        let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: search_date });
+        if (win_data) {
+            win_number = win_data.win_number;
+        }
+        let data = await DB.LAO_KYAT_CUT_NUMBER_DB.find({ win_date: search_date });
+        data = _.filter(data, (e) => e.bet_amount > 0);
+        data = _.groupBy(data, 'name');
+        res.send({ status: 1, data: { items: data, win_number } });
     } catch (error) {
         console.log("Error From laoCutNumber => ", error);
         next(new Error(process.env.connect_dev));
@@ -1083,6 +1158,20 @@ let laoAllCutWinKNumbers = async (req, res, next) => {
                 }
             }
         });
+        let three_cut_data = await DB.LAO_KYAT_CUT_NUMBER_DB.find({ win_date: search_date });
+        three_cut_data = _.filter(three_cut_data, (e) => e.bet_amount != 0);
+        three_cut_data.forEach((item) => {
+            if (item.bet_num == win_number.toString().substr(1, 4)) {
+                data.push({
+                    name: item.name,
+                    bet_num: item.bet_num,
+                    type: "3D",
+                    win_amount: item.bet_amount * setting.three_d.win_percent,
+                    win_str: "လာအို (ခ်ဲ)"
+                });
+            }
+        });
+
         res.send({ status: 1, data });
 
     } catch (error) {
@@ -1102,6 +1191,11 @@ let cashVoucher = async (req, res, next) => {
         await DB.LAO_TICKET_DB.updateOne({ _id: data._id }, {
             $set: {
                 "status.cash": true
+            }
+        });
+        await DB.LAO_CASH_LEDGER.updateOne({ $and: [{ name: auth_user.name }, { win_date: data.date.win }] }, {
+            $inc: {
+                cash_amount: data.amount.win
             }
         });
         res.send({
@@ -1382,13 +1476,13 @@ let getProfitKLedger = async (req, res, next) => {
                             if (amount_items[`${item.bet_amount}`].amount == 150) {
                                 // user_data.bet += 130;
                                 // user_data.real_bet += 130;
-                                user_data.com += 20;
+                                user_data.com += 2000;
                             } else if (amount_items[`${item.bet_amount}`].amount == 100) {
                                 // user_data.bet += 90;
-                                user_data.com += 15;
+                                user_data.com += 1500;
                             } else if (amount_items[`${item.bet_amount}`].amount == 60) {
                                 // user_data.bet += 50;
-                                user_data.com += 10;
+                                user_data.com += 1000;
                             } else if (amount_items[`${item.bet_amount}`].amount == 40) {
                                 // if (user.name == "UH" || user.name == "UHWK") {
                                 //     // user_data.bet += 35;
@@ -1396,7 +1490,7 @@ let getProfitKLedger = async (req, res, next) => {
                                 //     // user_data.bet += 30;
                                 //     user_data.com += 5;
                                 // }
-                                user_data.com += 5;
+                                user_data.com += 500;
                             }
                             user_data.bet += item.bet_amount;
                             user_data.real_bet += item.bet_amount;
@@ -1677,6 +1771,151 @@ let balanceLedger = async (req, res, next) => {
         next(new Error(process.env.CONNECT_DEV));
     }
 }
+
+
+let laoKyatCutNumber = async (req, res, next) => {
+    try {
+        let search_date = req.body.search_date;
+        search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
+        let data = await DB.LAO_KYAT_CUT_NUMBER_DB.find({ $and: [{ win_date: search_date }, { bet_amount: { $gt: 0 } }] });
+        data = _.filter(data, (e) => e.bet_amount != 0);
+        data = _.filter(data, (e) => e.bet_num.length == 3);
+        data = _.groupBy(data, 'name');
+        let return_data = {};
+        for (const [key, value] of Object.entries(data)) {
+            let inner_list = [];
+            for (let item of value) {
+                inner_list.push({ bet_num: item.bet_num, bet_amount: item.bet_amount });
+            }
+            return_data[key] = inner_list;
+        }
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From laoCutNumber => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+
+let cutByNameThreeDKyat = async (req, res, next) => {
+    try {
+        let from = req.body.from;
+        let to = req.body.to;
+        let search_date = req.body.search_date;
+        search_date = MOMENT(Date.parse(search_date)).tz("Asia/Rangoon").startOf('days');
+        let items = req.body.items;
+        let from_cut_number = await DB.LAO_KYAT_CUT_NUMBER_DB.find({ $and: [{ win_date: search_date }, { name: from }] });
+        let to_cut_number = await DB.LAO_KYAT_CUT_NUMBER_DB.find({ $and: [{ win_date: search_date }, { name: to }] });
+        from_cut_number = _.filter(from_cut_number, (e) => e.bet_num.length == 3);
+        to_cut_number = _.filter(to_cut_number, (e) => e.bet_num.length == 3);
+        from_cut_number = _.indexBy(from_cut_number, 'bet_num');
+        to_cut_number = _.indexBy(to_cut_number, 'bet_num');
+        for await (let item of items) {
+            if (item.num in from_cut_number) {
+                let f_item = from_cut_number[item.num];
+                if (item.num in to_cut_number) {
+                    let t_item = to_cut_number[item.num];
+                    let bet_amount = t_item.bet_amount + item.amount;
+                    await DB.LAO_KYAT_CUT_NUMBER_DB.updateOne({ _id: t_item._id }, { $set: { bet_amount: bet_amount } });
+                } else {
+                    await new DB.LAO_KYAT_CUT_NUMBER_DB(
+                        {
+                            bet_num: item.num,
+                            bet_amount: item.amount,
+                            original_amount: item.amount,
+                            name: to,
+                            win_date: search_date,
+                        }
+                    ).save();
+                }
+                let bm = f_item.bet_amount - item.amount;
+                await DB.LAO_KYAT_CUT_NUMBER_DB.updateOne({ _id: f_item._id }, { $set: { bet_amount: bm } });
+            }
+        }
+        res.send({
+            status: 1,
+            msg: `${to} ဖျတ်ယူထားသော အကွက်များ ကို စရင်းသွင်းပြီးပါပြီ။`
+        });
+    } catch (error) {
+        console.log("Error From cutByNameThreeDKyat => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+
+let laoCashLedgers = async (req, res, next) => {
+    try {
+        let search_date = MOMENT.unix(req.body.search_date).tz("Asia/Rangoon").startOf('days');
+        let data = await DB.LAO_CASH_LEDGER.find({ win_date: search_date }).sort({ win_amount: -1 });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From laoCashLedgers => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+
+let laoPrePayBalance = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let balance = req.body.balance;
+        let remark = req.body.remark;
+        let auth_user = res.locals.auth_user;
+        if (!search_id || !balance || isNaN(balance)) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        let ledger = await DB.LAO_CASH_LEDGER.findOne({ _id: search_id });
+        if (!ledger) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        await DB.LAO_CASH_LEDGER.updateOne({ _id: ledger._id }, {
+            $set: {
+                balance: ledger.balance + parseInt(balance),
+            }, $push: {
+                balance_history: {
+                    amount: balance,
+                    remark: remark,
+                    createdAt: MOMENT().unix(),
+                }
+            }
+        });
+        res.send({ status: 1, msg: "အောင်မြင်ပါသည်။" });
+    } catch (error) {
+        console.log("Error From laoPrePayBalance => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+let laoShopAmount = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let shop_amount = req.body.shop_amount;
+        let remark = req.body.remark;
+        if (!search_id || !shop_amount || isNaN(shop_amount)) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        let ledger = await DB.LAO_CASH_LEDGER.findOne({ _id: search_id });
+        if (!ledger) {
+            res.send({ status: 0, msg: "မအောင်မြင်ပါ။" });
+            return;
+        }
+        await DB.LAO_CASH_LEDGER.updateOne({ _id: ledger._id }, {
+            $set: {
+                shop_amount: ledger.shop_amount + parseInt(shop_amount),
+            }, $push: {
+                shop_history: {
+                    amount: shop_amount,
+                    remark: remark,
+                    createdAt: MOMENT().unix(),
+                }
+            }
+        });
+        res.send({ status: 1, msg: "အောင်မြင်ပါသည်။" });
+    } catch (error) {
+        console.log("Error From laoPrePayBalance => ", error);
+        next(new Error(process.env.connect_dev));
+    }
+}
+
 module.exports = {
     getSetting,
     updateSetting,
@@ -1699,6 +1938,7 @@ module.exports = {
     laoCutNumber,
     cutByName,
     laoAllCutNumber,
+    laoAllKyatCutNumber,
     laoAllCutWinNumbers,
     laoAllCutWinKNumbers,
     cashVoucher,
@@ -1711,5 +1951,10 @@ module.exports = {
     getLaoDeleteTicketLedger,
     remarkLao,
     remarkKLao,
-    balanceLedger
+    balanceLedger,
+    laoKyatCutNumber,
+    cutByNameThreeDKyat,
+    laoCashLedgers,
+    laoPrePayBalance,
+    laoShopAmount
 }

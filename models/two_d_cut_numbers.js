@@ -7,5 +7,6 @@ const twoDCutNumberSchema = new Schema({
     bet_num: {type:String,default:""},
     amount: {type:Number,default:0},
 });
+twoDCutNumberSchema.index({ name: 1, type: 1, win_date:1});
 const TwoDCutNumberDB = MONGO.model('two_d_cut_number', twoDCutNumberSchema);
 module.exports = TwoDCutNumberDB;

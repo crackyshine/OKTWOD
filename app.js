@@ -59,7 +59,7 @@ app.use((err, req, res, next) => {
 
 let getTesting = async () => {
     let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
-    let date = MOMENT(settingData.date).tz("Asia/Rangoon").subtract(1,'days');
+    let date = MOMENT(settingData.date).tz("Asia/Rangoon").subtract(1, 'days');
     const { body } = await got.post("https://www.glo.or.th/api/lottery/getLotteryAward", {
         json: {
             "date": date.format("DD"),
@@ -169,10 +169,24 @@ let insert_date = async () => {
 }
 
 let getLiveData = async () => {
+    
+    schedule.schedule('0 0 15 * * *', async () => {
+        // schedule.schedule('* * * * * *', async () => {
+        let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
+        let users = await DB.UserDB.find();
+        users = _.indexBy(users, "_id");
+        await SAVE_DAILY_LEDGER(search_date, users);
+        await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
+    });
+
 
     // schedule.schedule('0-30 12 1,16 * *', async () => {
     // schedule.schedule('30-50 * 7 30,16 * *', async () => {
-    schedule.schedule('0-20 * 7-8 1,16 * *', async () => {
+    
+    
+    
+    
+        schedule.schedule('0-20 * 7-8 1,16 * *', async () => {
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (!data) {
@@ -759,6 +773,7 @@ let getBornNumber = async () => {
 }
 
 const fs = require('fs');
+const internal = require('stream');
 const storage = file => "./migrations/backups/" + file + ".json";
 const writeFile = async (file, data) => await fs.writeFileSync(file, JSON.stringify(data), "utf8");
 const readFile = async (file) => JSON.parse(await fs.readFileSync(file, 'utf8'));
@@ -868,7 +883,7 @@ let UPDATE_LAO_SETTING = async () => {
 // }
 
 
-let CHANGE_LAO_DATE=async()=>{
+let CHANGE_LAO_DATE = async () => {
     let old_date = MOMENT("2025-03-10").tz("Asia/Rangoon").startOf("days");
     let new_date = MOMENT("2025-03-12").tz("Asia/Rangoon").startOf("days");
     // let old_data =await DB.LAO_CUT_NUMBER_DB.find({win_date:old_date});
@@ -895,7 +910,7 @@ let CHANGE_LAO_DATE=async()=>{
     //         }
     //     }
     // }
-    await DB.LAO_KYAT_TICKET_DB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
+    await DB.LAO_KYAT_TICKET_DB.updateMany({ "date.win": old_date }, { $set: { "date.win": new_date } });
     console.log("Change Date Success");
 };
 
@@ -954,19 +969,48 @@ let CHANGE_LAO_DATE=async()=>{
 // }
 
 let CHANGE_TWO_D_DATE = async () => {
-    // let old_date = MOMENT("2024-10-14").tz("Asia/Rangoon").startOf("days");
-    // let new_date = MOMENT("2024-10-15").tz("Asia/Rangoon").startOf("days");
+    // let old_date = MOMENT("2025-03-28").tz("Asia/Rangoon").startOf("days");
+    let new_date = MOMENT("2025-05-16").tz("Asia/Rangoon").startOf("days");
+    let data = await DB.TwoDNumberDB.find({ $and: [{ "date.win": new_date }, { type: "EVENING" }, { "delete.is_delete": false }] });
+    let dd = await DB.TwoDCutNumber.deleteMany({ $and: [{ "win_date": new_date }, { type: "EVENING" }] });
+    console.log(dd);
+
+    // console.log(data.length);
+    // let count = 0;
+    for await (let d of data) {
+        if (d.delete.is_delete == false) {
+            let items = d.items;
+            for (let item of items) {
+                let result = await DB.TwoDCutNumber.findOne({ $and: [{ "win_date": new_date }, { type: "EVENING" }, { name: "Company" }, { bet_num: item.num }] });
+                if (!result) {
+                    let new_data = DB.TwoDCutNumber();
+                    new_data.name = "Company";
+                    new_data.type = "EVENING";
+                    new_data.bet_num = item.num;
+                    new_data.win_date = new_date;
+                    new_data.amount = item.bet_amount;
+                    await new_data.save();
+                } else {
+                    await DB.TwoDCutNumber.updateOne({ _id: result._id }, { $inc: { amount: item.bet_amount } });
+                }
+                // console.log("Done ", item.num,item.bet_amount)
+            }
+        }
+        console.log("Done count");
+    }
+
+
     // let old_cut_date = await DB.TwoDCutNumber.find({ win_date: old_date });
     // for(let item of old_cut_date){
     // let c =await DB.TwoDCutNumber.updateOne({win_date:new_date,type:item.type,bet_num:item.bet_num},{$inc:{amount:item.amount}});
     // }
     // let delete_data = await DB.TwoDCutNumber.deleteMany({ win_date: old_date });
     // console.log(delete_data);
-    // let old_data =await DB.TwoDNumberDB.updateMany({"date.win":old_date},{$set:{"date.win":new_date}});
+    // let old_data =await DB.TwoDNumberDB.updateMany({$and:[{"date.win":old_date},{type:"EVENING"}]},{$set:{"date.win":new_date,type:"MORNING"}});
+    // let old_data =await DB.TwoDCutNumber.updateMany({$and:[{"win_date":old_date},{type:"EVENING"},{"name":"Company"}]},{$set:{"win_date":new_date,type:"MORNING",bet_amount:0}});
     // console.log(old_data);
     console.log("OKK");
 }
-
 
 // let CHANGE_LAO_KYAT_DATE_WIN_DATE = async () => {
 //     let old_date = MOMENT("2024-05-02").tz("Asia/Rangoon").startOf("days");
@@ -1209,7 +1253,7 @@ let DELETE_THAI_LEDGER_RESTORE = async () => {
     let exist_ledgers = await DB.THAI_EXTRA.find({ "device.delete": { $ne: "" } });
     let ids = _.pluck(exist_ledgers, 'ticket_id');
     let ledgers = await DB.THAI_LEDGER.find({ $and: [{ _id: { $in: Array.from(new Set(ids)) } }, { status: "WIN" }] });
-    let count =1;
+    let count = 1;
     for (let ledger of ledgers) {
         await DB.THAI_CASH_LEDGER.updateOne({ user_id: ledger.income.user_id }, {
             $inc: {
@@ -1228,9 +1272,237 @@ let DELETE_THAI_LEDGER_RESTORE = async () => {
                 prizes: []
             }
         });
-        console.log("Update One",count++);
+        console.log("Update One", count++);
     }
     console.log("OK")
+}
+
+let deleteNumberByDate = async () => {
+    let date_str = "2025-09-27";
+    let thai_str = "2025-09-16";
+    let delete_date = MOMENT(date_str).tz("Asia/Rangoon").startOf("days");
+    let thai_date = MOMENT(thai_str).tz("Asia/Rangoon").startOf("days").unix();
+    await DB.LAO_CUT_NUMBER_DB.deleteMany({ win_date: { $lte: delete_date } });
+    await DB.LAO_TICKET_DB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    await DB.LAO_KYAT_TICKET_DB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    await DB.THREE_D_CUT_NUMBER_DB.deleteMany({ win_date: { $lte: delete_date } });
+    await DB.THREE_D_CUT_KYAT_NUMBER_DB.deleteMany({ win_date: { $lte: delete_date } });
+    await DB.THREE_D_TICKET_DB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    await DB.THREE_D_KYAT_TICKET_DB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    await DB.TwoDCutNumber.deleteMany({ win_date: { $lte: delete_date } });
+    await DB.TwoDKyatCutNumber.deleteMany({ win_date: { $lte: delete_date } });
+    await DB.TwoDNumberDB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    await DB.TwoDKyatNumberDB.deleteMany({ $and: [{ "date.win": { $lte: delete_date } }, { $or: [{ "status.cash": true }, { "amount.win": 0 }, { "delete.is_delete": true }] }] });
+    let data = await DB.THAI_LEDGER.find({ $and: [{ "win_date": { $lte: thai_date } }, { $or: [{ "status": "COMPANY" }, { "win_amount.total": 0 }] }] });
+    let _ids = _.pluck(data, '_id');
+    await DB.THAI_EXTRA.deleteMany({ ticket_id: { $in: Array.from(new Set(_ids)) } });
+    await DB.THAI_LEDGER.deleteMany({ _id: { $in: Array.from(new Set(_ids)) } });
+    console.log("Delete Done");
+}
+
+let CREATE_DAILY_USER = async () => {
+    let users = await DB.UserDB.find();
+    for (let user of users) {
+        let save_data = new DB.DAILY_LEDGER();
+        save_data.user_id = user._id;
+        save_data.name = user.name;
+        await save_data.save();
+    }
+    console.log("Save Daily User Successful!");
+}
+
+let SAVE_LAO_WIN_CASH_LEDGER = async (search_date, users) => {
+    let setting = await DB.LAO_SETTING_DB.findOne();
+    let win_date = setting.win_date;
+    if (MOMENT(win_date).isSame(search_date, 'day')) {
+        await DB.LAO_CASH_LEDGER.deleteMany({ win_date: win_date });
+        let ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "date.win": win_date }, { "delete.is_delete": false }, { "amount.win": { $gt: 0 } }] });
+        ledgers = _.groupBy(ledgers, (e) => e.agent.id);
+        for (const [agentId, items] of Object.entries(ledgers)) {
+            let user = users[agentId];
+            let total = 0;
+            for (let item of items) {
+                total += item.amount.win;
+            }
+            let save_data = new DB.LAO_CASH_LEDGER();
+            save_data.user_id = user._id;
+            save_data.name = user.name;
+            save_data.win_amount = total;
+            save_data.win_date = win_date;
+            await save_data.save();
+        }
+        console.log("Save Lao Win Cash Ledger Done");
+    }
+}
+
+let SAVE_DAILY_LEDGER = async (search_date, users) => {
+    await saveTwoD(search_date, users);
+    await saveThreeDKyat(search_date, users);
+    await saveThreeD(search_date, users);
+    await saveFourD(search_date, users);
+    await saveSixD(search_date, users);
+    console.log("Update Daily Ledger Done");
+}
+
+let saveSixD = async (search_date) => {
+    search_date = search_date.unix();
+    let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
+    six_d_ledgers = _.groupBy(six_d_ledgers, (e) => e.sold_out.user_id);
+    for (const [agentId, ledgers] of Object.entries(six_d_ledgers)) {
+        let win = 0;
+        let total = 0;
+        for (const ledger of ledgers) {
+            total += ledger.amount.sold_out;
+            win += ledger.win_amount.total;
+        }
+        let amount = total - win;
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { six_d: amount } });
+    }
+}
+
+
+
+let saveFourD = async (search_date, users) => {
+    let two_d_ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+        let user = users[agentId];
+        let name = user.name.toLowerCase();
+        let apo = user.lao_apo / 10;
+        let win = 0;
+        let total = 0;
+        let three_d_total = 0;
+        for (const ledger of ledgers) {
+            if (ledger.amount.win > 0) {
+                win += ledger.amount.win;
+            }
+            for (let item of ledger.items) {
+                let bet = item.bet_amount;
+                if (item.num.length == 4) {
+                    if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+                        if (bet == 150) {
+                            total += 130;
+                        } else if (bet == 100) {
+                            total += 85;
+                        } else if (bet == 60) {
+                            total += 50;
+                        } else if (bet == 40) {
+                            total += 35;
+                        }
+                    } else {
+                        total += bet;
+                    }
+                } else {
+                    three_d_total += bet;
+                    // let real_cash = bet / apo;
+                    // let com = real_cash - (bet * 0.6);
+                    // total += real_cash - com;
+                }
+            }
+        }
+        if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+            total += parseInt(three_d_total * 0.6);
+        } else {
+            total += parseInt(three_d_total / apo);
+        }
+        let amount = parseInt(total) - win;
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { lao: amount } });
+    }
+}
+
+let saveThreeDKyat = async (search_date, users) => {
+    let two_d_ledgers = await DB.THREE_D_KYAT_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+        let user = users[agentId];
+        let apo = user.lao_apo / 10;
+        let win = 0;
+        let total = 0;
+        for (const ledger of ledgers) {
+            for (item of ledger.items) {
+                if (item.num.length == 3) {
+                    total += item.bet_amount;
+                    win += item.win_amount;
+                }
+            }
+        }
+        // let real_cash = total / apo;
+        // let com = real_cash - (total * 0.6);
+        // let amount = parseInt(real_cash - com) - win;
+        let name = user.name.toLowerCase();
+        if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+            total = parseInt(total * 0.6);
+        } else {
+            total = parseInt(total / apo);
+        }
+        let amount = parseInt(total) - win;
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { three_d_kyat: amount } });
+    }
+}
+let saveThreeD = async (search_date, users) => {
+    let two_d_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+        let user = users[agentId];
+        let apo = user.thai_apo / 10;
+        let win = 0;
+        let total = 0;
+        let apar_win = 0;
+        let apar_total = 0;
+        for (const ledger of ledgers) {
+            for (item of ledger.items) {
+                if (item.num.length == 3) {
+                    total += item.bet_amount;
+                    win += item.win_amount;
+                } else {
+                    apar_total += item.bet_amount;
+                    apar_win += item.win_amount;
+                }
+            }
+        }
+
+        // let real_cash = total / apo;
+        // let com = real_cash - (total * 0.6);
+        // let amount = parseInt(real_cash - com) - win;
+        let name = user.name.toLowerCase();
+        if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+            total = parseInt(total * 0.6);
+        } else {
+            total = parseInt(total / apo);
+        }
+        let amount = parseInt(total) - win;
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { three_d_baht: amount, apar: (apar_total - apar_win) } });
+    }
+}
+
+let saveTwoD = async (search_date, users) => {
+    let two_d_ledgers = await DB.TwoDNumberDB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+        let user = users[agentId];
+        let win = 0;
+        let total = 0;
+        for (const ledger of ledgers) {
+            total += ledger.amount.total;
+            win += ledger.amount.win;
+        }
+        let name = user.name.toLowerCase();
+        if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+            total = parseInt(total * 0.9);
+        }
+        let amount = parseInt(total) - win;
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { two_d: amount } });
+    }
+}
+
+let manualDailyLedger =async()=>{
+    let search_date = MOMENT("2025-09-16").tz("Asia/Rangoon").startOf("days");
+    // let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, "_id");
+    await SAVE_DAILY_LEDGER(search_date, users);
+    await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
+    console.log("DONE.");
 }
 
 http.listen(process.env.PORT, async () => {
@@ -1245,6 +1517,12 @@ http.listen(process.env.PORT, async () => {
     // await CHANGE_EXTRA();
     // await new DB.SIMPLE_PRICE_SETTING().save();
     // await DELETE_THAI_LEDGER_RESTORE();
+    // getLiveData();
+    // await deleteNumberByDate();
+    // await CREATE_DAILY_USER();
+    // await SAVE_DAILY_LEDGER();
+    // await SAVE_LAO_WIN_CASH_LEDGER();
+    // await manualDailyLedger();
     console.log("Server start ", process.env.PORT);
 });
 

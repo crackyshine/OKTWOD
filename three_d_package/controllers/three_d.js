@@ -597,7 +597,6 @@ let threeDWinNumbers = async (req, res, next) => {
 let updateThreeDSetting = async (req, res, next) => {
     try {
         let update_data = req.body;
-        console.log(update_data);
         await DB.THREE_D_SETTING_DB.updateOne({ show_id: 0 }, { $set: update_data })
         res.send({
             status: 1,

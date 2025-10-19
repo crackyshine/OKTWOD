@@ -19,7 +19,7 @@ let validateAuthToken = async (req, res, next) => {
                 }
             }
             // if(auth_user.is_owner ==false && is_confirm ==false){
-            if (auth_user.is_owner == false && auth_user.name != "MKHNH" && auth_user.name != "ksl" && is_confirm == false) {
+            if (auth_user.is_owner == false && auth_user.name != "WKS" && auth_user.name != "PHT" && auth_user.name != "MKHNH" && auth_user.name != "ksl" && is_confirm == false) {
                 res.send({ status: 0, msg: "ဝင်ခွင့်မရှိပါ။" });
                 return;
             }

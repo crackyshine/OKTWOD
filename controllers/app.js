@@ -3178,14 +3178,16 @@ let checkTwoDNumbers = async (req, res) => {
             return;
         }
         let data = [];
+        let item_num = _.pluck(items, 'num');
         for (let item of items) {
             if (item.num.includes(' ')) {
                 res.send({ status: 0, msg: `${item.num} မှားယွင်းနေပါသည်။` });
                 return;
             }
         }
+        let response = await DB.TwoDNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": { $in: item_num } }, { "delete.is_delete": false }] });
+        let block_numbers = await DB.TwoDBlockNumberDB.findOne({ block_num: { $in: item_num } });
         for await (let item of items) {
-            let response = await DB.TwoDNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": item.num }, { "delete.is_delete": false }] });
             let server_amount = 0;
             let old_bet_amount = 0;
             for (let res of response) {
@@ -3195,10 +3197,15 @@ let checkTwoDNumbers = async (req, res) => {
                 }
 
             }
-            let block_number = await DB.TwoDBlockNumberDB.findOne({ block_num: item.num });
-            if (block_number) {
-                server_amount += block_number.amount;
+            // let block_number = _.find(block_numbers, { block_num: item.num });
+            if (block_numbers) {
+                let block_number = null;
+                block_number = _.find(block_numbers, (b) => b.block_num == item.num);
+                if (block_number) {
+                    server_amount += block_number.amount;
+                }
             }
+
 
             if (data.some(e => e.num === item.num)) {
                 for (let d of data) {
@@ -3218,7 +3225,11 @@ let checkTwoDNumbers = async (req, res) => {
 
         let now = MOMENT(Date.now()).tz("Asia/Rangoon");
         for (let d of data) {
-            let block_number = await DB.TwoDBlockNumberDB.findOne({ block_num: d.num });
+            // let block_number = await DB.TwoDBlockNumberDB.findOne({ block_num: d.num });
+            let block_number = null;
+            if (block_numbers) {
+                block_number = _.find(block_numbers, (b) => b.block_num == d.num);
+            }
             if (d.server_amount >= setting.block_amount) {
                 d.bet_amount = 0;
                 confirm = true;
@@ -3264,8 +3275,10 @@ let checkTwoDKyatNumbers = async (req, res) => {
                 return;
             }
         }
+        let item_num = _.pluck(items, 'num');
+        let response = await DB.TwoDKyatNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": { $in: item_num } }, { "delete.is_delete": false }] });
+        let block_numbers = await DB.TwoDBlockKyatNumberDB.findOne({ block_num: { $in: item_num } });
         for await (let item of items) {
-            let response = await DB.TwoDKyatNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": item.num }, { "delete.is_delete": false }] });
             let server_amount = 0;
             let old_bet_amount = 0;
             for (let res of response) {
@@ -3274,9 +3287,12 @@ let checkTwoDKyatNumbers = async (req, res) => {
                     old_bet_amount += res.items.find(e => e.num == item.num).bet_amount;
                 }
             }
-            let block_number = await DB.TwoDBlockKyatNumberDB.findOne({ block_num: item.num });
-            if (block_number) {
-                server_amount += block_number.amount;
+            if (block_numbers) {
+                let block_number = null;
+                block_number = _.find(block_numbers, (b) => b.block_num == item.num);
+                if (block_number) {
+                    server_amount += block_number.amount;
+                }
             }
 
             if (data.some(e => e.num === item.num)) {
@@ -3297,7 +3313,10 @@ let checkTwoDKyatNumbers = async (req, res) => {
 
         let now = MOMENT(Date.now()).tz("Asia/Rangoon");
         for (let d of data) {
-            let block_number = await DB.TwoDBlockKyatNumberDB.findOne({ block_num: d.num });
+            let block_number = null;
+            if (block_numbers) {
+                block_number = _.find(block_numbers, (b) => b.block_num == d.num);
+            }
             if (d.server_amount >= setting.block_kyat_amount) {
                 d.bet_amount = 0;
                 confirm = true;
@@ -3341,16 +3360,17 @@ let saveTwoDNumber = async (req, res) => {
         }
         let total = 0;
         let now = MOMENT(Date.now()).tz("Asia/Rangoon");
+        
         for (let item of items) {
             if (item.num.includes(' ')) {
                 res.send({ status: 0, msg: `${item.num} မှားယွင်းနေပါသည်။` });
                 return;
             }
         }
-        // let cover_amount = 22000;
-        // let cover_numbers = [];
+        let item_num = _.pluck(items, 'num');
+        let response = await DB.TwoDNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": { $in: item_num } }, { "delete.is_delete": false }] });
+        let block_numbers = await DB.TwoDBlockNumberDB.findOne({ block_num: { $in: item_num } });
         for await (let item of items) {
-            let response = await DB.TwoDNumberDB.find({ $and: [{ type: type }, { "date.win": date }, { "items.num": item.num }, { "delete.is_delete": false }] });
             let server_amount = 0;
             let old_bet_amount = 0;
             for (let res of response) {
@@ -3359,9 +3379,12 @@ let saveTwoDNumber = async (req, res) => {
                     old_bet_amount += res.items.find(e => e.num == item.num).bet_amount;
                 }
             }
-            let block_number = await DB.TwoDBlockNumberDB.findOne({ block_num: item.num });
-            if (block_number) {
-                server_amount += block_number.amount;
+            let block_number = null;
+            if (block_numbers) {
+                block_number = _.find(block_numbers, (b) => b.block_num == item.num);
+                if (block_number) {
+                    server_amount += block_number.amount;
+                }
             }
             if (server_amount >= setting.block_amount) {
                 item.bet_amount = 0;
@@ -3887,9 +3910,9 @@ let getTwoDCutNumbers = async (req, res) => {
         }
         search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
         let win_numbers = await DB.TwoDWinNumberDB.find({ win_date: search_date });
-        win_numbers =_.indexBy(win_numbers,"type");
+        win_numbers = _.indexBy(win_numbers, "type");
         let data = await DB.TwoDCutNumber.find({ win_date: search_date });
-        res.send({ status: 1, data:{items: data, win_numbers} });
+        res.send({ status: 1, data: { items: data, win_numbers } });
     } catch (err) {
         console.log("Error From getTwoDCutNumbers => ", err);
         res.send({ status: 0, msg: process.env.connect_dev });
@@ -3978,9 +4001,9 @@ let getTwoDCutKyatNumbers = async (req, res) => {
         }
         search_date = MOMENT(search_date).tz("Asia/Rangoon").startOf('day');
         let win_numbers = await DB.TwoDWinNumberDB.find({ win_date: search_date });
-        win_numbers =_.indexBy(win_numbers,"type");
+        win_numbers = _.indexBy(win_numbers, "type");
         let data = await DB.TwoDKyatCutNumber.find({ win_date: search_date });
-        res.send({ status: 1, data:{items:data,win_numbers} });
+        res.send({ status: 1, data: { items: data, win_numbers } });
     } catch (err) {
         console.log("Error From getTwoDCutKyatNumbers => ", err);
         res.send({ status: 0, msg: process.env.connect_dev });

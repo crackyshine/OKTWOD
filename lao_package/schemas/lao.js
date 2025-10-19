@@ -10,6 +10,7 @@ let lao_setting = JOI.object({
     three_d: JOI.object({
         win_percent: JOI.number().required().error(new Error("သုံးလုံး အနိုင် ရာခိုင်နှုန်းမှားယွင်းနေပါသည်။")),
         block_amount: JOI.number().required().error(new Error("သုံးလုံး အကန့်အသတ်မှားယွင်းနေပါသည်။")),
+        block_amount_k: JOI.number().required().error(new Error("သုံးလုံး(ကျပ်) အကန့်အသတ်မှားယွင်းနေပါသည်။")),
     }),
     lao_cut_count: JOI.object({
         prize_one: JOI.number().required().error(new Error("35  ဘတ် ဖျတ်ပမာဏ မှားနေပါသည်။")),
@@ -18,6 +19,7 @@ let lao_setting = JOI.object({
         prize_four: JOI.number().required().error(new Error("150  ဘတ် ဖျတ်ပမာဏ မှားနေပါသည်။")),
     }),
     three_d_cut_amount: JOI.number().required().error(new Error("သုံးလုံး ဖျတ်ပမာဏ မှားယွင်းနေပါသည်။")),
+    three_d_cut_amount_k: JOI.number().required().error(new Error("သုံးလုံး(ကျပ်) ဖျတ်ပမာဏ မှားယွင်းနေပါသည်။")),
 });
 let lao_price_item = JOI.object({
     type_name: JOI.string().required().error(new Error("နာမည် မှားယွင်းနေပါသည်။")),

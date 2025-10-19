@@ -24,9 +24,11 @@ const THREE_D_WIN_NUMBER_DB = require('../three_d_package/models/three_d_win_num
 const LAO_SETTING_DB = require('../lao_package/models/lao_settings');
 const LAO_BLOCK_NUMBER_DB = require('../lao_package/models/lao_block_numbers');
 const LAO_CUT_NUMBER_DB = require('../lao_package/models/lao_cut_numbers');
+const LAO_KYAT_CUT_NUMBER_DB = require('../lao_package/models/lao_kyat_cut_numbers');
 const LAO_WIN_NUMBER_DB = require('../lao_package/models/lao_win_numbers');
 const LAO_TICKET_DB = require('../lao_package/models/lao_tickets');
 const LAO_KYAT_TICKET_DB = require('../lao_package/models/lao_kyat_tickets');
+const LAO_CASH_LEDGER = require('../lao_package/models/lao_cash_ledgers');
 const THREE_D_KYAT_TICKET_DB = require("../three_d_kyat_package/models/three_d_kyat_tickets");
 const THREE_D_BLOCK_KYAT_NUMBER_DB = require("../three_d_kyat_package/models/three_d_block_kyat_numbers");
 const THREE_D_CUT_KYAT_NUMBER_DB = require('../three_d_kyat_package/models/three_d_cut_kyat_numbers');
@@ -37,6 +39,10 @@ const SIMPLE_PRICE_SETTING = require('../thai_package/models/simple_price_settin
 const THAI_CASH_LEDGER = require('../thai_package/models/thai_cash_ledgers');
 const THAI_EXTRA = require('../thai_package/models/thai_extras');
 const THAI_OTHER_TICKET_LEDGER = require('../thai_package/models/thai_other_ticket_ledgers');
+const KpiDB = require('../thai_package/models/kpi');
+const SCHAR_CASH_LEDGER_DB = require('../thai_package/models/share_cash_ledgers');
+const DAILY_LEDGER = require('../thai_package/models/daily_ledgers');
+const DAILY_ADMIN_LEDGER = require('../thai_package/models/daily_admin_ledgers');
 module.exports = {
     UserDB,
     SettingDB,
@@ -64,6 +70,7 @@ module.exports = {
     LAO_SETTING_DB,
     LAO_BLOCK_NUMBER_DB,
     LAO_CUT_NUMBER_DB,
+    LAO_KYAT_CUT_NUMBER_DB,
     LAO_WIN_NUMBER_DB,
     LAO_TICKET_DB,
     LAO_KYAT_TICKET_DB,
@@ -76,6 +83,11 @@ module.exports = {
     SIMPLE_PRICE_SETTING,
     THAI_CASH_LEDGER,
     THAI_EXTRA,
-    THAI_OTHER_TICKET_LEDGER
+    THAI_OTHER_TICKET_LEDGER,
+    KpiDB,
+    SCHAR_CASH_LEDGER_DB,
+    DAILY_LEDGER,
+    DAILY_ADMIN_LEDGER,
+    LAO_CASH_LEDGER
 }
 

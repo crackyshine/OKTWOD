@@ -4,7 +4,9 @@ const _ = require("underscore");
 let GEN_KYAT_TO_BAHT =(items,price_items)=>{
     let data =[];
     for(let item of items){
-        item.original_amount =price_items[`${item.original_amount}`].amount;
+        if(item.num.length == 4){
+            item.original_amount =price_items[`${item.original_amount}`].amount;
+        }
         data.push(item);
     }
     return data;
@@ -217,16 +219,27 @@ let checkLaoNumber = async (items, win_date, name, setting, price_items) => {
 
 
 let checkLaoKNumber = async (items, win_date, name, setting, price_items) => {
-    let nums = _.uniq(_.pluck(items, 'num'));
+    let four_nums =_.filter(items, (item) => item.num.length == 4);
+    let three_nums =_.filter(items, (item) => item.num.length == 3);
+    let f_nums = _.uniq(_.pluck(four_nums, 'num'));
+    let t_nums = _.uniq(_.pluck(three_nums, 'num'));
     items =REFORMAT_ITEM(items,name="Company");
-    let exist_tickets = await DB.LAO_CUT_NUMBER_DB.find({
+    let four_exit_tickets = await DB.LAO_CUT_NUMBER_DB.find({
         $and: [
-            { bet_num: { $in: Array.from(new Set(nums)) } },
+            { bet_num: { $in: Array.from(new Set(f_nums)) } },
             { win_date: win_date },
             { name: name },
         ]
     });
-    let gen_items = GEN_ITEMS_K(items, exist_tickets, name == "Company", setting.lao_cut_count);
+    let three_exit_tickets = await DB.LAO_KYAT_CUT_NUMBER_DB.find({
+        $and: [
+            { bet_num: { $in: Array.from(new Set(t_nums)) } },
+            { win_date: win_date },
+            { name: name },
+        ]
+    });
+    let exit_tickets = four_exit_tickets.concat(three_exit_tickets);
+    let gen_items = GEN_ITEMS_K(items, exit_tickets, name == "Company", setting.lao_cut_count);
     let data;
     if (name == "Company") {
         data = await CHECK_BLOCK_COMPANY_ITEMS(gen_items, setting.three_d.block_amount_k, price_items);

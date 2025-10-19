@@ -5,6 +5,15 @@ const USER_GEN = require('../../CKLibby/UserGen');
 const MOMENT = require("moment-timezone");
 const _ = require('underscore');
 const THAI_GEN = require('../libby/thai_gan');
+const { date } = require('joi');
+const { win_number } = require('../../three_d_package/schemas/three_d');
+let checkPermute = (win_num, num) => {
+    let permute_list = UTILS.permute(win_num);
+    if (permute_list.includes(num)) {
+        return true;
+    }
+    return false;
+}
 let getSellTicketLedgers = async (req, res, next) => {
     try {
         let settings = await DB.SettingDB.findOne();
@@ -661,7 +670,7 @@ let getOtherHteeByAgent = async (req, res, next) => {
         let end_date = req.body.end_date;
         start_date = MOMENT.unix(start_date).startOf('days').unix();
         end_date = MOMENT.unix(end_date).endOf('days').unix();
-        let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date } }, { "income.user_id": search_id },{status:{$ne:"DELETE"}}] });
+        let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date } }, { "income.user_id": search_id }, { status: { $ne: "DELETE" } }] });
         res.send({ status: 1, data });
     } catch (error) {
         console.log("Error From getOtherHtee => ", error);
@@ -672,7 +681,7 @@ let getOtherHtee = async (req, res, next) => {
     try {
         let start_date = req.body.start_date;
         let end_date = req.body.end_date;
-        let auth_user =res.locals.auth_user;
+        let auth_user = res.locals.auth_user;
         start_date = MOMENT.unix(start_date).startOf('days').unix();
         end_date = MOMENT.unix(end_date).endOf('days').unix();
         let data = await DB.THAI_OTHER_TICKET_LEDGER.find({ $and: [{ status: { $ne: "DELETE" } }, { "income.user_id": auth_user._id }, { cash_date: { $gte: start_date, $lte: end_date } }] }).sort({ cash_date: -1 });
@@ -777,6 +786,462 @@ let companyOtherHtee = async (req, res, next) => {
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
+
+let getKPI = async (req, res, next) => {
+    try {
+        let start_date = MOMENT.unix(req.body.start_date).startOf('days').unix();
+        let end_date = MOMENT.unix(req.body.end_date).endOf('days').unix();
+        let data = await DB.KpiDB.find({ $and: [{ start: { $gte: start_date, $lte: end_date } }, { end: { $gte: start_date, $lte: end_date } }] });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From getKPI => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let newKPI = async (req, res, next) => {
+    try {
+        let start_date = req.body.start_date;
+        let end_date = req.body.end_date;
+        // let start_date = MOMENT('2025-07-01').startOf('month');
+        // let end_date = MOMENT('2025-07-01').endOf('month');
+        start_date = MOMENT.unix(parseInt(start_date)).tz("Asia/Rangoon").startOf("day");
+        end_date = MOMENT.unix(parseInt(end_date)).tz("Asia/Rangoon").endOf("day");
+        let search_date = `${start_date.unix()}_${end_date.unix()}`;
+        let data = await DB.KpiDB.findOne({ name: search_date });
+        if (!data || data.length == 0) {
+            // start_date = MOMENT(start_date).tz('Asia/Rangoon').startOf('days');
+            // end_date = MOMENT(start_date).tz('Asia/Rangoon').startOf('days');
+            let two_ledgers = await DB.TwoDNumberDB.find({ $and: [{ "date.win": { $gte: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+            let three_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.win": { $gte: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+            let four_ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "date.win": { $gte: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+            let six_ledgers = await DB.THAI_LEDGER.find({ $and: [{ "win_date": { $gte: start_date.unix(), $lte: end_date.unix() } }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
+            two_ledgers = THAI_GEN.GEN_NAME_AND_SUM_AMOUNT(two_ledgers);
+            three_ledgers = THAI_GEN.GEN_NAME_AND_SUM_AMOUNT(three_ledgers);
+            four_ledgers = THAI_GEN.GEN_LAO_NAME_AND_SUM_AMOUNT(four_ledgers);
+            six_ledgers = THAI_GEN.GEN_THAI_NAME_AND_SUM_AMOUNT(six_ledgers);
+            let name_exist = {};
+            for (let item of two_ledgers) {
+                if (!name_exist[item.name]) {
+                    name_exist[item.name] = { name: item.name, two: 0, three: 0, four: 0, six: 0, total: 0, percent: 0 };
+                }
+                name_exist[item.name].two += item.amount;
+                name_exist[item.name].total += item.amount;
+            }
+            for (let item of three_ledgers) {
+                if (!name_exist[item.name]) {
+                    name_exist[item.name] = { name: item.name, two: 0, three: 0, four: 0, six: 0, total: 0, percent: 0 };
+                }
+                name_exist[item.name].three += item.amount;
+                name_exist[item.name].total += item.amount;
+            }
+            for (let item of four_ledgers) {
+                if (!name_exist[item.name]) {
+                    name_exist[item.name] = { name: item.name, two: 0, three: 0, four: 0, six: 0, total: 0, percent: 0 };
+                }
+                name_exist[item.name].four += item.amount;
+                name_exist[item.name].total += item.amount;
+            }
+            for (let item of six_ledgers) {
+                if (!name_exist[item.name]) {
+                    name_exist[item.name] = { name: item.name, two: 0, three: 0, four: 0, six: 0, total: 0, percent: 0 };
+                }
+                name_exist[item.name].six += item.amount;
+                name_exist[item.name].total += item.amount;
+            }
+            let items = Object.values(name_exist);
+            data = {
+                name: search_date,
+                items: items,
+                start: start_date.unix(),
+                end: end_date.unix(),
+                createdAt: MOMENT(Date.now()).tz('Asia/Rangoon').unix()
+            }
+        } else {
+            res.send({ status: 0, msg: "ယခု Date ဖြင့် save ပြီးသားရှိပြီးပါပြီ။" });
+            return;
+        }
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From getKPI => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let setNewKPI = async (req, res, next) => {
+    try {
+        let item = req.body;
+        let check_item = await DB.KpiDB.findOne({ name: item.name });
+        if (check_item) {
+            res.send({ status: 0, msg: "ယခု Date ဖြင့် save ပြီးသားရှိပြီးပါပြီ။" });
+            return;
+        }
+        let createdAt = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        item.createdAt = createdAt;
+        await new DB.KpiDB(item).save();
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From companyOtherHtee => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let deleteKpi = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        await DB.KpiDB.deleteOne({ _id: search_id });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From getKPI => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let getAgentReport = async (req, res, next) => {
+    try {
+        let start_date = MOMENT.unix(req.body.search_date).startOf('month');
+        let end_date = MOMENT.unix(req.body.search_date).endOf('month');
+        let two_win_numbers = await DB.TwoDWinNumberDB.find({ win_date: { $gte: start_date, $lte: end_date } }).sort({ date: -1 });
+        let three_win_numbers = await DB.THREE_D_WIN_NUMBER_DB.find({ win_date: { $gte: start_date, $lte: end_date } }).sort({ date: -1 });
+        let four_win_numbers = await DB.LAO_WIN_NUMBER_DB.find({ win_date: { $gte: start_date, $lte: end_date } }).sort({ date: -1 });
+        let setting = await DB.LAO_SETTING_DB.findOne({ show_id: 0 });
+        two_win_numbers = _.indexBy(two_win_numbers, (e) => `${e.win_date}_${e.type}`);
+        three_win_numbers = _.indexBy(three_win_numbers, (e) => `${e.win_date}`);
+        four_win_numbers = _.indexBy(four_win_numbers, (e) => `${e.win_date}`);
+        let price_items = setting.lao;
+        price_items = _.indexBy(price_items, 'amount');
+        let two_ledgers = await DB.TwoDCutNumber.find({ $and: [{ win_date: { $gte: start_date, $lte: end_date } }, { name: { $ne: "Company" } }] }).sort({ date: -1 });
+        let three_ledgers = await DB.THREE_D_CUT_NUMBER_DB.find({ $and: [{ win_date: { $gte: start_date, $lte: end_date } }, { name: { $ne: "Company" } }] }).sort({ date: -1 });
+        let four_ledgers = await DB.LAO_CUT_NUMBER_DB.find({ $and: [{ win_date: { $gte: start_date, $lte: end_date } }, { name: { $ne: "Company" } }] }).sort({ date: -1 });
+        two_ledgers = _.groupBy(two_ledgers, (e) => `${e.win_date}`);
+        three_ledgers = _.groupBy(three_ledgers, (e) => `${e.win_date}`);
+        four_ledgers = _.groupBy(four_ledgers, (e) => `${e.win_date}`);
+
+        let data = [];
+        //Two Ledger Start
+        for (let key in two_ledgers) {
+            let agent_ledger = _.groupBy(two_ledgers[key], (e) => e.name);
+            for (let agent in agent_ledger) {
+                let total = 0;
+                let win_amount = 0;
+                for (let item of agent_ledger[agent]) {
+                    let win_number = two_win_numbers[`${item.win_date}_${item.type}`];
+                    if (!win_number) {
+                        continue;
+                    }
+                    total += item.amount;
+                    win_amount += win_number.win_number == item.bet_num ? item.amount * 80 : 0;
+                }
+                let bet_amount = Math.ceil(total * (agent == "HNH" ? 1 : 0.88));
+                data.push({
+                    name: agent,
+                    type: "two",
+                    total: parseInt(bet_amount - win_amount),
+                    win_date: MOMENT(Date.parse(key)).unix()
+                });
+            }
+
+        }
+        //Two Ledger End
+        //Three Ledger Start
+        for (let key in three_ledgers) {
+            let agent_ledger = _.groupBy(three_ledgers[key], (e) => e.name);
+            for (let agent in agent_ledger) {
+                let total = 0;
+                let win_amount = 0;
+                for (let item of agent_ledger[agent]) {
+                    let win_number = three_win_numbers[key];
+                    if (!win_number) {
+                        continue;
+                    }
+                    total += item.amount;
+                    win_amount += win_number.win_number == item.bet_num ? item.amount * 500 : 0;
+                }
+                // let bet_amount = parseInt((agent == "HNH" ? (total / 14) * 10 : total * (agent == "MTK" ? 0.57 : 0.55)));
+                let bet_amount = Math.ceil(total * (agent == "HNH" ? 1 : agent == "MTK" ? 0.57 : 0.55));
+                data.push({
+                    name: agent,
+                    type: "three",
+                    total: parseInt(bet_amount - win_amount),
+                    win_date: MOMENT(Date.parse(key)).unix()
+                });
+            }
+        }
+        //Three Ledger End
+        let lao_com = { 40: 35, 60: 45, 100: 80, 150: 125 };
+        //Four Ledger Start
+        for (let key in four_ledgers) {
+            let agent_ledger = _.groupBy(four_ledgers[key], (e) => e.name);
+            for (let agent in agent_ledger) {
+                let four_total = 0;
+                let four_three_total = 0;
+                let win_amount = 0;
+                for (let item of agent_ledger[agent]) {
+                    let win_number = four_win_numbers[key];
+                    if (!win_number) {
+                        continue;
+                    }
+                    let win_num = win_number.win_number;
+                    if (item.bet_num.length == 3) {
+                        four_three_total += item.bet_amount;
+                        win_amount += win_num.substring(1, 4) == item.bet_num ? item.bet_amount * 500 : 0;
+                    } else {
+                        four_total += lao_com[item.original_amount] * (item.bet_amount / item.original_amount);
+                        if (win_num == item.num) {
+                            win_amount += (price_items[`${item.original_amount}`].four_d) * parseInt(item.bet_amount / item.original_amount);
+                        } else if (win_num.substring(1, 4) == item.bet_num.toString().substr(1, 4)) {
+                            win_amount += price_items[`${item.original_amount}`].three_d * parseInt(item.bet_amount / item.original_amount);
+                        } else if (win_num.substring(0, 3) == item.bet_num.toString().substr(0, 3)) {
+                            win_amount += price_items[`${item.original_amount}`].front_three_d * parseInt(item.bet_amount / item.original_amount);
+                        } else if (checkPermute(win_num, item.bet_num)) {
+                            win_amount += price_items[`${item.original_amount}`].four_permute * parseInt(item.bet_amount / item.original_amount);
+                        } else if (checkPermute(win_num.substring(1, 4), item.bet_num.toString().substr(1, 4))) {
+                            win_amount += price_items[`${item.original_amount}`].three_permute * parseInt(item.bet_amount / item.original_amount);
+                        } else if (win_num.substring(0, 2) == item.bet_num.toString().substr(0, 2)) {
+                            win_amount += price_items[`${item.original_amount}`].front_two_d * parseInt(item.bet_amount / item.original_amount);
+                        } else if (win_num.substring(2, 4) == item.bet_num.toString().substr(2, 4)) {
+                            win_amount += price_items[`${item.original_amount}`].back_two_d * parseInt(item.bet_amount / item.original_amount);
+                        }
+                    }
+                }
+                let total = four_total + (agent == "HNH" ? four_three_total : four_three_total * 0.55);
+                data.push({
+                    name: agent,
+                    type: "four",
+                    total: parseInt(total - win_amount),
+                    win_date: MOMENT(Date.parse(key)).unix()
+                });
+            }
+        }
+        let agents = _.uniq(_.pluck(data, 'name'));
+        res.send({ status: 1, data: data, agents });
+    } catch (error) {
+        console.log("Error From getAgentReport => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let getShareCashLedger = async (req, res, next) => {
+    try {
+        let start_date = MOMENT.unix(req.body.start_date).startOf('days').unix();
+        let end_date = MOMENT.unix(req.body.end_date).endOf('days').unix();
+        let data = await DB.SCHAR_CASH_LEDGER_DB.find({ createdAt: { $gte: start_date, $lte: end_date } });
+        let dates = _.uniq(_.pluck(data, 'win_date'));
+        res.send({ status: 1, data, dates, names: UTILS.SHARE_HOLDERS });
+    } catch (error) {
+        console.log("Error From getShareCashLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let shareCashLedgerAgents = async (req, res, next) => {
+    try {
+        res.send({ status: 1, data: UTILS.SHARE_HOLDERS });
+    } catch (error) {
+        console.log("Error From shareCashLedgerAgents => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let addShareCashLedger = async (req, res, next) => {
+    try {
+        let win_date = req.body.win_date;
+        let balance = req.body.balance;
+        let items = req.body.items;
+        let save_data = new DB.SCHAR_CASH_LEDGER_DB();
+        save_data.win_date = win_date;
+        save_data.balance = balance;
+        save_data.items = items;
+        await save_data.save();
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From addShareCashLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let getDailyLedgers = async (req, res, next) => {
+    try {
+        let start_date = MOMENT.unix(req.body.search_date).startOf('month').unix();
+        let end_date = MOMENT.unix(req.body.search_date).endOf('month').unix();
+        let auth_user = res.locals.auth_user;
+        let daily_ledger = await DB.DAILY_LEDGER.findOne({ user_id: auth_user._id });
+        if (!daily_ledger) {
+            res.send({ status: 0, msg: 'No Data Found' });
+            return;
+        }
+        let daily_admin_ledgers = await DB.DAILY_ADMIN_LEDGER.find({ $and: [{ user_id: auth_user._id }, { createdAt: { $gte: start_date, $lte: end_date } }] }).sort({ createdAt: -1 });
+        res.send({ status: 1, daily_ledger, daily_admin_ledgers });
+
+    } catch (error) {
+        console.log("Error From getDailyLedgers => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let addDailyUse = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let amount = req.body.amount;
+        let remark = req.body.remark;
+        let createdAt = MOMENT(Date.now()).tz("Asia/Rangoon").unix();
+        await DB.DAILY_LEDGER.updateOne({ _id: search_id }, { $push: { items: { name: remark, amount: amount, createdAt: createdAt } } }, {
+            safe: true,
+            multi: true
+        });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From addDailyUse => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let addDailyPrePay = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let pre_pay = req.body.pre_pay;
+        let cash_thai = req.body.cash_thai;
+        let withdraw_thai = req.body.withdraw_thai;
+        await DB.DAILY_LEDGER.updateOne({ _id: search_id }, { $set: { pre_pay: pre_pay, cash_thai: cash_thai, withdraw_thai: withdraw_thai } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From addDailyPrePay => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let createDailyLedger = async (req, res, next) => {
+    try {
+        let auth_user = res.locals.auth_user;
+        let ledger = await DB.DAILY_LEDGER.findOne({ user_id: auth_user._id });
+        if (!ledger) {
+            res.send({ status: 0, msg: 'No Data Found' });
+            return;
+        }
+        let is_two_d = req.body.is_two_d;
+        let is_three_d = req.body.is_three_d;
+        let is_lao = req.body.is_lao;
+        let is_pre_pay = req.body.is_pre_pay;
+        let is_six_d = req.body.is_six_d;
+        let is_cash = req.body.is_cash;
+        let is_daily_use = req.body.is_daily_use;
+        let save_data = new DB.DAILY_ADMIN_LEDGER();
+        save_data.user_id = ledger.user_id;
+        save_data.name = ledger.name;
+        save_data.two_d = is_two_d ? ledger.two_d : 0;
+        save_data.three_d_baht = is_three_d ? ledger.three_d_baht : 0;
+        save_data.three_d_kyat = is_three_d ? ledger.three_d_kyat : 0;
+        save_data.apar = is_three_d ? ledger.apar : 0;
+        save_data.lao = is_lao ? ledger.lao : 0;
+        save_data.pre_pay = is_pre_pay ? ledger.pre_pay : 0;
+        save_data.six_d = is_six_d ? ledger.six_d : 0;
+        save_data.cash_thai = is_cash ? ledger.cash_thai : 0;
+        save_data.withdraw_thai = is_cash ? ledger.withdraw_thai : 0;
+        save_data.items = is_daily_use ? ledger.items : [];
+        await save_data.save();
+
+        await DB.DAILY_LEDGER.updateOne({ _id: ledger._id }, {
+            $set: {
+                two_d: is_two_d ? 0 : ledger.two_d,
+                three_d_baht: is_three_d ? 0 : ledger.three_d_baht,
+                three_d_kyat: is_three_d ? 0 : ledger.three_d_kyat,
+                apar: is_three_d ? 0 : ledger.apar,
+                lao: is_lao ? 0 : ledger.lao,
+                pre_pay: is_pre_pay ? 0 : ledger.pre_pay,
+                six_d: is_six_d ? 0 : ledger.six_d,
+                cash_thai: is_cash ? 0 : ledger.cash_thai,
+                withdraw_thai: is_cash ? 0 : ledger.withdraw_thai,
+                items: is_daily_use ? [] : ledger.items
+            }
+        });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From createDailyLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+
+let deleteDailyLedger = async (req, res, next) => {
+    try {
+        let auth_user = res.locals.auth_user;
+        let search_id = req.body.search_id;
+        let ledger = await DB.DAILY_ADMIN_LEDGER.findOne({ $and: [{ _id: search_id }, { user_id: auth_user._id }] });
+        let auth_ledger = await DB.DAILY_LEDGER.findOne({ user_id: auth_user.id });
+        if (!auth_ledger) {
+            res.send({ status: 0, msg: 'No Data Found' });
+            return;
+        }
+        if (!ledger) {
+            res.send({ status: 0, msg: 'No Data Found' });
+            return;
+        }
+        let items = auth_ledger.items.concat(ledger.items);
+        await DB.DAILY_LEDGER.updateOne({ _id: auth_ledger._id }, {
+            $inc: {
+                two_d: ledger.two_d,
+                three_d_baht: ledger.three_d_baht,
+                three_d_kyat: ledger.three_d_kyat,
+                lao: ledger.lao,
+                pre_pay: ledger.pre_pay,
+                six_d: ledger.six_d,
+                cash_thai: ledger.cash_thai,
+                withdraw_thai: ledger.withdraw_thai,
+            }
+        });
+        await DB.DAILY_LEDGER.updateOne({ _id: auth_ledger._id }, { $set: { items: items } });
+        await DB.DAILY_ADMIN_LEDGER.deleteOne({ _id: search_id });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From deleteDailyLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+
+let dailyAdminLedger = async (req, res, nexxt) => {
+    try {
+        let search_date = req.body.search_date;
+        let start_date = MOMENT.unix(search_date).startOf('days').unix();
+        let end_date = MOMENT.unix(search_date).endOf('days').unix();
+        let data = await DB.DAILY_ADMIN_LEDGER.find({ createdAt: { $gte: start_date, $lte: end_date } });
+        res.send({ status: 1, data });
+    } catch (error) {
+        console.log("Error From dailyAdminLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let confirmDailyLedger = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let ledger = await DB.DAILY_ADMIN_LEDGER.findOne({ _id: search_id });
+        if (!ledger) {
+            res.send({ status: 0, msg: 'No Data Found' });
+            return;
+        }
+        await DB.DAILY_ADMIN_LEDGER.updateOne({ _id: search_id }, { $set: { confirm: true } });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From confirmDailyLedger => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let deleteDailyUse = async (req, res, next) => {
+    try {
+        let search_id = req.body.search_id;
+        let auth_user = res.locals.auth_user;
+        await DB.DAILY_LEDGER.updateOne({ user_id: auth_user._id }, { $pull: { items: { _id: search_id } } }, {
+            safe: true,
+            multi: true
+        });
+        res.send({ status: 1, msg: 'အောင်မြင်ပါသည်။' });
+    } catch (error) {
+        console.log("Error From deleteDailyUse => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
 module.exports = {
     getSellTicketLedgers,
     getShopSellTicketLedgers,
@@ -808,5 +1273,21 @@ module.exports = {
     deleteOtherHtee,
     deleteOtherHteeByAgent,
     remarkOtherHtee,
-    companyOtherHtee
+    companyOtherHtee,
+    getKPI,
+    newKPI,
+    setNewKPI,
+    deleteKpi,
+    getAgentReport,
+    getShareCashLedger,
+    shareCashLedgerAgents,
+    addShareCashLedger,
+    getDailyLedgers,
+    addDailyUse,
+    addDailyPrePay,
+    createDailyLedger,
+    deleteDailyLedger,
+    dailyAdminLedger,
+    confirmDailyLedger,
+    deleteDailyUse
 }
