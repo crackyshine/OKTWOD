@@ -169,7 +169,7 @@ let insert_date = async () => {
 }
 
 let getLiveData = async () => {
-    
+
     schedule.schedule('0 0 15 * * *', async () => {
         // schedule.schedule('* * * * * *', async () => {
         let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
@@ -182,11 +182,11 @@ let getLiveData = async () => {
 
     // schedule.schedule('0-30 12 1,16 * *', async () => {
     // schedule.schedule('30-50 * 7 30,16 * *', async () => {
-    
-    
-    
-    
-        schedule.schedule('0-20 * 7-8 1,16 * *', async () => {
+
+
+
+
+    schedule.schedule('0-20 * 7-8 1,16 * *', async () => {
         let settingData = await DB.SettingDB.findOne({ show_id: 0 }).select("date");
         let data = await DB.WinNumberDB.findOne({ date: settingData.date });
         if (!data) {
@@ -1345,15 +1345,16 @@ let SAVE_DAILY_LEDGER = async (search_date, users) => {
 }
 
 let saveSixD = async (search_date) => {
+    let end_date = search_date.clone().endOf('days').unix();
     search_date = search_date.unix();
-    let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ win_date: search_date }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
+    let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ created: {$gte:search_date,$lte:end_date} }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
     six_d_ledgers = _.groupBy(six_d_ledgers, (e) => e.sold_out.user_id);
     for (const [agentId, ledgers] of Object.entries(six_d_ledgers)) {
         let win = 0;
         let total = 0;
         for (const ledger of ledgers) {
             total += ledger.amount.sold_out;
-            win += ledger.win_amount.total;
+            // win += ledger.win_amount.total;
         }
         let amount = total - win;
         await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { six_d: amount } });
@@ -1440,7 +1441,9 @@ let saveThreeDKyat = async (search_date, users) => {
     }
 }
 let saveThreeD = async (search_date, users) => {
-    let two_d_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    // let two_d_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    let end_date = search_date.clone().endOf('days');
+    let two_d_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.created": { $gte: search_date, $lte: end_date } }, { "delete.is_delete": false }] });
     two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
     for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
         let user = users[agentId];
@@ -1453,10 +1456,10 @@ let saveThreeD = async (search_date, users) => {
             for (item of ledger.items) {
                 if (item.num.length == 3) {
                     total += item.bet_amount;
-                    win += item.win_amount;
+                    // win += item.win_amount;
                 } else {
                     apar_total += item.bet_amount;
-                    apar_win += item.win_amount;
+                    // apar_win += item.win_amount;
                 }
             }
         }
@@ -1495,12 +1498,12 @@ let saveTwoD = async (search_date, users) => {
     }
 }
 
-let manualDailyLedger =async()=>{
+let manualDailyLedger = async () => {
     let search_date = MOMENT("2025-09-16").tz("Asia/Rangoon").startOf("days");
     // let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
     let users = await DB.UserDB.find();
     users = _.indexBy(users, "_id");
-    await SAVE_DAILY_LEDGER(search_date, users);
+    // await SAVE_DAILY_LEDGER(search_date, users);
     await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
     console.log("DONE.");
 }
@@ -1522,7 +1525,7 @@ http.listen(process.env.PORT, async () => {
     // await CREATE_DAILY_USER();
     // await SAVE_DAILY_LEDGER();
     // await SAVE_LAO_WIN_CASH_LEDGER();
-    // await manualDailyLedger();
+    await manualDailyLedger();
     console.log("Server start ", process.env.PORT);
 });
 
