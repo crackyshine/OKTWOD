@@ -1503,7 +1503,7 @@ let manualDailyLedger = async () => {
     // let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
     let users = await DB.UserDB.find();
     users = _.indexBy(users, "_id");
-    // await SAVE_DAILY_LEDGER(search_date, users);
+    await SAVE_DAILY_LEDGER(search_date, users);
     await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
     console.log("DONE.");
 }
@@ -1525,7 +1525,7 @@ http.listen(process.env.PORT, async () => {
     // await CREATE_DAILY_USER();
     // await SAVE_DAILY_LEDGER();
     // await SAVE_LAO_WIN_CASH_LEDGER();
-    await manualDailyLedger();
+    // await manualDailyLedger();
     console.log("Server start ", process.env.PORT);
 });
 
