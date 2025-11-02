@@ -48,4 +48,6 @@ Router.post('/delete_daily_ledger', ThaiController.deleteDailyLedger);
 Router.post('/daily_admin_ledger', ThaiController.dailyAdminLedger);
 Router.post('/confirm_daily_ledger', ThaiController.confirmDailyLedger);
 Router.post('/delete_daily_use', ThaiController.deleteDailyUse);
+Router.get('/save_three_d_daily', ThaiController.saveThreeDDailyLedger);
+Router.get('/save_six_d_daily', ThaiController.saveSixDDailyLedger);
 module.exports = Router;

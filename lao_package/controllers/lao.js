@@ -4,6 +4,86 @@ const _ = require('underscore');
 const MOMENT = require('moment-timezone');
 const RULE = require('../libby/rule');
 let LAO_GEN = require('../libby/lao_gen');
+let SAVE_LAO_WIN_CASH_LEDGER = async (search_date) => {
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, "_id");
+    let setting = await DB.LAO_SETTING_DB.findOne();
+    let win_date = setting.win_date;
+    if (MOMENT(win_date).isSame(search_date, 'day')) {
+        await DB.LAO_CASH_LEDGER.deleteMany({ win_date: win_date });
+        let ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "date.win": win_date }, { "delete.is_delete": false }, { "amount.win": { $gt: 0 } }] });
+        ledgers = _.groupBy(ledgers, (e) => e.agent.id);
+        for (const [agentId, items] of Object.entries(ledgers)) {
+            let user = users[agentId];
+            let total = 0;
+            for (let item of items) {
+                total += item.amount.win;
+            }
+            let save_data = new DB.LAO_CASH_LEDGER();
+            save_data.user_id = user._id;
+            save_data.name = user.name;
+            save_data.win_amount = total;
+            save_data.win_date = win_date;
+            await save_data.save();
+        }
+        console.log("Save Lao Win Cash Ledger Done");
+    }
+}
+
+let reCalculateLaoDialyLedger = async (search_date, is_minus) => {
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, "_id");
+    let two_d_ledgers = await DB.LAO_TICKET_DB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+    two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+        let user = users[agentId];
+        let name = user.name.toLowerCase();
+        let apo = user.lao_apo / 10;
+        let win = 0;
+        let total = 0;
+        let three_d_total = 0;
+        for (const ledger of ledgers) {
+            if (ledger.amount.win > 0) {
+                win += ledger.amount.win;
+            }
+            for (let item of ledger.items) {
+                let bet = item.bet_amount;
+                if (item.num.length == 4) {
+                    if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+                        if (bet == 150) {
+                            total += 130;
+                        } else if (bet == 100) {
+                            total += 85;
+                        } else if (bet == 60) {
+                            total += 50;
+                        } else if (bet == 40) {
+                            total += 35;
+                        }
+                    } else {
+                        total += bet;
+                    }
+                } else {
+                    three_d_total += bet;
+                    // let real_cash = bet / apo;
+                    // let com = real_cash - (bet * 0.6);
+                    // total += real_cash - com;
+                }
+            }
+        }
+        if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+            total += parseInt(three_d_total * 0.6);
+        } else {
+            total += parseInt(three_d_total / apo);
+        }
+        let amount = parseInt(total) - win;
+
+        if (is_minus) {
+            amount = amount < 0 ? Math.abs(amount) : -amount;
+        }
+        await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { lao: amount } });
+    }
+}
+
 let SAVE_CUT_LAO = async (items, name, win_date) => {
     for await (let item of items) {
         let data = null;
@@ -768,6 +848,10 @@ let saveLaoWinNumber = async (req, res, next) => {
         let agents = await DB.UserDB.find();
         agents = _.indexBy(agents, '_id');
         let setting = await DB.LAO_SETTING_DB.findOne({ show_id: 0 });
+        let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: setting.win_date });
+        if (win_data) {
+            await reCalculateLaoDialyLedger(setting.win_date, true);
+        }
         await DB.LAO_TICKET_DB.updateMany({
             $and: [
                 { "delete.is_delete": false },
@@ -810,7 +894,6 @@ let saveLaoWinNumber = async (req, res, next) => {
             items.forEach((item) => {
                 if (item.num.length == 3) {
                     if (item.num == win_number.toString().substr(1, 4)) {
-                        console.log(item.num, win_number.toString().substr(1, 4));
                         let agent = agents[ticket.agent.id];
                         item.win.str = "လာအို (ချဲ)";
                         if (agent.is_permission == true) {
@@ -843,7 +926,6 @@ let saveLaoWinNumber = async (req, res, next) => {
             });
         }
         await saveLaoKyatWinNumer(win_number, setting, agents);
-        let win_data = await DB.LAO_WIN_NUMBER_DB.findOne({ win_date: setting.win_date });
         if (win_data) {
             await DB.LAO_WIN_NUMBER_DB.updateOne({ _id: win_data._id }, { $set: { win_number: win_number } });
         } else {
@@ -854,7 +936,8 @@ let saveLaoWinNumber = async (req, res, next) => {
                 }
             }).save();
         }
-
+        await reCalculateLaoDialyLedger(setting.win_date, false);
+        await SAVE_LAO_WIN_CASH_LEDGER(setting.win_date);
         res.send({
             status: 1,
             msg: `ပေါက်ဂဏန်း ${win_number} ကို စရင်းသွင်းပြီးပါပြီ။`
@@ -1193,11 +1276,11 @@ let cashVoucher = async (req, res, next) => {
                 "status.cash": true
             }
         });
-        await DB.LAO_CASH_LEDGER.updateOne({ $and: [{ name: auth_user.name }, { win_date: data.date.win }] }, {
-            $inc: {
-                cash_amount: data.amount.win
-            }
-        });
+        // await DB.LAO_CASH_LEDGER.updateOne({ $and: [{ name: auth_user.name }, { win_date: data.date.win }] }, {
+        //     $inc: {
+        //         cash_amount: data.amount.win
+        //     }
+        // });
         res.send({
             status: 1,
             msg: `ဘောင်ချာနံပါတ် ${data.voucher_id.toString().padStart(6, '0')} ကို ငွေရှင်းပြီးပါပြီ။`
@@ -1843,8 +1926,27 @@ let cutByNameThreeDKyat = async (req, res, next) => {
 
 let laoCashLedgers = async (req, res, next) => {
     try {
-        let search_date = MOMENT.unix(req.body.search_date).tz("Asia/Rangoon").startOf('days');
-        let data = await DB.LAO_CASH_LEDGER.find({ win_date: search_date }).sort({ win_amount: -1 });
+        let start_date = MOMENT.unix(req.body.start_date).tz("Asia/Rangoon").startOf('days');
+        let end_date = MOMENT.unix(req.body.end_date).tz("Asia/Rangoon").startOf('days');
+        let data = await DB.LAO_CASH_LEDGER.find({ win_date: { $gte: start_date, $lte: end_date } }).sort({ win_amount: -1 });
+        if (!start_date.isSame(end_date)) {
+            let group_data = [];
+            data = _.groupBy(data, (e) => e.name);
+            for (const [key, value] of Object.entries(data)) {
+                let item = new DB.LAO_CASH_LEDGER();
+                for (let group_item of value) {
+                    item.name = key;
+                    item.win_amount += group_item.win_amount;
+                    item.shop_amount += group_item.shop_amount;
+                    item.balance += group_item.balance;
+                    item.shop_history = item.shop_history.concat(group_item.shop_history);
+                    item.balance_history = item.balance_history.concat(group_item.balance_history);
+                    item.win_date = end_date;
+                }
+                group_data.push(item);
+            }
+            data = group_data;
+        }
         res.send({ status: 1, data });
     } catch (error) {
         console.log("Error From laoCashLedgers => ", error);

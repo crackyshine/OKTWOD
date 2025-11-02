@@ -5,7 +5,9 @@ const USER_GEN = require('../CKLibby/UserGen');
 const MOMENT = require("moment-timezone");
 const _ = require('underscore');
 
-let reCalculateTwoDDailay = async (search_date, type,is_minus) => {
+let reCalculateTwoDDailay = async (search_date, type, is_minus) => {
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, "_id");
     let two_d_ledgers = await DB.TwoDNumberDB.find({ $and: [{ "date.win": search_date }, { type: type }, { "delete.is_delete": false }] });
     two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
     for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
@@ -21,8 +23,8 @@ let reCalculateTwoDDailay = async (search_date, type,is_minus) => {
             total = parseInt(total * 0.9);
         }
         let amount = parseInt(total) - win;
-        if (is_minus === true) {
-            amount  =amount < 0 ? Math.abs(amount) : -amount;
+        if (is_minus) {
+            amount = amount < 0 ? Math.abs(amount) : -amount;
         }
         await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { two_d: amount } });
     }
@@ -3742,6 +3744,7 @@ let saveTwoDWinNumber = async (req, res) => {
         let win_num = req.body.win_num;
         let win_date = req.body.win_date;
         let type = req.body.type;
+        console.log(req.body);
         if (!win_num || win_num.length != 2) {
             res.send({ status: 0, msg: "ပေါက်ဂဏန်းမှားယွင်းနေပါသည်။" });
             return;
@@ -3754,11 +3757,11 @@ let saveTwoDWinNumber = async (req, res) => {
             res.send({ status: 0, msg: "အချိန်မှားယွင်းနေပါသည်" });
             return;
         }
-        let win_data = await DB.TwoDWinNumberDB.findOne({ $and: [{ win_date: win_date }, { type: type }] });
-        if(win_data){
-            reCalculateTwoDDailay(win_data,type,true);
-        }
         win_date = MOMENT(win_date).tz("Asia/Rangoon").startOf('day');
+        let win_data = await DB.TwoDWinNumberDB.findOne({ $and: [{ win_date: win_date }, { type: type }] });
+        if (win_data) {
+            await reCalculateTwoDDailay(win_date, type, true);
+        }
         let tickets = await DB.TwoDNumberDB.find({ $and: [{ "delete.is_delete": false }, { type: type }, { "date.win": win_date }] });
         for await (let ticket of tickets) {
             let items = ticket.items;
@@ -3798,7 +3801,7 @@ let saveTwoDWinNumber = async (req, res) => {
             });
         }
         let auth_user = res.locals.auth_user;
-        reCalculateTwoDDailay(win_data,type,false);
+        await reCalculateTwoDDailay(win_date, type, false);
         // let win_data = await DB.TwoDWinNumberDB.findOne({ $and: [{ win_date: win_date }, { type: type }] });
         let save_data = {
             win_number: win_num,

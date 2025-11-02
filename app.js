@@ -170,14 +170,14 @@ let insert_date = async () => {
 
 let getLiveData = async () => {
 
-    schedule.schedule('0 0 15 * * *', async () => {
-        // schedule.schedule('* * * * * *', async () => {
-        let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
-        let users = await DB.UserDB.find();
-        users = _.indexBy(users, "_id");
-        await SAVE_DAILY_LEDGER(search_date, users);
-        await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
-    });
+    // schedule.schedule('0 0 15 * * *', async () => {
+    //     // schedule.schedule('* * * * * *', async () => {
+    //     let search_date = MOMENT().tz("Asia/Rangoon").startOf("days");
+    //     let users = await DB.UserDB.find();
+    //     users = _.indexBy(users, "_id");
+    //     await SAVE_DAILY_LEDGER(search_date, users);
+    //     await SAVE_LAO_WIN_CASH_LEDGER(search_date, users);
+    // });
 
 
     // schedule.schedule('0-30 12 1,16 * *', async () => {
@@ -1532,28 +1532,28 @@ http.listen(process.env.PORT, async () => {
 
 
 
-// const numOfCpuCores = os.cpus().length;
-// if (numOfCpuCores > 1) {
-//     if (cluster.isMaster) {
-//         console.log(`Cluster master ${process.pid} is running.`);
-//         // migrateText();
-//         getLiveData();
-//         // example();
-//         for (let i = 0; i < numOfCpuCores; i++) {
-//             cluster.fork()
-//         }
-//         cluster.on("exit", function (worker) {
-//             console.log("Worker", worker.id, " has exitted.")
-//         })
+const numOfCpuCores = os.cpus().length;
+if (numOfCpuCores > 1) {
+    if (cluster.isMaster) {
+        console.log(`Cluster master ${process.pid} is running.`);
+        // migrateText();
+        getLiveData();
+        // example();
+        for (let i = 0; i < numOfCpuCores; i++) {
+            cluster.fork()
+        }
+        cluster.on("exit", function (worker) {
+            console.log("Worker", worker.id, " has exitted.")
+        })
 
-//     } else {
-//         http.listen(process.env.PORT, async () => {
-//             console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
-//         });
-//     }
-// } else {
-//     http.listen(process.env.PORT, async () => {
-//         // migrateText();
-//         console.log("Server start ", process.env.PORT);
-//     });
-// }
+    } else {
+        http.listen(process.env.PORT, async () => {
+            console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+        });
+    }
+} else {
+    http.listen(process.env.PORT, async () => {
+        // migrateText();
+        console.log("Server start ", process.env.PORT);
+    });
+}

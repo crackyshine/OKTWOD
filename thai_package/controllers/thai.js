@@ -1242,6 +1242,101 @@ let deleteDailyUse = async (req, res, next) => {
         res.send({ status: 0, msg: process.env.connect_dev });
     }
 }
+let saveThreeDDailyLedger = async (req, res, next) => {
+    try {
+        let auth_user = res.locals.auth_user;
+        let auth_ledger = await DB.DAILY_LEDGER.findOne({ user_id: auth_user._id });
+        let start_date = MOMENT(auth_ledger.three_d_date).tz("Asia/Rangoon");
+        let end_date = MOMENT(Date.now()).tz("Asia/Rangoon");
+        let users = await DB.UserDB.find();
+        users = _.indexBy(users, "_id");
+        let two_d_ledgers = await DB.THREE_D_TICKET_DB.find({ $and: [{ "date.created": { $gt: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+        two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
+        for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+            let user = users[agentId];
+            let apo = user.thai_apo / 10;
+            let win = 0;
+            let total = 0;
+            let apar_win = 0;
+            let apar_total = 0;
+            for (const ledger of ledgers) {
+                for (item of ledger.items) {
+                    if (item.num.length == 3) {
+                        total += item.bet_amount;
+                    } else {
+                        apar_total += item.bet_amount;
+                    }
+                }
+            }
+            let name = user.name.toLowerCase();
+            if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+                total = parseInt(total * 0.6);
+            } else {
+                total = parseInt(total / apo);
+            }
+            let amount = parseInt(total) - win;
+            await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { three_d_baht: amount, apar: (apar_total - apar_win)}, $set: { three_d_date: end_date } });
+        }
+
+
+        let three_d_kyat_ledgers = await DB.THREE_D_KYAT_TICKET_DB.find({ $and: [{ "date.created": { $gt: start_date, $lte: end_date } }, { "delete.is_delete": false }] });
+        three_d_kyat_ledgers = _.groupBy(three_d_kyat_ledgers, (e) => e.agent.id);
+        for (const [agentId, ledgers] of Object.entries(three_d_kyat_ledgers)) {
+            let user = users[agentId];
+            let apo = user.lao_apo / 10;
+            let win = 0;
+            let total = 0;
+            for (const ledger of ledgers) {
+                for (item of ledger.items) {
+                    if (item.num.length == 3) {
+                        total += item.bet_amount;
+                        win += item.win_amount;
+                    }
+                }
+            }
+            let name = user.name.toLowerCase();
+            if (name == "uh" || name == "uhpl" || name == "4uh" || name == "uhwk" || name == "uh5") {
+                total = parseInt(total * 0.6);
+            } else {
+                total = parseInt(total / apo);
+            }
+            let amount = parseInt(total) - win;
+            await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { three_d_kyat: amount},$set:{ three_d_date: end_date } });
+        }
+        res.send({ status: 1, msg: 'သုံးလုံးထီ နေ့စဉ်ရှင်းတမ်း စာရင်း မှတ်ပြီးပါပြီ။' });
+    } catch (error) {
+        console.log("Error From deleteDailyUse => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
+
+let saveSixDDailyLedger = async (req, res, next) => {
+    try {
+        let auth_user = res.locals.auth_user;
+        let auth_ledger = await DB.DAILY_LEDGER.findOne({ user_id: auth_user._id });
+        let start_date = MOMENT(auth_ledger.six_d_date).tz("Asia/Rangoon").unix();
+        let end_date = MOMENT(Date.now()).tz("Asia/Rangoon");
+        let users = await DB.UserDB.find();
+        users = _.indexBy(users, "_id");
+        // let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date.unix() } }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
+        let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ created: { $gte: start_date, $lte: end_date.unix() } }, { sold_out: { $ne: null } }, { status: "SOLD_OUT" }] });
+        six_d_ledgers = _.groupBy(six_d_ledgers, (e) => e.sold_out.user_id);
+        for (const [agentId, ledgers] of Object.entries(six_d_ledgers)) {
+            let win = 0;
+            let total = 0;
+            for (const ledger of ledgers) {
+                total += ledger.amount.sold_out;
+                // win += ledger.win_amount.total;
+            }
+            let amount = total - win;
+            await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { six_d: amount } ,$set:{six_d_date: end_date}});
+        }
+        res.send({ status: 1, msg: 'ထိုင်းထီ နေ့စဉ်ရှင်းတမ်း စာရင်း မှတ်ပြီးပါပြီ။' });
+    } catch (error) {
+        console.log("Error From deleteDailyUse => ", error);
+        res.send({ status: 0, msg: process.env.connect_dev });
+    }
+}
 module.exports = {
     getSellTicketLedgers,
     getShopSellTicketLedgers,
@@ -1289,5 +1384,7 @@ module.exports = {
     deleteDailyLedger,
     dailyAdminLedger,
     confirmDailyLedger,
-    deleteDailyUse
+    deleteDailyUse,
+    saveThreeDDailyLedger,
+    saveSixDDailyLedger
 }

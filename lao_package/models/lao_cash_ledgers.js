@@ -9,7 +9,6 @@ const laoCashLedgerSchema = new mongoose.Schema({
         type: String, required: true
     },
     win_amount: { type: Number, default: 0 },
-    cash_amount: { type: Number, default: 0 },
     shop_amount: { type: Number, default: 0 },
     balance: { type: Number, default: 0 },
     shop_history: {

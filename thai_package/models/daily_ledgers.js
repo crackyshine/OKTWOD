@@ -20,6 +20,8 @@ const dailyLedgerSchema = new mongoose.Schema({
     pre_pay: { type: Number, default: 0 },
     apar: { type: Number, default: 0 },
     six_d: { type: Number, default: 0 },
+    three_d_date: { type: Date, default: Date.now },
+    six_d_date: { type: Date, default: Date.now },
     cash_thai: { type: Number, default: 0 },
     withdraw_thai: { type: Number, default: 0 },
     items: {
