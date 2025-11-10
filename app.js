@@ -1347,7 +1347,7 @@ let SAVE_DAILY_LEDGER = async (search_date, users) => {
 let saveSixD = async (search_date) => {
     let end_date = search_date.clone().endOf('days').unix();
     search_date = search_date.unix();
-    let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ created: {$gte:search_date,$lte:end_date} }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
+    let six_d_ledgers = await DB.THAI_LEDGER.find({ $and: [{ created: { $gte: search_date, $lte: end_date } }, { sold_out: { $ne: null } }, { status: { $ne: "DELETE" } }] });
     six_d_ledgers = _.groupBy(six_d_ledgers, (e) => e.sold_out.user_id);
     for (const [agentId, ledgers] of Object.entries(six_d_ledgers)) {
         let win = 0;
@@ -1478,10 +1478,15 @@ let saveThreeD = async (search_date, users) => {
     }
 }
 
-let saveTwoD = async (search_date, users) => {
-    let two_d_ledgers = await DB.TwoDNumberDB.find({ $and: [{ "date.win": search_date }, { "delete.is_delete": false }] });
+let saveTwoD = async () => {
+     let search_date = MOMENT(Date.parse("2025-011-10")).tz("Asia/Rangoon").startOf("days");
+    let type = "EVENING";
+    let is_minus = false;
+    let users = await DB.UserDB.find();
+    users = _.indexBy(users, "_id");
+    let two_d_ledgers = await DB.TwoDNumberDB.find({ $and: [{ "date.win": search_date }, { type: type }, { "delete.is_delete": false }] });
     two_d_ledgers = _.groupBy(two_d_ledgers, (e) => e.agent.id);
-    for (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
+    for await (const [agentId, ledgers] of Object.entries(two_d_ledgers)) {
         let user = users[agentId];
         let win = 0;
         let total = 0;
@@ -1494,6 +1499,10 @@ let saveTwoD = async (search_date, users) => {
             total = parseInt(total * 0.9);
         }
         let amount = parseInt(total) - win;
+        if (is_minus) {
+            amount = amount < 0 ? Math.abs(amount) : -amount;
+        }
+        console.log("OKK ", user.name, total,win,amount);
         await DB.DAILY_LEDGER.updateOne({ user_id: agentId }, { $inc: { two_d: amount } });
     }
 }
@@ -1532,28 +1541,28 @@ http.listen(process.env.PORT, async () => {
 
 
 
-const numOfCpuCores = os.cpus().length;
-if (numOfCpuCores > 1) {
-    if (cluster.isMaster) {
-        console.log(`Cluster master ${process.pid} is running.`);
-        // migrateText();
-        getLiveData();
-        // example();
-        for (let i = 0; i < numOfCpuCores; i++) {
-            cluster.fork()
-        }
-        cluster.on("exit", function (worker) {
-            console.log("Worker", worker.id, " has exitted.")
-        })
+// const numOfCpuCores = os.cpus().length;
+// if (numOfCpuCores > 1) {
+//     if (cluster.isMaster) {
+//         console.log(`Cluster master ${process.pid} is running.`);
+//         // migrateText();
+//         getLiveData();
+//         // example();
+//         for (let i = 0; i < numOfCpuCores; i++) {
+//             cluster.fork()
+//         }
+//         cluster.on("exit", function (worker) {
+//             console.log("Worker", worker.id, " has exitted.")
+//         })
 
-    } else {
-        http.listen(process.env.PORT, async () => {
-            console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
-        });
-    }
-} else {
-    http.listen(process.env.PORT, async () => {
-        // migrateText();
-        console.log("Server start ", process.env.PORT);
-    });
-}
+//     } else {
+//         http.listen(process.env.PORT, async () => {
+//             console.log(`Server is listening on port ${process.env.PORT} and process ${process.pid}.`);
+//         });
+//     }
+// } else {
+//     http.listen(process.env.PORT, async () => {
+//         // migrateText();
+//         console.log("Server start ", process.env.PORT);
+//     });
+// }
